@@ -1,0 +1,27 @@
+<!-- inicio_sesion.erb -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inicio de Sesión</title>
+</head>
+<body>
+
+<h2>Iniciar Sesión</h2>
+
+<form action="/menu" method="post">
+  <label for="nombre_usuario">Nombre de Usuario:</label>
+  <input type="text" id="nombre_usuario" name="nombre_usuario" required><br>
+
+  <label for="contrasena">Contraseña:</label>
+  <input type="password" id="contrasena" name="contrasena" required><br>
+
+  <label for="repetir_contrasena">Repetir Contraseña:</label>
+  <input type="password" id="repetir_contrasena" name="repetir_contrasena" required><br>
+
+  <button type="submit">Iniciar Sesión</button>
+</form>
+
+</body>
+</html>
