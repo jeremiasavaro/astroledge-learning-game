@@ -15,6 +15,13 @@ require 'sinatra'
     get '/register' do
       erb :register
     end
+    get '/solarSystem' do
+      erb :solarSystem
+    end
+
+    get '/earthLevels' do
+      erb :earthLevels
+    end
 
     post '/login' do
       login_nombre_usuario = params[:nombre_usuario]
@@ -25,6 +32,14 @@ require 'sinatra'
       register_nombre_usuario = params[:reg_nombre_usuario]
       register_contraseña = params[:reg_contraseña]
       register_repetir_contraseña = params[:reg_repetir_contraseña]
+    end
+
+    post '/solarSystem' do
+      erb :'/solarSystem'
+    end
+
+    post '/earthLevels' do
+      erb :'/earthLevels'
     end
 
     post '/menu' do

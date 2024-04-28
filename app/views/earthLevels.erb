@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>earthLevels</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 300px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 20px;
+            border: 2px double #000;
+            background-color: #f0f0f0;
+            font-size: 24px;
+            width: 150px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-grid">
+        <button class="button" onclick="">Botón 1</button>
+        <button class="button" onclick="">Botón 2</button>
+        <button class="button" onclick="">Botón 3</button>
+        <button class="button" onclick="">Botón 4</button>
+    </div>
+</body>
+</html>
