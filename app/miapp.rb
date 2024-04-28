@@ -17,9 +17,14 @@ require 'sinatra'
     end
 
     post '/login' do
-      nombre_usuario = params[:nombre_usuario]
-      contrasena = params[:contrasena]
-      repetir_contrasena = params[:repetir_contrasena]
+      login_nombre_usuario = params[:nombre_usuario]
+      login_contrasena = params[:contrasena]
+    end
+
+    post '/register' do
+      register_nombre_usuario = params[:reg_nombre_usuario]
+      register_contraseña = params[:reg_contraseña]
+      register_repetir_contraseña = params[:reg_repetir_contraseña]
     end
 
     post '/menu' do
