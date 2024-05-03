@@ -1,29 +1,72 @@
-<!-- inicio_sesion.erb -->
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registrarse</title>
+ <style>
+    body {
+    background-image: url('https://images.hdqwalls.com/download/space-stars-purple-sky-3n-2560x1440.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+   }
+   
+   .container {
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   }
+   
+   h2 {
+    text-align: center;
+    margin-bottom: 20px;
+   }
+   
+   label {
+    display: block;
+    margin-bottom: 5px;
+   }
+   
+   input[type="text"], input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+   }
+   
+   input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #ADD8E6;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   }
+   
+   input[type="submit"]:hover {
+    background-color: #0000FF;
+    color: white;
+   }
+ </style>
 </head>
 <body>
-
-<h2>Registrarse</h2>
-
-<div>
-    <form action="/solarSystem" METHOD="POST">  
-        <label for="nombre_usuario">Nombre de Usuario:</label>
-        <input type="text" id="reg_nombre_usuario" name="reg_nombre_usuario" required><br>
-
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="reg_contrasena" name="reg_contrasena" required><br>
-
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="reg_repetir_contrasena" name="reg_repetir_contrasena" required><br>
-
-        <button type="submit">Registrarse</button>
+ <div class="container">
+    <h2>Registro de Usuario</h2>
+    <form action="/solarSystem" method="post">
+        <label for="username">Nombre de usuario</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required>
+        <label for="password">Repita su contraseña</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Iniciar sesión">
     </form>
-</div>
-
+ </div>
 </body>
 </html>
+
