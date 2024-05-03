@@ -8,6 +8,10 @@ require 'sinatra'
       erb :menu
     end
 
+    get '/menu' do
+      erb :menu
+    end
+
     get '/login' do
       erb :login
     end

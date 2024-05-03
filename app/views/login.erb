@@ -1,4 +1,4 @@
-<!-- inicio_sesion.erb -->
+<!-- 
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,3 +24,75 @@
 
 </body>
 </html>
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+ <style>
+    body {
+    background-image: url('https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+   }
+   
+   .container {
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   }
+   
+   h2 {
+    text-align: center;
+    margin-bottom: 20px;
+   }
+   
+   label {
+    display: block;
+    margin-bottom: 5px;
+   }
+   
+   input[type="text"], input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+   }
+   
+   input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #ADD8E6;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   }
+   
+   input[type="submit"]:hover {
+    background-color: #0000FF;
+    color: white;
+   }
+ </style>
+</head>
+<body>
+ <div class="container">
+    <h2>Iniciar sesión</h2>
+    <form action="/solarSystem" method="post">
+        <label for="username">Nombre de usuario</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Iniciar sesión">
+    </form>
+ </div>
+</body>
+</html>
+
