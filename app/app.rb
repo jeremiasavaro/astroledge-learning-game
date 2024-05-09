@@ -2,6 +2,7 @@
 
 require 'sinatra'
 require 'sinatra/activerecord'
+require './models/user'
 
 set :database_file, './config/database.yml'
 
