@@ -40,16 +40,35 @@ class App < Sinatra::Application
   end
 
   post '/login' do
-    login_nombre_usuario = params[:nombre_usuario]
-    login_contrasena = params[:contrasena]
-    #si todos los parametros son correctos, verificados en la base de datos ingresamos al juego
+    username = params[:nombre_usuario]
+    password = params[:contrasena]
+
+    user = User.authenticate(username, password)
+    if user
+      redirect '/solarSystem'
+    else
+      #do something
+    end
   end
 
   post '/register' do
-    register_nombre_usuario = params[:reg_nombre_usuario]
-    register_contraseña = params[:reg_contraseña]
-    register_repetir_contraseña = params[:reg_repetir_contraseña]
+    usernameNew = params[:reg_nombre_usuario]
+    passwordNew = params[:reg_contraseña]
+    passwordRepeat = params[:reg_repetir_contraseña]
+
+    if params[:passwordNew] != params[:passwordRepeat]
+      #password dont match, do something
+    else
+      aut = User.authenticate(usernameNew, passwordNew)
+      if aut
+        #user already exists, to implement something
+      else
+        user = User.create!(params)
+        redirect '/login'
+      end
+    end
   end
+
 
   post '/solarSystem' do
     erb :'/solarSystem'
