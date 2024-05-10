@@ -40,11 +40,11 @@ class App < Sinatra::Application
   end
 
   post '/login' do
-    username = params[:nombre_usuario]
-    password = params[:contrasena]
+    username = params[:username]
+    pswd = params[:password]
 
-    user = User.authenticate(username, password)
-    if user
+    user = User.find_by(username: username, password: pswd)
+    if user != nil
       redirect '/solarSystem'
     else
       #do something
@@ -52,23 +52,22 @@ class App < Sinatra::Application
   end
 
   post '/register' do
-    usernameNew = params[:reg_nombre_usuario]
-    passwordNew = params[:reg_contraseña]
-    passwordRepeat = params[:reg_repetir_contraseña]
+    usernameNew = params[:username]
+    passwordNew = params[:password]
+    passwordRepeat = params[:passwordRep]
 
-    if params[:passwordNew] != params[:passwordRepeat]
+    if passwordNew != passwordRepeat
       #password dont match, do something
     else
-      aut = User.authenticate(usernameNew, passwordNew)
-      if aut
-        #user already exists, to implement something
+      aut = User.find_by(username: usernameNew)
+      if aut != nil
+
       else
-        user = User.create!(params)
+        user = User.create(username: usernameNew, password: passwordNew)
         redirect '/login'
       end
     end
   end
-
 
   post '/solarSystem' do
     erb :'/solarSystem'
