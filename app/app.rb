@@ -43,11 +43,12 @@ class App < Sinatra::Application
     username = params[:username]
     pswd = params[:password]
 
-    user = User.find_by(username: username, password: pswd)
-    if user != nil
-      redirect '/solarSystem'
-    else
+    user = User.find_by(username: username)
+    if user == nil
       #do something
+    else
+      if user.authenticate(pswd)
+        redirect '/solarSystem'
     end
   end
 
@@ -80,4 +81,5 @@ class App < Sinatra::Application
   post '/menu' do
     erb :menu
   end
+end
 end

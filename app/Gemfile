@@ -1,5 +1,5 @@
 # Gemfile
-ruby '3.0.2'
+ruby '3.0.7'
 
 source "https://rubygems.org"
 
@@ -8,4 +8,5 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'sqlite3', '~> 1.4'
 gem 'rake'
+gem 'rackup'
 gem 'bcrypt', '~> 3.1.7'
