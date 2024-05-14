@@ -6,7 +6,7 @@ class Planet < ActiveRecord::Base
   private
 
   def validate_level_count
-    if levels.size > 3
+    if levels.count > 3
       errors.add(:levels, "A planet can have a maximum of 3 levels.")
     end
   end

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :actual_level, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
   # authenticates user
-  def authenticate(password)
+  def authenticates(password)
     self.password == password
   end
 end

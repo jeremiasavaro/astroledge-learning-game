@@ -12,10 +12,6 @@ set :database_file, './config/database.yml'
 
 class App < Sinatra::Application
 
-  def initialize(app = nil)
-    super()
-  end
-
   get '/' do
     erb :menu
   end
@@ -35,6 +31,7 @@ class App < Sinatra::Application
   get '/register' do
     erb :register
   end
+
   get '/solarSystem' do
     erb :solarSystem
   end
@@ -48,11 +45,18 @@ class App < Sinatra::Application
     pswd = params[:password]
 
     user = User.find_by(username: username)
-    if user == nil
-      #do something
+    if user.nil?
+      # Usuario no encontrado
+      @error = "Usuario no encontrado."
+      erb :login
     else
-      if user.authenticate(pswd)
+      if user.authenticates(pswd)
         redirect '/solarSystem'
+      else
+        # Autenticación fallida
+        @error = "Contraseña incorrecta."
+        erb :login
+      end
     end
   end
 
@@ -62,28 +66,32 @@ class App < Sinatra::Application
     passwordRepeat = params[:passwordRep]
 
     if passwordNew != passwordRepeat
-      #password dont match, do something
+      # Las contraseñas no coinciden
+      @error = "Las contraseñas no coinciden."
+      erb :register
     else
       aut = User.find_by(username: usernameNew)
-      if aut != nil
-
+      if aut
+        # Nombre de usuario ya tomado
+        @error = "Nombre de usuario ya está en uso."
+        erb :register
       else
-        user = User.create(username: usernameNew, password: passwordNew)
+        user = User.create(username: usernameNew, password: passwordNew, score: 0, actual_level: 0)
+        user.save
         redirect '/login'
       end
     end
   end
 
   post '/solarSystem' do
-    erb :'/solarSystem'
+    erb :solarSystem
   end
 
   post '/earthLevels' do
-    erb :'/earthLevels'
+    erb :earthLevels
   end
 
   post '/menu' do
     erb :menu
   end
-end
 end

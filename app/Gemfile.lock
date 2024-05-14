@@ -35,6 +35,9 @@ GEM
       rack (>= 3.0.0, < 4)
     rack-session (2.0.0)
       rack (>= 3.0.0)
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
     rake (13.2.1)
     ruby2_keywords (0.0.5)
     sinatra (4.0.0)
@@ -46,39 +49,27 @@ GEM
     sinatra-activerecord (2.0.27)
       activerecord (>= 4.1)
       sinatra (>= 1.0)
-    sqlite3 (1.7.3-aarch64-linux)
-    sqlite3 (1.7.3-arm-linux)
     sqlite3 (1.7.3-arm64-darwin)
-    sqlite3 (1.7.3-x86-linux)
-    sqlite3 (1.7.3-x86_64-darwin)
-    sqlite3 (1.7.3-x86_64-linux)
     tilt (2.3.0)
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    webrick (1.8.1)
 
 PLATFORMS
-  aarch64-linux
-  aarch64-linux-musl
-  arm-linux
-  arm-linux-musl
   arm64-darwin
-  x86-linux
-  x86-linux-musl
-  x86_64-darwin
-  x86_64-linux
-  x86_64-linux-musl
 
 DEPENDENCIES
   activerecord
   bcrypt (~> 3.1.7)
+  rackup
   rake
   sinatra
   sinatra-activerecord
   sqlite3 (~> 1.4)
 
 RUBY VERSION
-   ruby 3.0.2p107
+   ruby 3.0.7p220
 
 BUNDLED WITH
-   2.5.9
+   2.5.10
