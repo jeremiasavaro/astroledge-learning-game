@@ -1,4 +1,4 @@
-class Question < ActiveRecord:Base
+class Question < ActiveRecord::Base
   belongs_to :level
   has_many :answers
   validates :description, presence: true

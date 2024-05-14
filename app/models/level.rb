@@ -1,11 +1,14 @@
-class Level < ActiveRecord:Base
-  has_many :questions
+class Level < ActiveRecord::Base
+  belongs_to :planet
+  has_many :questions, dependent: :destroy
   validates :number, presence: true
-  validate :validate_level_count
+  validate :validate_question_count
 
-  def validate_level_count
+  private
+
+  def validate_question_count
     if questions.size > 3
-      errors.add(:questions, "A level must have only 3 questions.")
+      errors.add(:questions, "A level can have a maximum of 3 questions.")
     end
   end
 end

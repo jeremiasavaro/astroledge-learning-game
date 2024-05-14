@@ -1,10 +1,13 @@
-class Planet < ActiveRecord:Base
-  has_many :levels
+class Planet < ActiveRecord::Base
+  has_many :levels, dependent: :destroy
+  validates :name, presence: true
   validate :validate_level_count
+
+  private
 
   def validate_level_count
     if levels.size > 3
-      errors.add(:levels, "A planet must have only 3 levels.")
+      errors.add(:levels, "A planet can have a maximum of 3 levels.")
     end
   end
 end

@@ -3,6 +3,10 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require './models/user'
+require './models/planet'
+require './models/level'
+require './models/question'
+require './models/answer'
 
 set :database_file, './config/database.yml'
 

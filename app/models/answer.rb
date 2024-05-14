@@ -1,4 +1,4 @@
-class Answer < ActiveRecord:Base
+class Answer < ActiveRecord::Base
   belongs_to :question
   validates :description, presence: true
   validates :correct, inclusion: { in: [true, false] }

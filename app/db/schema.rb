@@ -10,14 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_220236) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_14_162330) do
+  create_table "answers", force: :cascade do |t|
+    t.integer "question_id", null: false
+    t.string "description", null: false
+    t.boolean "correct", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.integer "planet_id", null: false
+    t.integer "number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["planet_id"], name: "index_levels_on_planet_id"
+  end
+
+  create_table "planets", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.integer "level_id", null: false
+    t.string "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id"], name: "index_questions_on_level_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "names"
     t.string "username"
-    t.string "email"
     t.string "password"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
   end
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "levels", "planets"
+  add_foreign_key "questions", "levels"
 end
