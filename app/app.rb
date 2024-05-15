@@ -45,7 +45,7 @@ class App < Sinatra::Application
     pswd = params[:password]
 
     user = User.find_by(username: username)
-    if user.nil?
+    if user == nil
       # Usuario no encontrado
       @error = "Usuario no encontrado."
       erb :login
@@ -77,7 +77,6 @@ class App < Sinatra::Application
         erb :register
       else
         user = User.create(username: usernameNew, password: passwordNew, score: 0, actual_level: 0)
-        user.save
         redirect '/login'
       end
     end
