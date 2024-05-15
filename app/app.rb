@@ -2,6 +2,9 @@
 
 require 'sinatra'
 require 'sinatra/activerecord'
+
+  enable :sessions
+
 require './models/user'
 require './models/planet'
 require './models/level'
@@ -9,6 +12,7 @@ require './models/question'
 require './models/answer'
 
 set :database_file, './config/database.yml'
+set :public_folder, 'assets'
 
 class App < Sinatra::Application
 
@@ -24,20 +28,12 @@ class App < Sinatra::Application
     erb :menu
   end
 
+  post '/menu' do
+    erb :menu
+  end
+
   get '/login' do
     erb :login
-  end
-
-  get '/register' do
-    erb :register
-  end
-
-  get '/solarSystem' do
-    erb :solarSystem
-  end
-
-  get '/earthLevels' do
-    erb :earthLevels
   end
 
   post '/login' do
@@ -51,6 +47,7 @@ class App < Sinatra::Application
       erb :login
     else
       if user.authenticates(pswd)
+        session[:user_id] = user.id
         redirect '/solarSystem'
       else
         # Autenticación fallida
@@ -58,6 +55,10 @@ class App < Sinatra::Application
         erb :login
       end
     end
+  end
+
+  get '/register' do
+    erb :register
   end
 
   post '/register' do
@@ -73,24 +74,61 @@ class App < Sinatra::Application
       aut = User.find_by(username: usernameNew)
       if aut
         # Nombre de usuario ya tomado
-        @error = "Nombre de usuario ya está en uso."
+        puts "Nombre de usuario ya está en uso."
         erb :register
       else
-        user = User.create(username: usernameNew, password: passwordNew, score: 0, actual_level: 0)
+        user = User.new
+        user.username = usernameNew
+        user.password = passwordNew
+        user.score = 0
+        user.actual_level = 1
+        user.save
+
         redirect '/login'
       end
     end
   end
 
-  post '/solarSystem' do
+  get '/solarSystem' do
     erb :solarSystem
   end
 
-  post '/earthLevels' do
+  post '/solarSystem' do
+    planet = params[:planet]
+    if planet == "Earth"
+      redirect '/earthLevels'
+    end
+  end
+
+  get '/earthLevels' do
     erb :earthLevels
   end
 
-  post '/menu' do
-    erb :menu
+  post '/earthLevels' do
+    yourLevel = params[:level].to_i
+    if yourLevel == 1
+      redirect '/earthLevel1'
+    end
   end
+
+  get '/earthLevel1' do
+    @question = Question.all.to_a.map(&:id)
+    @currentQuestion = @question.shift
+    @question_id = @currentQuestion
+    session[:question] = @question
+    session[:currentQuestion] = @currentQuestion
+    erb :earthLevel1
+  end
+
+  post '/earthLevel1' do
+    yourAnswer = params[:button].to_i
+    u = session[:currentQuestion]
+    ques = Question.find_by(id: u)
+    if ques.answers[yourAnswer-1] == ques.correct_answer
+      redirect '/menu'
+    else
+      erb :earthLevel1
+    end
+  end
+
 end

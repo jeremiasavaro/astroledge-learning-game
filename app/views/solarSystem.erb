@@ -1,35 +1,82 @@
-<!-- inicio_sesion.erb -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Planetas</title>
-<form action="/earthLevels">
-    <button type="submit" id="Earth">Earth</button>
-</form>
-<form action="/marsLevels">
-    <button type="submit" id="Mars">Mars</button>
-</form>
-<form action="/jupiterLevels">
-    <button type="submit" id="Jupiter">Jupiter</button>
-</form>
-<form action="/neptuneLevels">
-    <button type="submit" id="Neptune">Neptune</button>
-</form>
-<form action="/uranusLevels">
-    <button type="submit" id="Uranus">Uranus</button>
-</form>
+<style>
+    body {
+    background-image: url('https://c.wallhere.com/photos/41/26/1920x1080_px_Cartoon_humor_solar_system-1197876.jpg!d');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Asegura que el fondo ocupe toda la altura del viewport */
+}
 
-<form action="/saturnLevels">
-    <button type="submit" id="Saturn">Saturn</button>
-</form>
+/* Otro CSS sigue igual */
 
-<form action="/plutoLevels">
-    <button type="submit" id="Pluto">Pluto</button>
-</form>
 
-<form action="/venusLevels">
-    <button type="submit" id="Venus">Venus</button>
-</form>
+    .button-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+    }
+    .button-grid form {
+        flex: 1 1 calc(25% - 20px);
+        display: flex;
+        justify-content: center;
+    }
+    .planet {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <div class="button-grid">
+        <form method="post">
+            <input type="hidden" name="planet" value="Earth">
+            <button type="submit" class="planet">Earth</button>
+        </form>
 
+        <form method="post">
+            <input type="hidden" name="planet" value="Mars">
+            <button type="submit" class="planet" id="Mars">Mars</button>
+        </form>
+
+        <form method="post">
+            <input type="hidden" name="planet" value="Jupiter">
+            <button type="submit" class="planet" id="Jupiter">Jupiter</button>
+        </form>
+
+        <form method="post">
+            <input type="hidden" name="planet" value="Neptune">
+            <button type="submit" class="planet" id="Neptune">Neptune</button>
+        </form>
+
+        <form method="post">
+            <input type="hidden" name="planet" value="Uranus">
+            <button type="submit" class="planet" id="Uranus">Uranus</button>
+        </form>
+
+        <form method="post">
+            <input type="hidden" name="planet" value="Saturn">
+            <button type="submit" class="planet" id="Saturn">Saturn</button>
+        </form>
+
+        <form method="post">
+            <input type="hidden" name="planet" value="Pluto">
+            <button type="submit" class="planet" id="Pluto">Pluto</button>
+        </form>
+
+        <form method="post">
+            <input type="hidden" name="planet" value="Venus">
+            <button type="submit" class="planet" id="Venus">Venus</button>
+        </form>
+    </div>
+</body>
+</html>

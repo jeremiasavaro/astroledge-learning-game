@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth - Level 1</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 300px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 20px;
+            border: 2px double #000;
+            background-color: #f0f0f0;
+            font-size: 24px;
+            width: 150px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <<div class="button-grid">
+    <form method="post">
+        <input type="hidden" name="button" value="1">
+        <button type="submit" class="button">Botón 1</button>
+    </form>
+    <form method="post">
+        <input type="hidden" name="button" value="2">
+        <button type="submit" class="button">Botón 2</button>
+    </form>
+    <form method="post">
+        <input type="hidden" name="button" value="3">
+        <button type="submit" class="button">Botón 3</button>
+    </form>
+    <form method="post">
+        <input type="hidden" name="button" value="4">
+        <button type="submit" class="button">Botón 4</button>
+    </form>
+</div>
+
+    <% u = session[:currentQuestion] %>
+    <%= Question.find_by(id: u).description %>
+</body>
+</html>
