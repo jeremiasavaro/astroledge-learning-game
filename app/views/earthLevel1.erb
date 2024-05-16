@@ -51,7 +51,17 @@
     </form>
 </div>
 
-    <% u = session[:currentQuestion] %>
-    <%= Question.find_by(id: u).description %>
+    <% if session[:currentQuestion] %>
+      <% u = session[:currentQuestion] %>
+      <% question = Question.find_by(id: u) %>
+      <% if question %>
+        <%= question.description %>
+      <% else %>
+        <p>Pregunta no encontrada</p>
+      <% end %>
+    <% else %>
+      <p>No hay una pregunta actual en la sesión</p>
+    <% end %>
+
 </body>
 </html>

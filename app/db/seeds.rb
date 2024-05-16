@@ -46,9 +46,9 @@ puts "Preguntas del level11: #{level11.questions.inspect}"
 # Create planet 2
 planeta2 = Planet.create(name: 'Venus')
 # Create levels for planet1
-planeta2.levels.create(number: '1')
-planeta2.levels.create(number: '2')
-planeta2.levels.create(number: '3')
+planeta2.levels.create(number: 1)
+planeta2.levels.create(number: 2)
+planeta2.levels.create(number: 3)
 
 # Verificar si los niveles se crearon correctamente
 puts "Niveles del planeta1: #{planeta2.levels.inspect}"
@@ -88,9 +88,9 @@ puts "Preguntas del level11: #{level12.questions.inspect}"
 # Create planet 3
 planeta3 = Planet.create(name: 'Earth')
 # Create levels for planet1
-planeta3.levels.create(number: '1')
-planeta3.levels.create(number: '2')
-planeta3.levels.create(number: '3')
+planeta3.levels.create(number: 1)
+planeta3.levels.create(number: 2)
+planeta3.levels.create(number: 3)
 
 # Verificar si los niveles se crearon correctamente
 puts "Niveles del planeta1: #{planeta3.levels.inspect}"
@@ -130,9 +130,9 @@ puts "Preguntas del level11: #{level13.questions.inspect}"
 # Create planet 4
 planeta4 = Planet.create(name: 'Mercurio')
 # Create levels for planet1
-planeta4.levels.create(number: '1')
-planeta4.levels.create(number: '2')
-planeta4.levels.create(number: '3')
+planeta4.levels.create(number: 1)
+planeta4.levels.create(number: 2)
+planeta4.levels.create(number: 3)
 
 # Verificar si los niveles se crearon correctamente
 puts "Niveles del planeta1: #{planeta4.levels.inspect}"
@@ -172,9 +172,9 @@ puts "Preguntas del level11: #{level14.questions.inspect}"
 # Create planet 5
 planeta5 = Planet.create(name: 'Marte')
 # Create levels for planet1
-planeta5.levels.create(number: '1')
-planeta5.levels.create(number: '2')
-planeta5.levels.create(number: '3')
+planeta5.levels.create(number: 1)
+planeta5.levels.create(number: 2)
+planeta5.levels.create(number: 3)
 
 # Verificar si los niveles se crearon correctamente
 puts "Niveles del planeta1: #{planeta5.levels.inspect}"
@@ -214,9 +214,9 @@ puts "Preguntas del level11: #{level15.questions.inspect}"
 # Create planet 6
 planeta6 = Planet.create(name: 'Jupiter')
 # Create levels for planet1
-planeta6.levels.create(number: '1')
-planeta6.levels.create(number: '2')
-planeta6.levels.create(number: '3')
+planeta6.levels.create(number: 1)
+planeta6.levels.create(number: 2)
+planeta6.levels.create(number: 3)
 
 # Verificar si los niveles se crearon correctamente
 puts "Niveles del planeta1: #{planeta6.levels.inspect}"
@@ -256,9 +256,9 @@ puts "Preguntas del level11: #{level16.questions.inspect}"
 # Create planet 7
 planeta7 = Planet.create(name: 'Uranus')
 # Create levels for planet1
-planeta7.levels.create(number: '1')
-planeta7.levels.create(number: '2')
-planeta7.levels.create(number: '3')
+planeta7.levels.create(number: 1)
+planeta7.levels.create(number: 2)
+planeta7.levels.create(number: 3)
 
 # Verificar si los niveles se crearon correctamente
 puts "Niveles del planeta1: #{planeta7.levels.inspect}"
@@ -298,9 +298,9 @@ puts "Preguntas del level11: #{level17.questions.inspect}"
 # Create planet 8
 planeta8 = Planet.create(name: 'Pluto')
 # Create levels for planet1
-planeta8.levels.create(number: '1')
-planeta8.levels.create(number: '2')
-planeta8.levels.create(number: '3')
+planeta8.levels.create(number: 1)
+planeta8.levels.create(number: 2)
+planeta8.levels.create(number: 3)
 
 # Verificar si los niveles se crearon correctamente
 puts "Niveles del planeta1: #{planeta8.levels.inspect}"
@@ -330,7 +330,6 @@ question2.answers.create(description: 'Quásar', correct: false)
 
 # Verificar si las respuestas se crearon correctamente
 puts "Respuestas de la pregunta1: #{question2.answers.inspect}"
-
 
 # Verificar si las preguntas se crearon correctamente
 puts "Preguntas del level11: #{level18.questions.inspect}"
