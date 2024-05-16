@@ -97,7 +97,7 @@ puts "Niveles del planeta1: #{planeta3.levels.inspect}"
 
 # Create question for level1
 level13 = planeta3.levels.first
-level13.questions.create(description: '¿Cuál es el nombre de la galaxia en la que se encuentra nuestro sistema solar?')
+level13.questions.create(description: '¿Cuál es el nombre de la galaxia en la que se encuentra nuestro sistema solar?', level_id: 1)
 # Create answers for question1
 question1 = level13.questions.first
 question1.answers.create(description: 'Andromeda', correct: false)
@@ -110,7 +110,7 @@ puts "Respuestas de la pregunta1: #{question1.answers.inspect}"
 
 # question 2
 
-level13.questions.create(description: '¿Cuál es la teoría científica que describe el origen del universo a partir de una explosión inicial?')
+level13.questions.create(description: '¿Cuál es la teoría científica que describe el origen del universo a partir de una explosión inicial?', level_id: 1)
 # Create answers for question2
 question2 = level13.questions.second
 question2.answers.create(description: 'Teoría de la relatividad', correct: false)
