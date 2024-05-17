@@ -16,6 +16,7 @@
         justify-content: center;
         align-items: center;
         position: relative;
+        flex-direction: column;
     }
     .planet-label {
         position: absolute;
@@ -23,9 +24,24 @@
         font-weight: bold;
         text-align: center;
     }
+    .button {
+        position: absolute;
+        border: 2px solid white;
+        bottom: 10px; /* Adjust this value as needed */
+        left: 3%;
+        bottom: 5%;
+        transform: translateX(-50%);
+        padding: 10px 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
+    <form method="post">
+        <input type="hidden" name="logout">
+        <button type="submit" class="button">Log out</button>
+    </form>
     <img src="https://c.wallhere.com/photos/41/26/1920x1080_px_Cartoon_humor_solar_system-1197876.jpg!d" usemap="#solarsystem" alt="Sistema Solar">
     <map name="solarsystem">
         <area shape="circle" coords="143,445,60" href="#" alt="Mercury" onclick="submitForm('Mercury')">
@@ -50,7 +66,6 @@
     <form id="planetForm" method="post" style="display:none;">
         <input type="hidden" name="planet" id="planetInput">
     </form>
-
     <script>
         function submitForm(planetName) {
             document.getElementById('planetInput').value = planetName;

@@ -7,7 +7,7 @@
   <style>
       body {
           margin: 0;
-          height: 100vh;
+          height: 90vh;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -70,6 +70,18 @@
           transition: all 0.3s ease-in-out;
       }
 
+      .buttonBack {
+        position: absolute;
+        border: 2px solid white;
+        bottom: 10px; /* Adjust this value as needed */
+        left: 2.5%;
+        bottom: 0;
+        transform: translateX(-50%);
+        padding: 10px 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
       .button:hover {
           background-color: lightgrey;
           border-color: #ccc;
@@ -111,5 +123,9 @@
     <%= redirect '/earthLevels'%>
   <% end %>
 </div>
+    <form method="post">
+      <input type="hidden" name="back">
+      <button type="submit" class="buttonBack">Back</button>
+    </form>
 </body>
 </html>

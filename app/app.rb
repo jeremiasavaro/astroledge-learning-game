@@ -95,6 +95,10 @@ class App < Sinatra::Application
   end
 
   post '/solarSystem' do
+    if params[:logout]
+      redirect '/login'
+      #Borrar datos de la sesion
+    end
     planet = params[:planet]
     if planet == "Earth"
       redirect '/earthLevels'
@@ -106,6 +110,9 @@ class App < Sinatra::Application
   end
 
   post '/earthLevels' do
+    if params[:back]
+      redirect '/solarSystem'
+    end
     yourLevel = params[:level].to_i
     session[:firstLevel1Earth] = true   #Primera vez jugando
     session[:levelSelected] = yourLevel #Nivel seleccionado
@@ -140,6 +147,9 @@ class App < Sinatra::Application
   end
 
   post '/earthLevel1' do
+    if params[:back] 
+      redirect '/earthLevels'
+    end
     yourAnswer = params[:button].to_i
     u = session[:currentQuestion]
 
