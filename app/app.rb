@@ -3,7 +3,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
-  enable :sessions
+enable :sessions
 
 require './models/user'
 require './models/planet'
@@ -48,6 +48,7 @@ class App < Sinatra::Application
     else
       if user.authenticates(pswd)
         session[:user_id] = user.id
+        session[:score_user] = user.score
         redirect '/solarSystem'
       else
         # Autenticación fallida
@@ -106,42 +107,49 @@ class App < Sinatra::Application
 
   post '/earthLevels' do
     yourLevel = params[:level].to_i
-    session[:firstLevel1Earth] = true
-    if yourLevel == 1
-      redirect '/earthLevel1'
-    end
+    session[:firstLevel1Earth] = true   #Primera vez jugando
+    session[:levelSelected] = yourLevel #Nivel seleccionado
+    redirect '/earthLevel1'
   end
 
-  EARTH_ID = Planet.find_by(name: 'Earth').id
-
   get '/earthLevel1' do
-    if session[:firstLevel1Earth] == true #Si estoy jugando el primer nivel
-      level_1 = Level.find_by(planet_id: EARTH_ID, number: 1)
-      @questions = level_1.questions.pluck(:id)
-      @currentQuestion = @questions.shift #saco la primer pregunta del nivel1
-      session[:question] = @questions #Guardo todas las preguntas en la sesion
-      session[:currentQuestion] = @currentQuestion  #Guardo la pregunta actual en la sesion
-      session[:firstLevel1Earth] = false
-      erb :earthLevel1
-    else    #Ya tengo todas las preguntas guardadas, solo saco la siguiente
-      @questions = session[:question]
+    EARTH_ID = Planet.find_by(name: 'Earth').id
+    if session[:firstLevel1Earth] == true # Si estoy jugando el primer nivel
+      levelSelected = session[:levelSelected]
+      level_n = Level.find_by(planet_id: EARTH_ID, number: levelSelected)
+
+      if level_n.nil?
+        halt 404, "Level not found"
+      end
+
+      @questions = level_n.questions.pluck(:id)
+      if @questions.empty?
+        halt 404, "No questions found for this level"
+      end
+
+      @currentQuestion = @questions.shift # Saco la primer pregunta del nivel1
+      session[:questions] = @questions # Guardo todas las preguntas en la sesion
+      session[:currentQuestion] = @currentQuestion  # Guardo la pregunta actual en la sesion
+    else # Ya tengo todas las preguntas guardadas, solo saco la siguiente
+      @questions = session[:questions]
       @currentQuestion = @questions.shift
-      @question_id = @currentQuestion
       session[:currentQuestion] = @currentQuestion
-      erb :earthLevel1
     end
+
+    erb :earthLevel1
   end
 
   post '/earthLevel1' do
     yourAnswer = params[:button].to_i
     u = session[:currentQuestion]
 
-    ques = Question.find_by(id: u)
+    quest = Question.find_by(id: u)
     selected_answer = Answer.find_by(id: yourAnswer)
 
-    if ques && selected_answer.correct    #respuesta correcta
+    if quest && selected_answer.correct    #respuesta correcta
       session[:firstLevel1Earth] = false  #Deje de estar en la primer pregunta del nivel 1
       redirect '/earthLevel1' #contesto la siguiente pregunta
+      session[:score_user] = quest.scoreQuestion
     else
       erb :earthLevel1  #Vuelvo a contestar la misma pregunta
     end

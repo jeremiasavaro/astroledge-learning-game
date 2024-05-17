@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_16_230958) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_17_144419) do
   create_table "answers", force: :cascade do |t|
     t.integer "question_id", null: false
     t.string "description", null: false
@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_230958) do
   create_table "questions", force: :cascade do |t|
     t.integer "level_id", null: false
     t.string "description", null: false
+    t.integer "scoreQuestion", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["level_id"], name: "index_questions_on_level_id"
@@ -47,8 +48,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_230958) do
     t.string "password"
     t.integer "score"
     t.integer "actual_level"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_foreign_key "answers", "questions"

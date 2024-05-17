@@ -97,7 +97,7 @@ puts "Niveles del planeta1: #{planeta3.levels.inspect}"
 
 # Create question for level1
 level13 = planeta3.levels.first
-level13.questions.create(description: '¿Cuál es el nombre de la galaxia en la que se encuentra nuestro sistema solar?', level_id: 1)
+level13.questions.create(description: '¿Cuál es el nombre de la galaxia en la que se encuentra nuestro sistema solar?', level_id: 1, scoreQuestion: 10)
 # Create answers for question1
 question1 = level13.questions.first
 question1.answers.create(description: 'Andromeda', correct: false)
@@ -110,7 +110,7 @@ puts "Respuestas de la pregunta1: #{question1.answers.inspect}"
 
 # question 2
 
-level13.questions.create(description: '¿Cuál es la teoría científica que describe el origen del universo a partir de una explosión inicial?', level_id: 1)
+level13.questions.create(description: '¿Cuál es la teoría científica que describe el origen del universo a partir de una explosión inicial?', level_id: 1, scoreQuestion: 15)
 # Create answers for question2
 question2 = level13.questions.second
 question2.answers.create(description: 'Teoría de la relatividad', correct: false)
@@ -122,8 +122,33 @@ question2.answers.create(description: 'Teoría de cuerdas', correct: false)
 puts "Respuestas de la pregunta1: #{question2.answers.inspect}"
 
 
+level23 = planeta3.levels.second
+level23.questions.create(description: '¿Cuál es el nombre de la galaxia en la que se encuentra nuestro sistema solar?', level_id: 2, scoreQuestion: 10)
+# Create answers for question1
+question1 = level23.questions.first
+question1.answers.create(description: 'Andromeda', correct: false)
+question1.answers.create(description: 'Via Lactea', correct: true)
+question1.answers.create(description: 'Eliptica', correct: false)
+question1.answers.create(description: 'Comulo de Virgo', correct: false)
+
+# Verificar si las respuestas se crearon correctamente
+puts "Respuestas de la pregunta1: #{question1.answers.inspect}"
+
+# question 2
+
+level23.questions.create(description: '¿Cuál es la teoría científica que describe el origen del universo a partir de una explosión inicial?', level_id: 2, scoreQuestion: 15)
+# Create answers for question2
+question2 = level23.questions.second
+question2.answers.create(description: 'Teoría de la relatividad', correct: false)
+question2.answers.create(description: 'Teoria del caos', correct: false)
+question2.answers.create(description: 'Teoría del Big Bang', correct: true)
+question2.answers.create(description: 'Teoría de cuerdas', correct: false)
+
+# Verificar si las respuestas se crearon correctamente
+puts "Respuestas de la pregunta1: #{question2.answers.inspect}"
+
 # Verificar si las preguntas se crearon correctamente
-puts "Preguntas del level11: #{level13.questions.inspect}"
+puts "Preguntas del level11: #{level23.questions.inspect}"
 
 #--------
 
