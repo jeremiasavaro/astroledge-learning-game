@@ -321,7 +321,7 @@ puts "Preguntas del level11: #{level17.questions.inspect}"
 #--------
 
 # Create planet 8
-planeta8 = Planet.create(name: 'Pluto')
+planeta8 = Planet.create(name: 'Neptuno')
 # Create levels for planet1
 planeta8.levels.create(number: 1)
 planeta8.levels.create(number: 2)
