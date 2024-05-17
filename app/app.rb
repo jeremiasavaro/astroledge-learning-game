@@ -112,10 +112,13 @@ class App < Sinatra::Application
     end
   end
 
+  EARTH_ID = Planet.find_by(name: 'Earth').id
+
   get '/earthLevel1' do
     if session[:firstLevel1Earth] == true #Si estoy jugando el primer nivel
-      @questions = Question.where(level_id: 1).pluck(:id) #A todas las preguntas las guardo en un arreglo y le asigno un id
-      @currentQuestion = @questions.shift #saco la primer pregunta del nivel1 (Falta poner que sea de nivelq y planeta tierra)
+      level_1 = Level.find_by(planet_id: EARTH_ID, number: 1)
+      @questions = level_1.questions.pluck(:id)
+      @currentQuestion = @questions.shift #saco la primer pregunta del nivel1
       session[:question] = @questions #Guardo todas las preguntas en la sesion
       session[:currentQuestion] = @currentQuestion  #Guardo la pregunta actual en la sesion
       session[:firstLevel1Earth] = false
@@ -134,13 +137,13 @@ class App < Sinatra::Application
     u = session[:currentQuestion]
 
     ques = Question.find_by(id: u)
+    selected_answer = Answer.find_by(id: yourAnswer)
 
-    if ques && ques.answers[yourAnswer-1] == ques.correct_answer    #respuesta correcta
+    if ques && selected_answer.correct    #respuesta correcta
       session[:firstLevel1Earth] = false  #Deje de estar en la primer pregunta del nivel 1
       redirect '/earthLevel1' #contesto la siguiente pregunta
     else
       erb :earthLevel1  #Vuelvo a contestar la misma pregunta
     end
   end
-
 end

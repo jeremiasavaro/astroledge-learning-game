@@ -17,7 +17,7 @@
         .button-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 300px;
+            gap: 20px;
             text-align: center;
         }
 
@@ -32,36 +32,24 @@
     </style>
 </head>
 <body>
-    <<div class="button-grid">
-    <form method="post">
-        <input type="hidden" name="button" value="1">
-        <button type="submit" class="button">Botón 1</button>
-    </form>
-    <form method="post">
-        <input type="hidden" name="button" value="2">
-        <button type="submit" class="button">Botón 2</button>
-    </form>
-    <form method="post">
-        <input type="hidden" name="button" value="3">
-        <button type="submit" class="button">Botón 3</button>
-    </form>
-    <form method="post">
-        <input type="hidden" name="button" value="4">
-        <button type="submit" class="button">Botón 4</button>
-    </form>
-</div>
-
-    <% if session[:currentQuestion] %>
-      <% u = session[:currentQuestion] %>
-      <% question = Question.find_by(id: u) %>
-      <% if question %>
-        <%= question.description %>
-      <% else %>
-        <p>Pregunta no encontrada</p>
-      <% end %>
-    <% else %>
-      <p>No hay una pregunta actual en la sesión</p>
-    <% end %>
-
+    <div class="button-grid">
+        <% if session[:currentQuestion] %>
+            <% question_id = session[:currentQuestion] %>
+            <% question = Question.find_by(id: question_id) %>
+            <% if question %>
+                <h2><%= question.description %></h2>
+                <% question.answers.each_with_index do |answer, index| %>
+                    <form method="post">
+                        <input type="hidden" name="button" value="<%= answer.id %>">
+                        <button type="submit" class="button">Botón <%= index +1 %>: <%= answer.description %></button>
+                    </form>
+                <% end %>
+            <% else %>
+                <p>Pregunta no encontrada</p>
+            <% end %>
+        <% else %>
+            <p>No hay una pregunta actual en la sesión</p>
+        <% end %>
+    </div>
 </body>
 </html>
