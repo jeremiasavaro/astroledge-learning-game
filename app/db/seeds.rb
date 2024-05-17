@@ -11,7 +11,7 @@ puts "Niveles del planeta1: #{planeta1.levels.inspect}"
 
 # Create question for level1
 level11 = planeta1.levels.first
-level11.questions.create(description: '¿Cuál es el planeta más cercano al Sol?')
+level11.questions.create(description: '¿Cuál es el planeta más cercano al Sol?', level_id: 1, scoreQuestion: 10)
 
 # Create answers for question1
 question1 = level11.questions.first
@@ -25,7 +25,7 @@ puts "Respuestas de la pregunta1: #{question1.answers.inspect}"
 
 # question 2
 
-level11.questions.create(description: '¿Qué objeto del sistema solar es conocido por tener anillos alrededor de él?')
+level11.questions.create(description: '¿Qué objeto del sistema solar es conocido por tener anillos alrededor de él?', level_id: 1, scoreQuestion: 10)
 
 # Create answers for question2
 question2 = level11.questions.second
@@ -55,7 +55,7 @@ puts "Niveles del planeta1: #{planeta2.levels.inspect}"
 
 # Create question for level1
 level12 = planeta2.levels.first
-level12.questions.create(description: '¿Cuál es la estrella más cercana a la Tierra después del Sol?')
+level12.questions.create(description: '¿Cuál es la estrella más cercana a la Tierra después del Sol?', level_id: 1, scoreQuestion: 10)
 
 # Create answers for question1
 question1 = level12.questions.first
@@ -69,7 +69,7 @@ puts "Respuestas de la pregunta1: #{question1.answers.inspect}"
 
 # question 2
 
-level12.questions.create(description: '¿Cuál es el nombre del primer satélite artificial enviado al espacio por la humanidad?')
+level12.questions.create(description: '¿Cuál es el nombre del primer satélite artificial enviado al espacio por la humanidad?', level_id: 2, scoreQuestion: 10)
 # Create answers for question2
 question2 = level12.questions.second
 question2.answers.create(description: 'Luna', correct: false)
@@ -123,26 +123,26 @@ puts "Respuestas de la pregunta1: #{question2.answers.inspect}"
 
 
 level23 = planeta3.levels.second
-level23.questions.create(description: '¿Cuál es el nombre de la galaxia en la que se encuentra nuestro sistema solar?', level_id: 2, scoreQuestion: 10)
+level23.questions.create(description: 'What is a neutron star?', level_id: 2, scoreQuestion: 10)
 # Create answers for question1
 question1 = level23.questions.first
-question1.answers.create(description: 'Andromeda', correct: false)
-question1.answers.create(description: 'Via Lactea', correct: true)
-question1.answers.create(description: 'Eliptica', correct: false)
-question1.answers.create(description: 'Comulo de Virgo', correct: false)
+question1.answers.create(description: 'A star in the final stage of its life', correct: true)
+question1.answers.create(description: 'A type of black hole', correct: false)
+question1.answers.create(description: 'The collapsed core of a massive star after a supernova', correct: false)
+question1.answers.create(description: 'A star emitting regular pulses of electromagnetic radiation.', correct: false)
 
 # Verificar si las respuestas se crearon correctamente
 puts "Respuestas de la pregunta1: #{question1.answers.inspect}"
 
 # question 2
 
-level23.questions.create(description: '¿Cuál es la teoría científica que describe el origen del universo a partir de una explosión inicial?', level_id: 2, scoreQuestion: 15)
+level23.questions.create(description: 'What is the name of Neptune´s largest natural satellite?', level_id: 2, scoreQuestion: 15)
 # Create answers for question2
 question2 = level23.questions.second
-question2.answers.create(description: 'Teoría de la relatividad', correct: false)
-question2.answers.create(description: 'Teoria del caos', correct: false)
-question2.answers.create(description: 'Teoría del Big Bang', correct: true)
-question2.answers.create(description: 'Teoría de cuerdas', correct: false)
+question2.answers.create(description: 'Triton', correct: true)
+question2.answers.create(description: 'lo', correct: false)
+question2.answers.create(description: 'Europa', correct: false)
+question2.answers.create(description: 'Titan', correct: false)
 
 # Verificar si las respuestas se crearon correctamente
 puts "Respuestas de la pregunta1: #{question2.answers.inspect}"
@@ -153,7 +153,7 @@ puts "Preguntas del level11: #{level23.questions.inspect}"
 #--------
 
 # Create planet 4
-planeta4 = Planet.create(name: 'Mercurio')
+planeta4 = Planet.create(name: 'Mercury')
 # Create levels for planet1
 planeta4.levels.create(number: 1)
 planeta4.levels.create(number: 2)
@@ -164,7 +164,7 @@ puts "Niveles del planeta1: #{planeta4.levels.inspect}"
 
 # Create question for level1
 level14 = planeta4.levels.first
-level14.questions.create(description: '¿Cuál es el nombre del primer astronauta en caminar sobre la Luna?')
+level14.questions.create(description: '¿Cuál es el nombre del primer astronauta en caminar sobre la Luna?', level_id: 1, scoreQuestion: 10)
 # Create answers for question1
 question1 = level14.questions.first
 question1.answers.create(description: 'Yuri Gagarin', correct: false)
@@ -177,7 +177,7 @@ puts "Respuestas de la pregunta1: #{question1.answers.inspect}"
 
 # question 2
 
-level14.questions.create(description: '¿Qué fenómeno astronómico ocurre cuando la Luna bloquea completamente la luz solar hacia la Tierra?')
+level14.questions.create(description: '¿Qué fenómeno astronómico ocurre cuando la Luna bloquea completamente la luz solar hacia la Tierra?', level_id: 1, scoreQuestion: 10)
 # Create answers for question2
 question2 = level14.questions.second
 question2.answers.create(description: 'Eclipse solar', correct: true)
@@ -195,7 +195,7 @@ puts "Preguntas del level11: #{level14.questions.inspect}"
 #--------
 
 # Create planet 5
-planeta5 = Planet.create(name: 'Marte')
+planeta5 = Planet.create(name: 'Mars')
 # Create levels for planet1
 planeta5.levels.create(number: 1)
 planeta5.levels.create(number: 2)
@@ -321,7 +321,7 @@ puts "Preguntas del level11: #{level17.questions.inspect}"
 #--------
 
 # Create planet 8
-planeta8 = Planet.create(name: 'Neptuno')
+planeta8 = Planet.create(name: 'Neptune')
 # Create levels for planet1
 planeta8.levels.create(number: 1)
 planeta8.levels.create(number: 2)

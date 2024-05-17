@@ -99,31 +99,30 @@ class App < Sinatra::Application
       redirect '/login'
       #Borrar datos de la sesion
     end
-    planet = params[:planet]
-    if planet == "Earth"
-      redirect '/earthLevels'
-    end
+    session[:planet] = params[:planet]
+    redirect '/planetLevels'
   end
 
-  get '/earthLevels' do
-    erb :earthLevels
+  get '/planetLevels' do
+    erb :planetLevels
   end
 
-  post '/earthLevels' do
+  post '/planetLevels' do
     if params[:back]
       redirect '/solarSystem'
     end
     yourLevel = params[:level].to_i
-    session[:firstLevel1Earth] = true   #Primera vez jugando
+    session[:firstLevel] = true   #Primera vez jugando
     session[:levelSelected] = yourLevel #Nivel seleccionado
-    redirect '/earthLevel1'
+    redirect '/planetLevel1'
   end
 
-  get '/earthLevel1' do
-    EARTH_ID = Planet.find_by(name: 'Earth').id
-    if session[:firstLevel1Earth] == true # Si estoy jugando el primer nivel
+  get '/planetLevel1' do
+    planet = session[:planet] 
+    PLANET_ID = Planet.find_by(name: planet).id
+    if session[:firstLevel] == true # Si estoy jugando el primer nivel
       levelSelected = session[:levelSelected]
-      level_n = Level.find_by(planet_id: EARTH_ID, number: levelSelected)
+      level_n = Level.find_by(planet_id: PLANET_ID, number: levelSelected)
 
       if level_n.nil?
         halt 404, "Level not found"
@@ -142,13 +141,12 @@ class App < Sinatra::Application
       @currentQuestion = @questions.shift
       session[:currentQuestion] = @currentQuestion
     end
-
-    erb :earthLevel1
+    erb :planetLevel1
   end
 
-  post '/earthLevel1' do
+  post '/planetLevel1' do
     if params[:back] 
-      redirect '/earthLevels'
+      redirect '/planetLevels'
     end
     yourAnswer = params[:button].to_i
     u = session[:currentQuestion]
@@ -157,11 +155,11 @@ class App < Sinatra::Application
     selected_answer = Answer.find_by(id: yourAnswer)
 
     if quest && selected_answer.correct    #respuesta correcta
-      session[:firstLevel1Earth] = false  #Deje de estar en la primer pregunta del nivel 1
-      redirect '/earthLevel1' #contesto la siguiente pregunta
+      session[:firstLevel] = false  #Deje de estar en la primer pregunta del nivel 1
+      redirect '/planetLevel1' #contesto la siguiente pregunta
       session[:score_user] = quest.scoreQuestion
     else
-      erb :earthLevel1  #Vuelvo a contestar la misma pregunta
+      erb :planetLevel1  #Vuelvo a contestar la misma pregunta
     end
   end
 end
