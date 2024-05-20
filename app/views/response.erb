@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+<body>
+<%iu = session[:currentQuestion]%>
+<%yourAnswer = session[:yourAnswer]%>
+<%quest = Question.find_by(id: iu)%>
+<%selected_answer = Answer.find_by(id: yourAnswer)%>
+<% if quest && selected_answer.correct %>
+    <%session[:score_user] = quest.scoreQuestion%>
+    <div class="container">
+        <p>Respuesta correcta, +<%=quest.scoreQuestion%>pts</p>
+    </div>
+<%else%>
+    <div class = "container">
+        <p>Tu Respuesta es incorrecta, la respuesta correcta es: <%quest.correct_answer%></p>
+    </div>
+<%end%>
+    <form method="post">
+        <input type="hidden" name="nextQuestion">
+        <button type="submit" class="button">Next question</button>
+    </form>
+</body>
+</html>
