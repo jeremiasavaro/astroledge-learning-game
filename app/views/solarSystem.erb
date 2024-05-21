@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Planets</title>
+<title>Planetas</title>
 <style>
     body {
         background-image: url('https://c.wallhere.com/photos/41/26/1920x1080_px_Cartoon_humor_solar_system-1197876.jpg!d');
@@ -25,16 +25,24 @@
         text-align: center;
     }
     .button {
-        position: absolute;
-        border: 2px solid white;
-        bottom: 10px; /* Adjust this value as needed */
-        left: 3%;
-        bottom: 5%;
-        transform: translateX(-50%);
-        padding: 10px 10px;
-        font-size: 16px;
-        cursor: pointer;
-    }
+          position: absolute;
+          bottom: 10px;
+          left: 10px;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          border: none;
+          background-color: #0E2087; /* Background gradient start color */
+          color: white;
+          border-radius: 30px;
+          display: flex;
+          align-items: center;
+          transition: background-color 0.3s ease-in-out;
+      }
+
+      .button:hover {
+          background-color: #0E2087; /* Darker shade for hover effect */
+      }
 </style>
 </head>
 <body>
