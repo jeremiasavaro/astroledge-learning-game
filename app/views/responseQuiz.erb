@@ -110,25 +110,27 @@
             <% question_user = QuestionUser.find_by(user: user, question: quest) %>
             <% if quest && selected_answer.correct %>
                 <div class="container">
-                    <p>Respuesta correcta, pero no es tu primer intento, +0pts, Puntos totales en esta sesión: <%= session[:score_user] %></p>
+                    <p>Correct answer, but it's not your first attempt, +0 points, total points: <%= session[:score_user] %></p>
                 </div>
                 <% question_user.update(correct: true) %> 
             <% else %>
                 <div class="container">
-                    <p>Tu Respuesta es incorrecta, la respuesta correcta es: <%= quest.correct_answer %></p>
+                    <p>Your answer is wrong, the correct answer is: <%=quest.correct_answer %></p>
                 </div>
             <% end %>
         <% else %>
             <% if quest && selected_answer.correct %>
                 <% actualScore = session[:score_user] %>
                 <% session[:score_user] = actualScore + quest.scoreQuestion %>
+                <% user.update(score: session[:score_user]) %>
+                <% user.save %>
                 <div class="container">
-                    <p>Respuesta correcta, +<%= quest.scoreQuestion %> pts, Puntos totales: <%= session[:score_user] %></p>
+                    <p>Correct answer, +<%= quest.scoreQuestion %> points, total points: <%= session[:score_user] %></p>
                 </div>
                 <% QuestionUser.create(user: user, question: quest, correct: true) %> 
             <% else %>
                 <div class="container">
-                    <p>Tu Respuesta es incorrecta, la respuesta correcta es: <%= quest.correct_answer %></p>
+                    <p>Your answer is wrong, the correct answer is: <%= quest.correct_answer %></p>
                 </div>
                 <% QuestionUser.create(user: user, question: quest, correct: false) %>
             <% end %>

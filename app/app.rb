@@ -98,7 +98,7 @@ class App < Sinatra::Application
   post '/solarSystem' do
     if params[:logout]
       user = User.find_by(id: session[:user_id])
-      user.update(score: session[:score_user])
+      user.save
       session.clear
       redirect '/login'
     end
@@ -118,10 +118,10 @@ class App < Sinatra::Application
     yourLevel = params[:level].to_i
     session[:firstLevel] = true   #Primera vez jugando
     session[:levelSelected] = yourLevel #Nivel seleccionado
-    redirect '/planetLevel1'
+    redirect '/planetLevelQuiz'
   end
 
-  get '/planetLevel1' do
+  get '/planetLevelQuiz' do
     if session[:firstLevel] == true # Si estoy jugando el primer nivel
       levelSelected = session[:levelSelected]
       level_n = Level.find_by(planet_id: PLANET_ID, number: levelSelected)
@@ -149,10 +149,11 @@ class App < Sinatra::Application
       session[:questions] = @questions
       session[:currentQuestion] = @currentQuestion
     end
-    erb :planetLevel1
+    erb :planetLevelQuiz
+
   end
 
-  post '/planetLevel1' do
+  post '/planetLevelQuiz' do
     if params[:back]
       redirect '/planetLevels'
     end
@@ -162,15 +163,15 @@ class App < Sinatra::Application
     @quest = Question.find_by(id: u)
     @selected_answer = Answer.find_by(id: session[:yourAnswer])
 
-    redirect '/response'
+    redirect '/responseQuiz'
   end
 
-  get '/response' do
-    erb :response
+  get '/responseQuiz' do
+    erb :responseQuiz
   end
 
-  post '/response' do
-    redirect '/planetLevel1'
+  post '/responseQuiz' do
+    redirect '/planetLevelQuiz'
   end
 
 end
