@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_17_144419) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_20_184012) do
   create_table "answers", force: :cascade do |t|
     t.integer "question_id", null: false
     t.string "description", null: false
@@ -34,6 +34,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_144419) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "question_users", force: :cascade do |t|
+    t.integer "question_id", null: false
+    t.integer "user_id", null: false
+    t.boolean "correct", default: false, null: false
+    t.index ["question_id", "user_id"], name: "index_question_users_on_question_id_and_user_id", unique: true
+    t.index ["question_id"], name: "index_question_users_on_question_id"
+    t.index ["user_id"], name: "index_question_users_on_user_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.integer "level_id", null: false
     t.string "description", null: false
@@ -54,5 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_144419) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "levels", "planets"
+  add_foreign_key "question_users", "questions"
+  add_foreign_key "question_users", "users"
   add_foreign_key "questions", "levels"
 end

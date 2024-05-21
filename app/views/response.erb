@@ -6,20 +6,39 @@
   <title></title>
 </head>
 <body>
-<%iu = session[:currentQuestion]%>
-<%yourAnswer = session[:yourAnswer]%>
-<%quest = Question.find_by(id: iu)%>
-<%selected_answer = Answer.find_by(id: yourAnswer)%>
-<% if quest && selected_answer.correct %>
-    <%session[:score_user] = quest.scoreQuestion%>
-    <div class="container">
-        <p>Respuesta correcta, +<%=quest.scoreQuestion%>pts</p>
-    </div>
-<%else%>
-    <div class = "container">
-        <p>Tu Respuesta es incorrecta, la respuesta correcta es: <%quest.correct_answer%></p>
-    </div>
-<%end%>
+    <% iu = session[:currentQuestion] %>
+    <% yourAnswer = session[:yourAnswer] %>
+    <% quest = Question.find_by(id: iu) %>
+    <% user = User.find(session[:user_id]) %>
+    <% selected_answer = Answer.find_by(id: yourAnswer) %>
+
+    <% if QuestionUser.exists?(user: user, question: quest) %>
+        <% question_user = QuestionUser.find_by(user: user, question: quest) %>
+        <% if quest && selected_answer.correct %>
+            <div class="container">
+                <p>Respuesta correcta, pero no es tu primer intento, +0pts, Puntos totales en esta sesión: <%= session[:score_user] %></p>
+            </div>
+            <% question_user.update(correct: true) %> 
+        <% else %>
+            <div class="container">
+                <p>Tu Respuesta es incorrecta, la respuesta correcta es: <%= quest.correct_answer %></p>
+            </div>
+        <% end %>
+    <% else %>
+        <% if quest && selected_answer.correct %>
+            <% actualScore = session[:score_user] %>
+            <% session[:score_user] = actualScore + quest.scoreQuestion %>
+            <div class="container">
+                <p>Respuesta correcta, +<%= quest.scoreQuestion %> pts, Puntos totales: <%= session[:score_user] %></p>
+            </div>
+            <% QuestionUser.create(user: user, question: quest, correct: true) %> 
+        <% else %>
+            <div class="container">
+                <p>Tu Respuesta es incorrecta, la respuesta correcta es: <%= quest.correct_answer %></p>
+            </div>
+            <% QuestionUser.create(user: user, question: quest, correct: false) %>
+        <% end %>
+    <% end %>
     <form method="post">
         <input type="hidden" name="nextQuestion">
         <button type="submit" class="button">Next question</button>

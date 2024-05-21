@@ -10,6 +10,8 @@ require './models/planet'
 require './models/level'
 require './models/question'
 require './models/answer'
+require './models/questionUser'
+
 
 set :database_file, './config/database.yml'
 set :public_folder, 'assets'
@@ -84,7 +86,6 @@ class App < Sinatra::Application
         user.score = 0
         user.actual_level = 1
         user.save
-
         redirect '/login'
       end
     end
@@ -96,11 +97,12 @@ class App < Sinatra::Application
 
   post '/solarSystem' do
     if params[:logout]
-      
+      user = User.find_by(id: session[:user_id])
+      user.update(score: session[:score_user])
       session.clear
       redirect '/login'
     end
-    planet = params[:planet] 
+    planet = params[:planet]
     PLANET_ID = Planet.find_by(name: planet).id
     redirect '/planetLevels'
   end
@@ -129,7 +131,7 @@ class App < Sinatra::Application
       end
 
       @questions = level_n.questions.pluck(:id)
-      
+
       if @questions.empty?
         halt 404, "No questions found for this level"
       end
@@ -137,7 +139,10 @@ class App < Sinatra::Application
       @currentQuestion = @questions.shift # Saco la primer pregunta del nivel1
       session[:questions] = @questions # Guardo todas las preguntas en la sesion
       session[:currentQuestion] = @currentQuestion  # Guardo la pregunta actual en la sesion
-      session[:firstLevel] = false 
+
+      user = User.find(session[:user_id])
+      question = Question.find(@currentQuestion)
+      session[:firstLevel] = false
     else # Ya tengo todas las preguntas guardadas, solo saco la siguiente
       @questions = session[:questions]
       @currentQuestion = @questions.shift
@@ -148,7 +153,7 @@ class App < Sinatra::Application
   end
 
   post '/planetLevel1' do
-    if params[:back] 
+    if params[:back]
       redirect '/planetLevels'
     end
     session[:yourAnswer] = params[:button].to_i
@@ -156,7 +161,7 @@ class App < Sinatra::Application
 
     @quest = Question.find_by(id: u)
     @selected_answer = Answer.find_by(id: session[:yourAnswer])
-  
+
     redirect '/response'
   end
 
