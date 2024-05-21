@@ -7,7 +7,7 @@
   <style>
       body {
           margin: 0;
-          height: 90vh;
+          height: 100vh;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -101,11 +101,11 @@
 </head>
 <body>
     <div class="container">
-        <% iu = session[:currentQuestion] %>
-        <% yourAnswer = session[:yourAnswer] %>
+        <% iu = session[:current_question] %>
+        <% your_answer = session[:your_answer] %>
         <% quest = Question.find_by(id: iu) %>
         <% user = User.find(session[:user_id]) %>
-        <% selected_answer = Answer.find_by(id: yourAnswer) %>
+        <% selected_answer = Answer.find_by(id: your_answer) %>
         <% if QuestionUser.exists?(user: user, question: quest) %>
             <% question_user = QuestionUser.find_by(user: user, question: quest) %>
             <% if quest && selected_answer.correct %>
@@ -120,8 +120,8 @@
             <% end %>
         <% else %>
             <% if quest && selected_answer.correct %>
-                <% actualScore = session[:score_user] %>
-                <% session[:score_user] = actualScore + quest.scoreQuestion %>
+                <% actual_score = session[:score_user] %>
+                <% session[:score_user] = actual_score + quest.scoreQuestion %>
                 <% user.update(score: session[:score_user]) %>
                 <% user.save %>
                 <div class="container">

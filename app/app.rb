@@ -40,21 +40,21 @@ class App < Sinatra::Application
 
   post '/login' do
     username = params[:username]
-    pswd = params[:password]
+    password = params[:password]
 
     user = User.find_by(username: username)
     if user == nil
-      # Usuario no encontrado
-      @error = "Usuario no encontrado."
+      # user not found
+      @error = "User not found."
       erb :login
     else
-      if user.authenticates(pswd)
+      if user.authenticates(password)
         session[:user_id] = user.id
         session[:score_user] = user.score
         redirect '/solarSystem'
       else
-        # Autenticación fallida
-        @error = "Contraseña incorrecta."
+        # failed authentication
+        @error = "Incorrect password."
         erb :login
       end
     end
@@ -65,24 +65,24 @@ class App < Sinatra::Application
   end
 
   post '/register' do
-    usernameNew = params[:username]
-    passwordNew = params[:password]
-    passwordRepeat = params[:passwordRep]
+    new_username = params[:username]
+    new_password = params[:password]
+    new_password_repeat = params[:password_rep]
 
-    if passwordNew != passwordRepeat
-      # Las contraseñas no coinciden
-      @error = "Las contraseñas no coinciden."
+    if new_password != new_password_repeat
+      # passwords don't match
+      @error = "Passwords don't match."
       erb :register
     else
-      aut = User.find_by(username: usernameNew)
+      aut = User.find_by(username: new_username)
       if aut
-        # Nombre de usuario ya tomado
-        puts "Nombre de usuario ya está en uso."
+        # username already taken
+        puts "Username already taken."
         erb :register
       else
         user = User.new
-        user.username = usernameNew
-        user.password = passwordNew
+        user.username = new_username
+        user.password = new_password
         user.score = 0
         user.actual_level = 1
         user.save
@@ -115,39 +115,37 @@ class App < Sinatra::Application
     if params[:back]
       redirect '/solarSystem'
     end
-    yourLevel = params[:level].to_i
-    session[:firstLevel] = true   #Primera vez jugando
-    session[:levelSelected] = yourLevel #Nivel seleccionado
+    your_level = params[:level].to_i
+    session[:first_level] = true # first time playing
+    session[:level_selected] = your_level # selected level
     redirect '/planetLevelQuiz'
   end
 
   get '/planetLevelQuiz' do
-    if session[:firstLevel] == true # Si estoy jugando el primer nivel
-      levelSelected = session[:levelSelected]
-      level_n = Level.find_by(planet_id: PLANET_ID, number: levelSelected)
+    if session[:first_level] == true # if the user it's playing the first level
+      level_selected = session[:level_selected]
+      level_n = Level.find_by(planet_id: PLANET_ID, number: level_selected)
 
       if level_n.nil?
-        halt 404, "Level not found"
+        halt 404, "Level not found."
       end
 
       @questions = level_n.questions.pluck(:id)
 
       if @questions.empty?
-        halt 404, "No questions found for this level"
+        halt 404, "No questions found for this level."
       end
 
-      @currentQuestion = @questions.shift # Saco la primer pregunta del nivel1
-      session[:questions] = @questions # Guardo todas las preguntas en la sesion
-      session[:currentQuestion] = @currentQuestion  # Guardo la pregunta actual en la sesion
+      @current_question = @questions.shift # takes the first question of level 1
+      session[:questions] = @questions # save all questions in the session
+      session[:current_question] = @current_question  # save the current question in the session
 
-      user = User.find(session[:user_id])
-      question = Question.find(@currentQuestion)
-      session[:firstLevel] = false
-    else # Ya tengo todas las preguntas guardadas, solo saco la siguiente
+      session[:first_level] = false
+    else # already have all the questions saved, just take the next one
       @questions = session[:questions]
-      @currentQuestion = @questions.shift
+      @current_question = @questions.shift
       session[:questions] = @questions
-      session[:currentQuestion] = @currentQuestion
+      session[:current_question] = @current_question
     end
     erb :planetLevelQuiz
 
@@ -157,11 +155,11 @@ class App < Sinatra::Application
     if params[:back]
       redirect '/planetLevels'
     end
-    session[:yourAnswer] = params[:button].to_i
-    u = session[:currentQuestion]
+    session[:your_answer] = params[:button].to_i
+    u = session[:current_question]
 
     @quest = Question.find_by(id: u)
-    @selected_answer = Answer.find_by(id: session[:yourAnswer])
+    @selected_answer = Answer.find_by(id: session[:your_answer])
 
     redirect '/responseQuiz'
   end
