@@ -101,7 +101,7 @@
 </head>
 <body>
 <div class="container">
-  <% if session[:currentQuestion] %>
+  <% if session[:currentQuestion]%>
     <% question_id = session[:currentQuestion] %>
     <% question = Question.find_by(id: question_id) %>
     <% if question %>

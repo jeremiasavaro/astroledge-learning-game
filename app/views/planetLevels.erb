@@ -4,15 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earth - Levels</title>
-    <style>
-        .button-grid {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 90vh;
-            margin: 0;
-            padding: 0;
-        }
+        <style>
+      body {
+          margin: 0;
+          height: 90vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed; /* Reemplaza con una URL válida */
+          background-size: cover;
+          font-family: Arial, sans-serif;
+          color: #fff; /* Texto blanco para mejor contraste */
+          position: relative;
+      }
+
+      body::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.3); /* Degradado oscuro */
+          z-index: 0;
+      }
+
+      .container {
+          width: 80%; /* Ocupa el 80% de la pantalla */
+          max-width: 800px;
+          padding: 40px;
+          border-radius: 10px;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+
+      .question-box {
+          border: 0 solid #ccc;
+          border-radius: 0;
+          padding: 40px;
+          text-align: center;
+          margin-bottom: 20px;
+          color: white; /* Texto negro para buena visibilidad */
+          flex-grow: 1; /* Ocupa el espacio disponible */
+      }
+
+      .button-grid {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+      }
         .button-grid form {
             flex: 1;
             display: flex;
@@ -23,26 +69,56 @@
             font-size: 16px;
             cursor: pointer;
         }
+
+        .buttonBack {
+        position: absolute;
+        border: 2px solid white;
+        bottom: 10px; /* Adjust this value as needed */
+        left: 2.5%;
+        bottom: 0;
+        transform: translateX(-50%);
+        padding: 10px 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .button:hover {
+          background-color: lightgrey;
+          border-color: #ccc;
+      }
+
+      h2 {
+          font-size: 48px;
+          margin-top: 0;
+          margin-bottom: 20px;
+      }
+
+      p {
+          font-size: 24px;
+          color: #fff;
+      }
     </style>
 </head>
 <body>
-    <div class="button-grid">
-        <form method="post">
-            <input type="hidden" name="level" value="1">
-            <button type="submit" class="button">Nivel 1</button>
-        </form>
-        <form method="post">
-            <input type="hidden" name="level" value="2">
-            <button type="submit" class="button">Nivel 2</button>
-        </form>
-        <form method="post">
-            <input type="hidden" name="level" value="3">
-            <button type="submit" class="button">Nivel 3</button>
-        </form>
+    <div class = "container">
+        <div class="button-grid">
+            <form method="post">
+                <input type="hidden" name="level" value="1">
+                <button type="submit" class="button">Nivel 1</button>
+            </form>
+            <form method="post">
+                <input type="hidden" name="level" value="2">
+                <button type="submit" class="button">Nivel 2</button>
+            </form>
+            <form method="post">
+                <input type="hidden" name="level" value="3">
+                <button type="submit" class="button">Nivel 3</button>
+            </form>
+        </div>
     </div>
     <form method="post">
         <input type="hidden" name="back">
-        <button type="submit" class="button">Back</button>
+        <button type="submit" class="buttonBack">Back</button>
     </form>
 </body>
 </html>
