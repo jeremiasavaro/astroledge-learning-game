@@ -51,7 +51,7 @@ class App < Sinatra::Application
       if user.authenticates(password)
         session[:user_id] = user.id
         session[:score_user] = user.score
-        redirect '/solarSystem'
+        redirect '/mainMenu'
       else
         # failed authentication
         @error = "Incorrect password."
@@ -96,11 +96,8 @@ class App < Sinatra::Application
   end
 
   post '/solarSystem' do
-    if params[:logout]
-      user = User.find_by(id: session[:user_id])
-      user.save
-      session.clear
-      redirect '/login'
+    if params[:back]
+      redirect '/mainMenu'
     end
     planet = params[:planet]
     PLANET_ID = Planet.find_by(name: planet).id
@@ -170,6 +167,38 @@ class App < Sinatra::Application
 
   post '/responseQuiz' do
     redirect '/planetLevelQuiz'
+  end
+
+  get '/mainMenu' do
+    erb :mainMenu
+  end
+
+  post '/mainMenu' do
+    if params[:logout]
+      user = User.find_by(id: session[:user_id])
+      user.save
+      session.clear
+      redirect '/menu'
+    end
+
+    if params[:solarSystem]
+      redirect '/solarSystem'
+    end
+
+    if params[:ranking]
+      redirect '/ranking'
+    end
+  end
+
+  get '/ranking' do
+    @users = User.order(score: :desc).limit(10)
+    erb :ranking
+  end
+  
+  post '/ranking' do
+    if params[:back]
+      redirect '/mainMenu'
+    end
   end
 
 end
