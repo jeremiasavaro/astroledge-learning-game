@@ -115,7 +115,7 @@
                 <% question_user.update(correct: true) %> 
             <% else %>
                 <div class="container">
-                    <p>Your answer is wrong, the correct answer is: <%=quest.correct_answer %></p>
+                    <p>Your answer is wrong, the correct answer is: <%=quest.correct_answer.description %></p>
                 </div>
             <% end %>
         <% else %>
@@ -130,7 +130,7 @@
                 <% QuestionUser.create(user: user, question: quest, correct: true) %> 
             <% else %>
                 <div class="container">
-                    <p>Your answer is wrong, the correct answer is: <%= quest.correct_answer %></p>
+                    <p>Your answer is wrong, the correct answer is: <%= quest.correct_answer.description %></p>
                 </div>
                 <% QuestionUser.create(user: user, question: quest, correct: false) %>
             <% end %>
