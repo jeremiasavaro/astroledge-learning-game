@@ -46,7 +46,7 @@ class App < Sinatra::Application
     if user == nil
       # user not found
       @error = "User not found."
-      erb :login
+      redirect '/register'
     else
       if user.authenticates(password)
         session[:user_id] = user.id
@@ -55,7 +55,7 @@ class App < Sinatra::Application
       else
         # failed authentication
         @error = "Incorrect password."
-        erb :login
+        redirect '/login'
       end
     end
   end
@@ -84,7 +84,7 @@ class App < Sinatra::Application
         user.username = new_username
         user.password = new_password
         user.score = 0
-        user.actual_level = 1
+        user.see_correct = false
         user.save
         redirect '/login'
       end
@@ -181,6 +181,17 @@ class App < Sinatra::Application
       redirect '/menu'
     end
 
+    if params[:see_correct]
+      user = User.find_by(id: session[:user_id])
+      if user.see_correct
+        user.see_correct = false
+      else
+        user.see_correct = true
+      end
+      user.save
+      redirect '/mainMenu'
+    end
+
     if params[:solarSystem]
       redirect '/solarSystem'
     end
@@ -194,11 +205,10 @@ class App < Sinatra::Application
     @users = User.order(score: :desc).limit(10)
     erb :ranking
   end
-  
+
   post '/ranking' do
     if params[:back]
       redirect '/mainMenu'
     end
   end
-
 end

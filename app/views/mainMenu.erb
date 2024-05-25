@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earth - Levels</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Earth - Levels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
       body {
           margin: 0;
           height: 100vh;
@@ -60,18 +60,18 @@
           margin: 0;
           padding: 0;
       }
-        .button-grid form {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-        .button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+      .button-grid form {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+      }
+      .button {
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+      }
 
-        .buttonBack {
+      .buttonBack {
           position: absolute;
           bottom: 10px;
           left: 10px;
@@ -85,11 +85,11 @@
           display: flex;
           align-items: center;
           transition: background-color 0.3s ease-in-out;
-        }
+      }
 
-        .buttonBack:hover {
-            background-color: #0E2087; /* Darker shade for hover effect */
-        }
+      .buttonBack:hover {
+          background-color: #0E2087; /* Darker shade for hover effect */
+      }
 
       h2 {
           font-size: 48px;
@@ -101,24 +101,34 @@
           font-size: 24px;
           color: #fff;
       }
-    </style>
+  </style>
 </head>
 <body>
-    <div class = "container">
-        <div class="button-grid">
-            <form method="post">
-                <input type="hidden" name="solarSystem">
-                <button type="submit" class="button">Solar System</button>
-            </form>
-            <form method="post">
-                <input type="hidden" name="ranking">
-                <button type="submit" class="button">Ranking</button>
-            </form>
-        </div>
-    </div>
+<div class = "container">
+  <div class="button-grid">
     <form method="post">
-        <input type="hidden" name="logout">
-        <button type="submit" class="buttonBack">Log out</button>
+      <input type="hidden" name="solarSystem">
+      <button type="submit" class="button">Solar System</button>
     </form>
+    <form method="post">
+      <input type="hidden" name="ranking">
+      <button type="submit" class="button">Ranking</button>
+    </form>
+    <form method="post">
+      <% user = User.find_by(id: session[:user_id])%>
+      <%if user.see_correct %>
+        <input type="hidden" name="see_correct">
+        <button type="submit" class="button">Disable see correct answer</button>
+      <%else%>
+        <input type="hidden" name="see_correct">
+        <button type="submit" class="button">Enable see correct answer</button>
+      <%end%>
+    </form>
+  </div>
+</div>
+<form method="post">
+  <input type="hidden" name="logout">
+  <button type="submit" class="buttonBack">Log out</button>
+</form>
 </body>
 </html>

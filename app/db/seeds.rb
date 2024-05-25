@@ -42,13 +42,13 @@ planets_data = [
             ]
           },
           {
-            description: 'What is the name of the process by which a massive star collapses under its own gravity at the end of its life cycle?',
+            description: 'What is the largest planet in the solar system?',
             scoreQuestion: 10,
             answers: [
-              { description: 'Supernova', correct: true },
-              { description: 'Nova', correct: false },
-              { description: 'Supernova remnant', correct: false },
-              { description: 'Planetary nebula', correct: false }
+              { description: 'Earth', correct: false },
+              { description: 'Jupiter', correct: true },
+              { description: 'Saturn', correct: false },
+              { description: 'Uranus', correct: false }
             ]
           }
         ]
@@ -57,13 +57,13 @@ planets_data = [
         number: 3,
         questions: [
           {
-            description: 'What is the largest planet in the solar system?',
+            description: 'What is the second closest planet to the Sun?',
             scoreQuestion: 10,
             answers: [
               { description: 'Earth', correct: false },
-              { description: 'Jupiter', correct: true },
-              { description: 'Saturn', correct: false },
-              { description: 'Uranus', correct: false }
+              { description: 'Mars', correct: false },
+              { description: 'Venus', correct: true },
+              { description: 'Mercury', correct: false }
             ]
           },
           {
@@ -137,13 +137,13 @@ planets_data = [
         number: 3,
         questions: [
           {
-            description: 'What is the second closest planet to the Sun?',
+            description: 'What is the name of the process by which a massive star collapses under its own gravity at the end of its life cycle?',
             scoreQuestion: 10,
             answers: [
-              { description: 'Earth', correct: false },
-              { description: 'Mars', correct: false },
-              { description: 'Venus', correct: true },
-              { description: 'Mercury', correct: false }
+              { description: 'Supernova', correct: true },
+              { description: 'Nova', correct: false },
+              { description: 'Supernova remnant', correct: false },
+              { description: 'Planetary nebula', correct: false }
             ]
           },
           {

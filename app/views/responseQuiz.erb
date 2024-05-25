@@ -71,15 +71,15 @@
       }
 
       .buttonBack {
-        position: absolute;
-        border: 2px solid white;
-        bottom: 10px; /* Adjust this value as needed */
-        left: 2.5%;
-        bottom: 0;
-        transform: translateX(-50%);
-        padding: 10px 10px;
-        font-size: 16px;
-        cursor: pointer;
+          position: absolute;
+          border: 2px solid white;
+          bottom: 10px; /* Adjust this value as needed */
+          left: 2.5%;
+          bottom: 0;
+          transform: translateX(-50%);
+          padding: 10px 10px;
+          font-size: 16px;
+          cursor: pointer;
       }
 
       .button:hover {
@@ -100,47 +100,78 @@
   </style>
 </head>
 <body>
-    <div class="container">
-        <% iu = session[:current_question] %>
-        <% your_answer = session[:your_answer] %>
-        <% quest = Question.find_by(id: iu) %>
-        <% user = User.find(session[:user_id]) %>
-        <% selected_answer = Answer.find_by(id: your_answer) %>
-        <% if QuestionUser.exists?(user: user, question: quest) %>
-            <% question_user = QuestionUser.find_by(user: user, question: quest) %>
-            <% if quest && selected_answer.correct %>
-                <div class="container">
-                    <p>Correct answer, but it's not your first attempt, +0 points, total points: <%= session[:score_user] %></p>
-                </div>
-                <% question_user.update(correct: true) %> 
-            <% else %>
-                <div class="container">
-                    <p>Your answer is wrong, the correct answer is: <%=quest.correct_answer.description %></p>
-                </div>
-            <% end %>
-        <% else %>
-            <% if quest && selected_answer.correct %>
-                <% actual_score = session[:score_user] %>
-                <% session[:score_user] = actual_score + quest.scoreQuestion %>
-                <% user.update(score: session[:score_user]) %>
-                <% user.save %>
-                <div class="container">
-                    <p>Correct answer, +<%= quest.scoreQuestion %> points, total points: <%= session[:score_user] %></p>
-                </div>
-                <% QuestionUser.create(user: user, question: quest, correct: true) %> 
-            <% else %>
-                <div class="container">
-                    <p>Your answer is wrong, the correct answer is: <%= quest.correct_answer.description %></p>
-                </div>
-                <% QuestionUser.create(user: user, question: quest, correct: false) %>
-            <% end %>
+<div class="container">
+  <% iu = session[:current_question] %>
+  <% your_answer = session[:your_answer] %>
+  <% quest = Question.find_by(id: iu) %>
+  <% user = User.find(session[:user_id]) %>
+  <% config = user.see_correct %>
+  <% selected_answer = Answer.find_by(id: your_answer) %>
+  <!-- if the user has already answered the question -->
+  <% if QuestionUser.exists?(user: user, question: quest) %>
+    <% question_user = QuestionUser.find_by(user: user, question: quest) %>
+    <!-- if the answer selected is correct-->
+    <% if quest && selected_answer.correct %>
+      <% if question_user[:correct] %>
+        <div class="container">
+          <p> Correct answer, but you have already answered correctly before.</p>
+        </div>
+      <% else %>
+        <% actual_score = session[:score_user] %>
+        <% session[:score_user] = actual_score + (quest.scoreQuestion / 2) %>
+        <% user.update(score: session[:score_user]) %>
+        <% user.save %>
+        <div class="container">
+          <p>Correct answer, but it's not your first attempt, +<%= quest.scoreQuestion / 2 %> points, total points: <%= session[:score_user] %></p>
+        </div>
+        <% question_user.update(correct: true) %>
+      <% end %>
+    <!-- if  answer selected was wrong -->
+    <% else %>
+      <!-- if user wants to see the correct answer -->
+      <% if config %>
+        <div class="container">
+          <p>Your answer is wrong, the correct answer is: <%=quest.correct_answer.description %>. <%=quest.why_is_wrong %></p>
+        </div>
+      <!-- if user doesn't want to see the correct answer -->
+      <% else %>
+        <div class="container">
+          <p>Your answer is wrong.</p>
+        </div>
         <% end %>
-        <form method="post">
-            <input type="hidden" name="nextQuestion">
-            <button type="submit" class="button">Next question</button>
-        </form>
-    </div>
-</body>
-</html>
+    <% end %>
+  <!-- if the user hasn't already answered the question -->
+  <% else %>
+    <!-- if the answer selected is correct-->
+    <% if quest && selected_answer.correct %>
+      <% actual_score = session[:score_user] %>
+      <% session[:score_user] = actual_score + quest.scoreQuestion %>
+      <% user.update(score: session[:score_user]) %>
+      <% user.save %>
+      <div class="container">
+        <p>Correct answer, +<%= quest.scoreQuestion %> points, total points: <%= session[:score_user] %></p>
+      </div>
+      <% QuestionUser.create(user: user, question: quest, correct: true) %>
+    <!-- if  answer selected was wrong -->
+    <% else %>
+      <!-- if user wants to see the correct answer -->
+      <% if config %>
+        <div class="container">
+          <p>Your answer is wrong, the correct answer is: <%=quest.correct_answer.description %></p>. <p><%=quest.why_is_wrong %></p>
+        </div>
+      <!-- if user doesn't want to see the correct answer -->
+      <% else %>
+        <div class="container">
+          <p>Your answer is wrong.</p>
+        </div>
+      <% end %>
+      <% QuestionUser.create(user: user, question: quest, correct: false) %>
+    <% end %>
+  <% end %>
+  <form method="post">
+    <input type="hidden" name="nextQuestion">
+    <button type="submit" class="button">Next question</button>
+  </form>
+</div>
 </body>
 </html>
