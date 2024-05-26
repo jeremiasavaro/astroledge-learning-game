@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking</title>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
       body {
           margin: 0;
           height: 100vh;
@@ -12,10 +14,10 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed; /* Reemplaza con una URL válida */
+          background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed;
           background-size: cover;
-          font-family: Arial, sans-serif;
-          color: #fff; /* Texto blanco para mejor contraste */
+          font-family: Montserrat, sans-serif;
+          color: #fff;
           position: relative;
       }
 
@@ -26,12 +28,12 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.3); /* Degradado oscuro */
+          background: rgba(0, 0, 0, 0.3);
           z-index: 0;
       }
 
       .container {
-          width: 80%; /* Ocupa el 80% de la pantalla */
+          width: 80%;
           max-width: 800px;
           padding: 40px;
           border-radius: 10px;
@@ -39,38 +41,50 @@
           display: flex;
           flex-direction: column;
           align-items: center;
+          background-color: rgba(255, 255, 255, 0);
+          z-index: 1;
       }
 
-      .question-box {
-          border: 0 solid #ccc;
-          border-radius: 0;
-          padding: 40px;
-          text-align: center;
+      h1 {
+          font-size: 48px;
+          margin-top: 0;
           margin-bottom: 20px;
-          color: white; /* Texto negro para buena visibilidad */
-          flex-grow: 1; /* Ocupa el espacio disponible */
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       }
 
-      .button-grid {
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          width: 100%;
-          margin: 0;
-          padding: 0;
+      p {
+          font-size: 24px;
+          color: #fff;
       }
-        .button-grid form {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-        .button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
 
-        .buttonBack {
+      table {
+          width: 60%;
+          border-collapse: collapse;
+          border: 1px solid #ccc;
+          background-color: white;
+          margin: 25px 0;
+          font-size: 18px;
+          text-align: center;
+          color: black;
+          border-radius: 10px;
+          overflow: hidden;
+      }
+
+      th, td {
+          padding: 12px;
+          border: 1px solid #ccc;
+      }
+
+      th {
+          background-color: #3B4F54;
+          color: white;
+      }
+
+      td {
+          background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .buttonBack {
           position: absolute;
           bottom: 10px;
           left: 10px;
@@ -78,65 +92,85 @@
           font-size: 16px;
           cursor: pointer;
           border: none;
-          background-color: #0E2087; /* Background gradient start color */
+          background-color: rgba(69, 90, 100, 0.9);
           color: white;
           border-radius: 30px;
           display: flex;
           align-items: center;
           transition: background-color 0.3s ease-in-out;
-        }
-
-        .buttonBack:hover {
-            background-color: #0E2087; /* Darker shade for hover effect */
-        }
-
-      h2 {
-          font-size: 48px;
-          margin-top: 0;
-          margin-bottom: 20px;
       }
 
-      p {
-          font-size: 24px;
-          color: #fff;
+      .buttonBack:hover {
+          background-color: #3B4F54;
       }
-        table {
-            width: 60%;
-            border-collapse: collapse;
-            border: solid;
-            border-color: black;
-            background-color: white;
-            margin: 25px 0;
-            font-size: 18px;
-            text-align: center;
-            color: black;
-        }
-        th, td {
-            padding: 12px;
-            border: solid;
-            border-color: black;
-        }
+
+      .gold {
+          color: gold;
+          font-weight: bold;
+      }
+
+      .silver {
+          color: silver;
+          font-weight: bold;
+      }
+
+      .bronze {
+          color: #cd7f32; /* bronze color */
+          font-weight: bold;
+      }
+
+      .currentUser {
+          background-color: rgba(0, 0, 0, 0.2); /* darker background */
+      }
+
+      audio {
+          display: none;
+      }
     </style>
 </head>
 <body>
-    <div class = "container">
-        <h1>Ranking</h1>
-        <table border="1">
-            <tr>
-                <th>Username</th>
-                <th>Score</th>
-            </tr>
-            <% @users.each do |user| %>
-                <tr>
-                    <td><%= user.username %></td>
-                    <td><%= user.score %></td>
-                </tr>
+<audio id="background-audio" autoplay loop>
+  <source src="/musicLobby.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+<div class="container">
+    <h1>Ranking</h1>
+    <table border="1">
+        <tr>
+    <th>Rank</th>
+    <th>Username</th>
+    <th>Score</th>
+</tr>
+<% @users.each_with_index do |user, index| %>
+    <tr <% if user.id == session[:user_id] %>class="currentUser"<% end %>>
+        <td>
+            <% if index == 0 %>
+                <span class="gold">🥇</span>
+            <% elsif index == 1 %>
+                <span class="silver">🥈</span>
+            <% elsif index == 2 %>
+                <span class="bronze">🥉</span>
+            <% else %>
+                <%= index + 1 %>
             <% end %>
-        </table>
-    </div>
-    <form method="post">
-        <input type="hidden" name="back">
-        <button type="submit" class="buttonBack">Back</button>
-    </form>
+        </td>
+        <td><%= user.username %></td>
+        <td><%= user.score %></td>
+    </tr>
+<% end %>
+
+    </table>
+</div>
+<form method="post">
+    <input type="hidden" name="back">
+    <button type="submit" class="buttonBack"><i class="fas fa-arrow-left"></i> Back</button>
+</form>
+<script>
+  // Set the volume of the background audio
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const audio = document.getElementById('background-audio');
+    audio.volume = 0.1;
+  });
+</script>
 </body>
 </html>

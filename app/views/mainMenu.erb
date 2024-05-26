@@ -6,17 +6,18 @@
   <title>Menu</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
       body {
           font-family: Montserrat, sans-serif;
           margin: 0;
           height: 100vh;
           display: flex;
-          flex-direction: column;
           justify-content: center;
           align-items: center;
           background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed; /* Reemplaza con una URL válida */
           background-size: cover;
-          color: #fff; /* Texto blanco para mejor contraste */
+          color: #fff; 
           position: relative;
       }
 
@@ -27,12 +28,12 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.3); /* Degradado oscuro */
+          background: rgba(0, 0, 0, 0.3);
           z-index: 0;
       }
 
       .container {
-          width: 80%; /* Ocupa el 80% de la pantalla */
+          width: 80%;
           max-width: 800px;
           padding: 40px;
           border-radius: 10px;
@@ -40,65 +41,124 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          background-color: rgba(255, 255, 255, 0); /* Fondo transparente */
-          margin-top: 50px; /* Agregado para que el título esté en la parte superior */
+          background-color: rgba(255, 255, 255, 0); 
+          z-index: 1;
+      }
+
+      .sidebar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          background-color: rgba(69, 90, 100, 0.9); 
+          padding: 10px;
+          transition: width 0.3s;
+          overflow: hidden;
+          width: 60px; 
+      }
+
+      .sidebar.expanded {
+          width: 200px; 
+      }
+
+      .toggle-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 15px;
+          cursor: pointer;
       }
 
       .button-grid {
           display: flex;
-          flex-direction: column; /* Cambiado para que los botones estén en vertical */
+          flex-direction: column; 
+          align-items: flex-start;
+      }
+
+      .button-grid form {
+          margin-bottom: 20px; 
+          display: flex;
           align-items: center;
           width: 100%;
-          margin: 0;
-          padding: 0;
       }
-      .button-grid form {
-          margin-bottom: 20px; /* Agregado para separar los botones */
-      }
+
       .button {
-          padding: 15px 30px; /* Aumentado el tamaño de los botones */
+          padding: 15px;
           font-size: 18px;
           cursor: pointer;
           border: none;
           border-radius: 30px;
-          background-color: #455A64; /* Azul grisáceo */
+          background-color: transparent;
           color: white;
           transition: background-color 0.3s ease-in-out;
+          display: flex;
+          align-items: center;
+          width: 100%;
+      }
+
+      .button i {
+          margin-right: 10px;
+          font-size: 24px;
       }
 
       .button:hover {
-          background-color: #3B4F54; /* Azul grisáceo oscuro */
+          background-color: #3B4F54; 
       }
 
-      .buttonBack {
-          position: absolute;
-          bottom: 10px;
-          left: 10px;
-          padding: 10px 20px;
-          font-size: 16px;
-          cursor: pointer;
-          border: none;
-          background-color: #455A64; /* Azul grisáceo */
-          color: white;
-          border-radius: 30px;
-          display: flex;
-          align-items: center;
-          transition: background-color 0.3s ease-in-out;
+      .button span {
+          display: none;
       }
 
-      .buttonBack:hover {
-          background-color: #3B4F54; /* Azul grisáceo oscuro */
+      .sidebar.expanded .button span {
+          display: inline;
       }
 
       h2 {
-          font-size: 48px;
-          margin-top: 0;
-          margin-bottom: 20px;
+          font-size: 120px;
+          color: #dcdcdc;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          margin: 0;
+          position: absolute;
+          top: 70%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          animation: bounce 1.5s infinite;
+          z-index: 2;
+      }
+      h5 {
           color: white;
-          position: absolute; /* Agregado para que el título esté en la parte superior */
-          top: 5%;
+          margin: 0;
+          position: absolute;
+          top: 80%;
           left: 50%;
           transform: translateX(-50%);
+          z-index: 2;
+      }
+
+      .spaceship {
+          position: absolute;
+          top: 32%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+          max-width: 80%;
+          opacity: 0.7;
+          height:500px
+      }
+
+      @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% {
+              transform: translate(-50%, -50%);
+          }
+          40% {
+              transform: translate(-50%, -60%);
+          }
+          60% {
+              transform: translate(-50%, -55%);
+          }
       }
 
       p {
@@ -108,36 +168,58 @@
   </style>
 </head>
 <body>
-<h2>ASTROLEDGE</h2>
-<div class="container">
-  <div class="button-grid">
+  <audio id="background-audio" autoplay loop>
+    <source src="/musicLobby.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  <h2>ASTROLEDGE</h2>
+  <h5>Learning astronomy has never been so fun...</h5>
+  <img src="https://images.vexels.com/media/users/3/150030/isolated/preview/21f6aa2ebb5547cb55eab996913e3007-ilustracion-de-nave-espacial.png" alt="Spaceship" class="spaceship">
+  <div class="sidebar">
+    <div>
+      <div class="toggle-button" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="button-grid">
+        <form method="post">
+          <input type="hidden" name="solarSystem">
+          <button type="submit" class="button"><i class="fas fa-globe"></i> <span>Solar System</span></button>
+        </form>
+        <form method="post">
+          <input type="hidden" name="ranking">
+          <button type="submit" class="button"><i class="fas fa-trophy"></i> <span>Ranking</span></button>
+        </form>
+        <form method="post">
+          <% user = User.find_by(id: session[:user_id])%>
+          <% if user.see_correct %>
+            <input type="hidden" name="see_correct">
+            <button type="submit" class="button"><i class="fas fa-eye-slash"></i> <span>Disable see correct answer</span></button>
+          <% else %>
+            <input type="hidden" name="see_correct">
+            <button type="submit" class="button"><i class="fas fa-eye"></i> <span>Enable see correct answer</span></button>
+          <% end %>
+        </form>
+        <form method="post">
+          <input type="hidden" name="learn">
+          <button type="submit" class="button"><i class="fas fa-book"></i> <span>Learn</span></button>
+        </form>
+      </div>
+    </div>
     <form method="post">
-      <input type="hidden" name="solarSystem">
-      <button type="submit" class="button">Solar System</button>
-    </form>
-    <form method="post">
-      <input type="hidden" name="ranking">
-      <button type="submit" class="button">Ranking</button>
-    </form>
-    <form method="post">
-      <% user = User.find_by(id: session[:user_id])%>
-      <%if user.see_correct %>
-        <input type="hidden" name="see_correct">
-        <button type="submit" class="button">Disable see correct answer</button>
-      <%else%>
-        <input type="hidden" name="see_correct">
-        <button type="submit" class="button">Enable see correct answer</button>
-      <%end%>
-    </form>
-    <form method="post">
-      <input type="hidden" name="learn">
-      <button type="submit" class="button learn buttonLearn">Learn</button>
+      <input type="hidden" name="logout">
+      <button type="submit" class="button"><i class="fas fa-sign-out-alt"></i> <span>Log out</span></button>
     </form>
   </div>
-</div>
-<form method="post">
-  <input type="hidden" name="logout">
-  <button type="submit" class="buttonBack">Log out</button>
-</form>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('expanded');
+    }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const audio = document.getElementById('background-audio');
+      audio.volume = 0.1; 
+    });
+  </script>
 </body>
 </html>
