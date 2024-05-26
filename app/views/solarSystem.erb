@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Planetas</title>
-<style>
-    body {
-        background-image: url('https://c.wallhere.com/photos/41/26/1920x1080_px_Cartoon_humor_solar_system-1197876.jpg!d');
-        background-size: cover;
-        background-position: center;
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        flex-direction: column;
-    }
-    .planet-label {
-        position: absolute;
-        color: white;
-        font-weight: bold;
-        text-align: center;
-    }
-    .button {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planets</title>
+  <style>
+      body {
+          font-family: Montserrat, sans-serif;
+          background-image: url('https://c.wallhere.com/photos/41/26/1920x1080_px_Cartoon_humor_solar_system-1197876.jpg!d');
+          background-size: cover;
+          background-position: center;
+          margin: 0;
+          padding: 0;
+          height: 100vh;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          flex-direction: column;
+      }
+      .planet-label {
+          position: absolute;
+          color: white;
+          font-weight: bold;
+          text-align: center;
+      }
+      .button {
           position: absolute;
           bottom: 10px;
           left: 10px;
@@ -41,44 +43,44 @@
       }
 
       .button:hover {
-          background-color: #0E2087; /* Darker shade for hover effect */
+          background-color: #0C1B6D; /* Darker shade for hover effect */
       }
-</style>
+  </style>
 </head>
 <body>
-    <form method="post">
-        <input type="hidden" name="back">
-        <button type="submit" class="button">Back</button>
-    </form>
-    <img src="https://c.wallhere.com/photos/41/26/1920x1080_px_Cartoon_humor_solar_system-1197876.jpg!d" usemap="#solarsystem" alt="Sistema Solar">
-    <map name="solarsystem">
-        <area shape="circle" coords="143,445,60" href="#" alt="Mercury" onclick="submitForm('Mercury')">
-        <area shape="circle" coords="303,445,60" href="#" alt="Venus" onclick="submitForm('Venus')">
-        <area shape="circle" coords="472,445,60" href="#" alt="Earth" onclick="submitForm('Earth')">
-        <area shape="circle" coords="645,445,60" href="#" alt="Mars" onclick="submitForm('Mars')">
-        <area shape="circle" coords="825,445,60" href="#" alt="Jupiter" onclick="submitForm('Jupiter')">
-        <area shape="circle" coords="1080,445,60" href="#" alt="Saturn" onclick="submitForm('Saturn')">
-        <area shape="circle" coords="1280,445,60" href="#" alt="Uranus" onclick="submitForm('Uranus')">
-        <area shape="circle" coords="1400,445,60" href="#" alt="Neptune" onclick="submitForm('Neptune')">
-    </map>
+<form method="post">
+  <input type="hidden" name="back">
+  <button type="submit" class="button">Back</button>
+</form>
+<img src="https://c.wallhere.com/photos/41/26/1920x1080_px_Cartoon_humor_solar_system-1197876.jpg!d" usemap="#solarsystem" alt="Sistema Solar">
+<map name="solarsystem">
+  <area shape="circle" coords="143,445,60" href="#" alt="Mercury" onclick="submitForm('Mercury')">
+  <area shape="circle" coords="303,445,60" href="#" alt="Venus" onclick="submitForm('Venus')">
+  <area shape="circle" coords="472,445,60" href="#" alt="Earth" onclick="submitForm('Earth')">
+  <area shape="circle" coords="645,445,60" href="#" alt="Mars" onclick="submitForm('Mars')">
+  <area shape="circle" coords="825,445,60" href="#" alt="Jupiter" onclick="submitForm('Jupiter')">
+  <area shape="circle" coords="1080,445,60" href="#" alt="Saturn" onclick="submitForm('Saturn')">
+  <area shape="circle" coords="1280,445,60" href="#" alt="Uranus" onclick="submitForm('Uranus')">
+  <area shape="circle" coords="1400,445,60" href="#" alt="Neptune" onclick="submitForm('Neptune')">
+</map>
 
-    <div class="planet-label" style="left: 90px; top: 505px;">Mercury</div>
-    <div class="planet-label" style="left: 280px; top: 505px;">Venus</div>
-    <div class="planet-label" style="left: 440px; top: 505px;">Earth</div>
-    <div class="planet-label" style="left: 625px; top: 505px;">Mars</div>
-    <div class="planet-label" style="left: 790px; top: 505px;">Jupiter</div>
-    <div class="planet-label" style="left: 1010px; top: 505px;">Saturn</div>
-    <div class="planet-label" style="left: 1210px; top: 505px;">Uranus</div>
-    <div class="planet-label" style="left: 1365px; top: 505px;">Neptune</div>
+<div class="planet-label" style="left: 3.5%; top: 505px;">Mercury</div>
+<div class="planet-label" style="left: 15%; top: 505px;">Venus</div>
+<div class="planet-label" style="left: 27%; top: 505px;">Earth</div>
+<div class="planet-label" style="left: 40%; top: 505px;">Mars</div>
+<div class="planet-label" style="left: 51%; top: 505px;">Jupiter</div>
+<div class="planet-label" style="left: 67%; top: 505px;">Saturn</div>
+<div class="planet-label" style="left: 80.5%; top: 505px;">Uranus</div>
+<div class="planet-label" style="left: 91.5%; top: 505px;">Neptune</div>
 
-    <form id="planetForm" method="post" style="display:none;">
-        <input type="hidden" name="planet" id="planetInput">
-    </form>
-    <script>
-        function submitForm(planetName) {
-            document.getElementById('planetInput').value = planetName;
-            document.getElementById('planetForm').submit();
-        }
-    </script>
+<form id="planetForm" method="post" style="display:none;">
+  <input type="hidden" name="planet" id="planetInput">
+</form>
+<script>
+    function submitForm(planetName) {
+        document.getElementById('planetInput').value = planetName;
+        document.getElementById('planetForm').submit();
+    }
+</script>
 </body>
 </html>

@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Earth - Levels</title>
+  <title>Menu</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
       body {
+          font-family: Montserrat, sans-serif;
           margin: 0;
           height: 100vh;
           display: flex;
@@ -15,7 +16,6 @@
           align-items: center;
           background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed; /* Reemplaza con una URL válida */
           background-size: cover;
-          font-family: Arial, sans-serif;
           color: #fff; /* Texto blanco para mejor contraste */
           position: relative;
       }
@@ -40,35 +40,34 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-      }
-
-      .question-box {
-          border: 0 solid #ccc;
-          border-radius: 0;
-          padding: 40px;
-          text-align: center;
-          margin-bottom: 20px;
-          color: white; /* Texto negro para buena visibilidad */
-          flex-grow: 1; /* Ocupa el espacio disponible */
+          background-color: rgba(255, 255, 255, 0); /* Fondo transparente */
+          margin-top: 50px; /* Agregado para que el título esté en la parte superior */
       }
 
       .button-grid {
           display: flex;
-          justify-content: space-around;
+          flex-direction: column; /* Cambiado para que los botones estén en vertical */
           align-items: center;
           width: 100%;
           margin: 0;
           padding: 0;
       }
       .button-grid form {
-          flex: 1;
-          display: flex;
-          justify-content: center;
+          margin-bottom: 20px; /* Agregado para separar los botones */
       }
       .button {
-          padding: 10px 20px;
-          font-size: 16px;
+          padding: 15px 30px; /* Aumentado el tamaño de los botones */
+          font-size: 18px;
           cursor: pointer;
+          border: none;
+          border-radius: 30px;
+          background-color: #455A64; /* Azul grisáceo */
+          color: white;
+          transition: background-color 0.3s ease-in-out;
+      }
+
+      .button:hover {
+          background-color: #3B4F54; /* Azul grisáceo oscuro */
       }
 
       .buttonBack {
@@ -79,7 +78,7 @@
           font-size: 16px;
           cursor: pointer;
           border: none;
-          background-color: #0E2087; /* Background gradient start color */
+          background-color: #455A64; /* Azul grisáceo */
           color: white;
           border-radius: 30px;
           display: flex;
@@ -88,13 +87,18 @@
       }
 
       .buttonBack:hover {
-          background-color: #0E2087; /* Darker shade for hover effect */
+          background-color: #3B4F54; /* Azul grisáceo oscuro */
       }
 
       h2 {
           font-size: 48px;
           margin-top: 0;
           margin-bottom: 20px;
+          color: white;
+          position: absolute; /* Agregado para que el título esté en la parte superior */
+          top: 5%;
+          left: 50%;
+          transform: translateX(-50%);
       }
 
       p {
@@ -104,7 +108,8 @@
   </style>
 </head>
 <body>
-<div class = "container">
+<h2>ASTROLEDGE</h2>
+<div class="container">
   <div class="button-grid">
     <form method="post">
       <input type="hidden" name="solarSystem">
@@ -123,6 +128,10 @@
         <input type="hidden" name="see_correct">
         <button type="submit" class="button">Enable see correct answer</button>
       <%end%>
+    </form>
+    <form method="post">
+      <input type="hidden" name="learn">
+      <button type="submit" class="button learn buttonLearn">Learn</button>
     </form>
   </div>
 </div>
