@@ -166,11 +166,22 @@
     <button type="submit" class="buttonBack"><i class="fas fa-arrow-left"></i> Back</button>
 </form>
 <script>
-  // Set the volume of the background audio
   window.addEventListener('DOMContentLoaded', (event) => {
-    const audio = document.getElementById('background-audio');
-    audio.volume = 0.1;
-  });
+      const audio = document.getElementById('background-audio');
+      audio.volume = 0.1;
+
+      // Retrieve the playback time from localStorage
+      const savedTime = localStorage.getItem('audioTime');
+      if (savedTime) {
+        audio.currentTime = savedTime;
+      }
+
+      // Save the playback time periodically
+      setInterval(() => {
+        localStorage.setItem('audioTime', audio.currentTime);
+      }, 1000);
+    });
+
 </script>
 </body>
 </html>

@@ -32,7 +32,7 @@
       padding: 1rem;
       background-color: #222;
       display: flex;
-      justify-content: flex;
+      justify-content: flex-start;
     }
 
     nav a {
@@ -58,12 +58,15 @@
       color: #c0c0c0;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
-
   </style>
   <title>Astroledge</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
+  <audio id="background-audio" autoplay loop>
+    <source src="/astroledge.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
   <nav>
     <a href="/login" target="" rel="noopener noreferrer"><i class="fas fa-sign-in-alt"></i>Login</a>
     <a href="/register" target="" rel="noopener noreferrer"><i class="fas fa-user-plus"></i>Register</a>
@@ -74,5 +77,23 @@
       <h1>ASTROLEDGE</h1>
     </div>
   </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const audio = document.getElementById('background-audio');
+      audio.volume = 0.1;
+
+      // Retrieve the playback time from localStorage
+      const savedTime = localStorage.getItem('audioTime');
+      if (savedTime) {
+        audio.currentTime = savedTime;
+      }
+
+      // Save the playback time periodically
+      setInterval(() => {
+        localStorage.setItem('audioTime', audio.currentTime);
+      }, 1000);
+    });
+  </script>
 </body>
 </html>

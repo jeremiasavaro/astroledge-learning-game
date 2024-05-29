@@ -104,6 +104,14 @@ class App < Sinatra::Application
     redirect '/planetLevels'
   end
 
+  get '/learn' do
+    erb :learn
+  end
+
+  post '/learn' do
+    erb :learn
+  end
+
   get '/planetLevels' do
     erb :planetLevels
   end
@@ -198,6 +206,10 @@ class App < Sinatra::Application
 
     if params[:ranking]
       redirect '/ranking'
+    end
+
+    if params[:learn]
+      redirect '/learn'
     end
   end
 

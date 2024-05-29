@@ -218,8 +218,20 @@
 
     window.addEventListener('DOMContentLoaded', (event) => {
       const audio = document.getElementById('background-audio');
-      audio.volume = 0.1; 
+      audio.volume = 0.1;
+
+      // Retrieve the playback time from localStorage
+      const savedTime = localStorage.getItem('audioTime');
+      if (savedTime) {
+        audio.currentTime = savedTime;
+      }
+
+      // Save the playback time periodically
+      setInterval(() => {
+        localStorage.setItem('audioTime', audio.currentTime);
+      }, 1000);
     });
+    
   </script>
 </body>
 </html>

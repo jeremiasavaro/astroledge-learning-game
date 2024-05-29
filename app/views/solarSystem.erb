@@ -48,6 +48,10 @@
   </style>
 </head>
 <body>
+  <audio id="background-audio" autoplay loop>
+    <source src="/musicLobby.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
 <form method="post">
   <input type="hidden" name="back">
   <button type="submit" class="button">Back</button>
@@ -81,6 +85,22 @@
         document.getElementById('planetInput').value = planetName;
         document.getElementById('planetForm').submit();
     }
+    
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const audio = document.getElementById('background-audio');
+      audio.volume = 0.1;
+
+      // Retrieve the playback time from localStorage
+      const savedTime = localStorage.getItem('audioTime');
+      if (savedTime) {
+        audio.currentTime = savedTime;
+      }
+
+      // Save the playback time periodically
+      setInterval(() => {
+        localStorage.setItem('audioTime', audio.currentTime);
+      }, 1000);
+    });
 </script>
 </body>
 </html>

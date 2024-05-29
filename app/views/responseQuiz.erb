@@ -12,10 +12,10 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed; /* Reemplaza con una URL válida */
+          background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed;
           background-size: cover;
           font-family: Montserrat, sans-serif;
-          color: #fff; /* Texto blanco para mejor contraste */
+          color: #fff;
           position: relative;
       }
 
@@ -26,12 +26,12 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.3); /* Degradado oscuro */
+          background: rgba(0, 0, 0, 0.3);
           z-index: 0;
       }
 
       .container {
-          width: 80%; /* Ocupa el 80% de la pantalla */
+          width: 80%;
           max-width: 800px;
           padding: 40px;
           border-radius: 10px;
@@ -47,8 +47,8 @@
           padding: 40px;
           text-align: center;
           margin-bottom: 20px;
-          color: white; /* Texto negro para buena visibilidad */
-          flex-grow: 1; /* Ocupa el espacio disponible */
+          color: white;
+          flex-grow: 1;
       }
 
       .button-grid {
@@ -73,7 +73,7 @@
       .buttonBack {
           position: absolute;
           border: 2px solid white;
-          bottom: 10px; /* Adjust this value as needed */
+          bottom: 10px;
           left: 2.5%;
           bottom: 0;
           transform: translateX(-50%);
@@ -97,9 +97,16 @@
           font-size: 24px;
           color: #fff;
       }
+
+      .happy, .sad {
+          width: 150px;
+          height: 150px;
+          margin-top: 20px;
+      }
   </style>
 </head>
 <body>
+
 <div class="container">
   <% iu = session[:current_question] %>
   <% your_answer = session[:your_answer] %>
@@ -107,14 +114,17 @@
   <% user = User.find(session[:user_id]) %>
   <% config = user.see_correct %>
   <% selected_answer = Answer.find_by(id: your_answer) %>
-  <!-- if the user has already answered the question -->
   <% if QuestionUser.exists?(user: user, question: quest) %>
     <% question_user = QuestionUser.find_by(user: user, question: quest) %>
-    <!-- if the answer selected is correct-->
     <% if quest && selected_answer.correct %>
       <% if question_user[:correct] %>
         <div class="container">
           <p> Correct answer, but you have already answered correctly before.</p>
+          <img class="happy" src="https://images.vexels.com/media/users/3/160984/isolated/preview/131b54bb87efa05876ad7ae969806757-planeta-tierra-felicidad-reir-sonrisa-plana.png" alt="Happy Image">
+          <audio class="correctSound" autoplay>
+            <source src="/correctAnswer.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+          </audio>
         </div>
       <% else %>
         <% actual_score = session[:score_user] %>
@@ -122,27 +132,37 @@
         <% user.update(score: session[:score_user]) %>
         <% user.save %>
         <div class="container">
-          <p>Correct answer, but it's not your first attempt, +<%= quest.scoreQuestion / 2 %> points, total points: <%= session[:score_user] %></p>
+          <p>Correct answer, and it's not your first attempt, +<%= quest.scoreQuestion / 2 %> points, total points: <%= session[:score_user] %></p>
+          <img class="happy" src="https://images.vexels.com/media/users/3/160984/isolated/preview/131b54bb87efa05876ad7ae969806757-planeta-tierra-felicidad-reir-sonrisa-plana.png" alt="Happy Image">
+          <audio class="correctSound" autoplay>
+            <source src="/correctAnswer.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+          </audio>
         </div>
         <% question_user.update(correct: true) %>
       <% end %>
-    <!-- if  answer selected was wrong -->
     <% else %>
-      <!-- if user wants to see the correct answer -->
       <% if config %>
         <div class="container">
-          <p>Your answer is wrong, the correct answer is: <%=quest.correct_answer.description %>. <%=quest.why_is_wrong %></p>
+          <p>Your answer is wrong, the correct answer is: <%= quest.correct_answer.description %>. <%= quest.why_is_wrong %></p>
+          <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
+          <audio class="wrongSound" autoplay>
+            <source src="/wrongAnswer.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+          </audio>
         </div>
-      <!-- if user doesn't want to see the correct answer -->
       <% else %>
         <div class="container">
           <p>Your answer is wrong.</p>
+          <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
+          <audio class="wrongSound" autoplay>
+            <source src="/wrongAnswer.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+          </audio>
         </div>
-        <% end %>
+      <% end %>
     <% end %>
-  <!-- if the user hasn't already answered the question -->
   <% else %>
-    <!-- if the answer selected is correct-->
     <% if quest && selected_answer.correct %>
       <% actual_score = session[:score_user] %>
       <% session[:score_user] = actual_score + quest.scoreQuestion %>
@@ -150,19 +170,31 @@
       <% user.save %>
       <div class="container">
         <p>Correct answer, +<%= quest.scoreQuestion %> points, total points: <%= session[:score_user] %></p>
-      </div>
+        <img class="happy" src="https://images.vexels.com/media/users/3/160984/isolated/preview/131b54bb87efa05876ad7ae969806757-planeta-tierra-felicidad-reir-sonrisa-plana.png" alt="Happy Image">
+        <audio class="correctSound" autoplay>
+          <source src="/correctAnswer.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>          
       <% QuestionUser.create(user: user, question: quest, correct: true) %>
-    <!-- if  answer selected was wrong -->
     <% else %>
-      <!-- if user wants to see the correct answer -->
       <% if config %>
         <div class="container">
-          <p>Your answer is wrong, the correct answer is: <%=quest.correct_answer.description %></p>. <p><%=quest.why_is_wrong %></p>
+          <p>Your answer is wrong, the correct answer is: <%= quest.correct_answer.description %>. <%= quest.why_is_wrong %></p>
+          <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
+          <audio class="wrongSound" autoplay>
+            <source src="/wrongAnswer.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+          </audio>
         </div>
-      <!-- if user doesn't want to see the correct answer -->
       <% else %>
         <div class="container">
           <p>Your answer is wrong.</p>
+          <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
+          <audio class="wrongSound" autoplay>
+            <source src="/wrongAnswer.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+          </audio>
         </div>
       <% end %>
       <% QuestionUser.create(user: user, question: quest, correct: false) %>
@@ -173,5 +205,14 @@
     <button type="submit" class="button">Next question</button>
   </form>
 </div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('audio').forEach(audio => {
+      audio.volume = 0.1;
+    });
+  });
+</script>
+
 </body>
 </html>

@@ -1,25 +1,47 @@
 <!DOCTYPE html>
-<html lang="EN">
+<html lang="es">
 <head>
   <link rel="stylesheet" type="text/css" href="log.css">
   <title>Login</title>
 </head>
-   <body>
-      <section id="sect1" class="sect">
-         <video src="https://videos.pexels.com/video-files/1851190/1851190-uhd_2560_1440_25fps.mp4" autoplay="true" muted="true" loop="true"></video>
-         <div class="container">
-            <h2>Login</h2>
-            <form method="post">
-               <label for="username">Username</label>
-               <input type="text" id="username" name="username" required>
-               <label for="password">Password</label>
-               <input type="password" id="password" name="password" required>
-               <input type="submit" value="Login">
-            </form>
-            <div class="notRegistered">
-              <p>First time here, <a href="/register"> sign up</a></p>
-            </div>
-         </div>
-   </section>
+<body>
+  <audio id="background-audio" autoplay loop>
+    <source src="/astroledge.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  <section id="sect1" class="sect">
+    <video src="https://videos.pexels.com/video-files/1851190/1851190-uhd_2560_1440_25fps.mp4" autoplay="true" muted="true" loop="true"></video>
+    <div class="container">
+      <h2>Login</h2>
+      <form method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Login">
+      </form>
+      <div class="notRegistered">
+        <p>First time here, <a href="/register">sign up</a></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const audio = document.getElementById('background-audio');
+      audio.volume = 0.1;
+
+      // Retrieve the playback time from localStorage
+      const savedTime = localStorage.getItem('audioTime');
+      if (savedTime) {
+        audio.currentTime = savedTime;
+      }
+
+      // Save the playback time periodically
+      setInterval(() => {
+        localStorage.setItem('audioTime', audio.currentTime);
+      }, 1000);
+    });
+  </script>
 </body>
 </html>
