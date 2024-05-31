@@ -87,6 +87,11 @@
       display: block;
       background: url('https://image.flaticon.com/icons/png/512/103/103171.png') no-repeat;
     }
+
+    .registered {
+      color: white;
+    }
+
   </style>
   <title>Register</title>
 </head>
@@ -108,6 +113,15 @@
         <input type="password" id="password_rep" name="password_rep" required>
         <input type="submit" value="Register">
       </form>
+      <div class = "registered" >
+        <% if @passwordDist == true %>
+          <p>Passwords are not the same, try again</p>
+        <% end %>
+        <% if @userOc == true %>
+          <p>Username already not exists, try another</p>
+        <% end %>
+        <p>Already registered?, <a href="/login">log in</a></p>
+      </div>
     </div>
   </section>
 

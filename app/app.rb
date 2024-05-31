@@ -35,6 +35,8 @@ class App < Sinatra::Application
   end
 
   get '/login' do
+    @userLoginExist = true
+    @passLoginCorrect = true
     erb :login
   end
 
@@ -46,8 +48,10 @@ class App < Sinatra::Application
     if user == nil
       # user not found
       @error = "User not found."
-      redirect '/register'
+      @userLoginExist = false
+      erb :login
     else
+      @userLoginExist = true
       if user.authenticates(password)
         session[:user_id] = user.id
         session[:score_user] = user.score
@@ -55,12 +59,15 @@ class App < Sinatra::Application
       else
         # failed authentication
         @error = "Incorrect password."
-        redirect '/login'
+        @passLoginCorrect = false
+        erb :login
       end
     end
   end
 
   get '/register' do
+    @passwordDist = false
+    @userOc = false
     erb :register
   end
 
@@ -68,16 +75,19 @@ class App < Sinatra::Application
     new_username = params[:username]
     new_password = params[:password]
     new_password_repeat = params[:password_rep]
-
+ 
     if new_password != new_password_repeat
       # passwords don't match
       @error = "Passwords don't match."
+      @passwordDist = true
       erb :register
     else
       aut = User.find_by(username: new_username)
+      @passwordDist = false
       if aut
         # username already taken
         puts "Username already taken."
+        @userOc = true
         erb :register
       else
         user = User.new

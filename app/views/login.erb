@@ -21,6 +21,13 @@
         <input type="submit" value="Login">
       </form>
       <div class="notRegistered">
+        <% if @userLoginExist != true %>
+          <p>Username already not exists, try another</p>
+        <% end %>
+        <% if @passLoginCorrect == false %>
+          <p>Incorrect password, try again</p>
+          <% @passLoginCorrect = true%>
+        <% end %>
         <p>First time here, <a href="/register">sign up</a></p>
       </div>
     </div>
