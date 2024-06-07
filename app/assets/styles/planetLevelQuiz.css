@@ -1,0 +1,99 @@
+    body {
+          margin: 0;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed; /* Reemplaza con una URL válida */
+          background-size: cover;
+          font-family: Arial, sans-serif;
+          color: #fff; /* Texto blanco para mejor contraste */
+          position: relative;
+      }
+
+      body::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.3); /* Degradado oscuro */
+          z-index: 0;
+      }
+
+      .container {
+          width: 80%; /* Ocupa el 80% de la pantalla */
+          max-width: 800px;
+          padding: 40px;
+          border-radius: 10px;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+
+      .question-box {
+          border: 0 solid #ccc;
+          border-radius: 0;
+          padding: 40px;
+          text-align: center;
+          margin-bottom: 20px;
+          color: white; /* Texto negro para buena visibilidad */
+          flex-grow: 1; /* Ocupa el espacio disponible */
+      }
+
+      .button-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+          text-align: center;
+          width: 100%;
+          margin-top: 20px;
+      }
+
+      .button {
+          padding: 20px;
+          border: 2px solid white;
+          border-radius: 10px;
+          font-size: 32px;
+          width: 100%;
+          cursor: pointer;
+          transition: all 0.3s ease-in-out;
+      }
+
+     .buttonBack {
+          position: absolute;
+          bottom: 10px;
+          left: 10px;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          border: none;
+          background-color: #0E2087; /* Background gradient start color */
+          color: white;
+          border-radius: 30px;
+          display: flex;
+          align-items: center;
+          transition: background-color 0.3s ease-in-out;
+      }
+
+      .buttonBack:hover {
+          background-color: #0E2087; /* Darker shade for hover effect */
+      }
+      .button:hover {
+          background-color: lightgrey;
+          border-color: #ccc;
+      }
+
+      h2 {
+          font-size: 48px;
+          margin-top: 0;
+          margin-bottom: 20px;
+      }
+
+      p {
+          font-size: 24px;
+          color: #fff;
+      }

@@ -1,0 +1,56 @@
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden; /* Add this to prevent scrolling */
+      background-size: cover;
+      font-family: 'Jersey', sans-serif;
+      font-size: 15px;
+      display: flex; /* Use flexbox to center elements vertically and horizontally */
+      justify-content: center;
+      align-items: center;
+    }
+
+    video {
+      position: fixed; /* Change from absolute to fixed */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Add this to ensure the video covers the entire screen */
+      z-index: -1;
+    }
+
+    nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+      background-color: #222;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    nav a i {
+      margin-right: 0.5rem;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .titleGame {
+      font-size: 7vh;
+      color: #c0c0c0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
