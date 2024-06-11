@@ -11,4 +11,16 @@ class User < ActiveRecord::Base
     self.password == password
   end
 
+  def see_the_correct?
+    self.see_correct
+  end
+
+  def have_username?
+    :username != null
+  end
+
+  def have_password?
+    :password != null
+  end
+
 end

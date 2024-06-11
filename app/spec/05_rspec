@@ -1,0 +1,67 @@
+# RSpec
+
+`irb -I. -r server.rb`
+
+https://github.com/rspec/rspec-core
+
+```
+$ gem install rspec
+
+# test_spec.rb
+RSpec.describe 'My test' do
+  it 'is true when it\'s true' do
+    expect(true).to be true
+  end
+end
+
+$ rspec test_spec.rb
+```
+
+## Install RSpec in Sinatra
+
+```
+# Gemfile
+
+group :test, :development do
+  gem 'rspec'
+  gem 'rack-test'
+end
+```
+
+### Init RSpec
+
+```
+$> bundle exec rspec --init
+```
+
+### Example functional test
+
+```
+ENV['APP_ENV'] = 'test'
+
+require_relative '../server.rb'
+require 'rspec'
+require 'rack/test'
+
+RSpec.describe 'The Server' do
+  include Rack::Test::Methods
+
+  def app
+    # Sinatra::Appplication
+    App
+  end
+
+
+  it 'says "Hello World"' do
+    get '/test'
+
+    expect(last_response).to be_ok
+    expect(last_response.body). to eq('Hello World')
+  end
+end
+```
+
+```
+bundle exec rspec
+```
+
