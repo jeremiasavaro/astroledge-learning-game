@@ -33,7 +33,7 @@ planets_data = [
         questions: [
           {
             description: 'What astronomical phenomenon occurs when a celestial object enters the Earth\'s atmosphere and burns up partially or completely?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Shooting star', correct: false },
               { description: 'Comet', correct: false },
@@ -43,7 +43,7 @@ planets_data = [
           },
           {
             description: 'What is the largest planet in the solar system?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Earth', correct: false },
               { description: 'Jupiter', correct: true },
@@ -58,7 +58,7 @@ planets_data = [
         questions: [
           {
             description: 'What is the second closest planet to the Sun?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Earth', correct: false },
               { description: 'Mars', correct: false },
@@ -68,7 +68,7 @@ planets_data = [
           },
           {
             description: 'Which planet has the shortest day in the solar system?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Jupiter', correct: true },
               { description: 'Mars', correct: false },
@@ -113,7 +113,7 @@ planets_data = [
         questions: [
           {
             description: 'What type of galaxy has a round or elliptical shape and contains primarily old stars?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Spiral galaxy', correct: false },
               { description: 'Irregular galaxy', correct: false },
@@ -123,7 +123,7 @@ planets_data = [
           },
           {
             description: 'What is the name of the phenomenon in which two stars orbit around a common center of mass?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Binary', correct: true },
               { description: 'Variable', correct: false },
@@ -138,7 +138,7 @@ planets_data = [
         questions: [
           {
             description: 'What is the name of the process by which a massive star collapses under its own gravity at the end of its life cycle?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Supernova', correct: true },
               { description: 'Nova', correct: false },
@@ -148,7 +148,7 @@ planets_data = [
           },
           {
             description: 'Which planet is known as the Earth\'s twin due to its size and composition?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Venus', correct: true },
               { description: 'Mars', correct: false },
@@ -178,7 +178,7 @@ planets_data = [
           },
           {
             description: 'What is the scientific theory that describes the origin of the universe from an initial explosion?',
-            scoreQuestion: 15,
+            scoreQuestion: 10,
             answers: [
               { description: 'Theory of relativity', correct: false },
               { description: 'Chaos theory', correct: false },
@@ -193,7 +193,7 @@ planets_data = [
         questions: [
           {
             description: 'What is a quasar?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'A dying star', correct: false },
               { description: 'A supermassive black hole', correct: true },
@@ -218,7 +218,7 @@ planets_data = [
         questions: [
           {
             description: 'What is the name of the asteroid belt located between Mars and Jupiter?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Kuiper Belt', correct: false },
               { description: 'Van Allen Belt', correct: false },
@@ -228,7 +228,7 @@ planets_data = [
           },
           {
             description: 'What phenomenon occurs when Earth passes between the Sun and the Moon, casting a shadow on the Moon?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Solar eclipse', correct: false },
               { description: 'Lunar eclipse', correct: true },
@@ -273,7 +273,7 @@ planets_data = [
         questions: [
           {
             description: 'What is a Type Ia supernova?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'The explosion of a massive star at the end of its life', correct: false },
               { description: 'The merger of two stars in a binary system', correct: false },
@@ -283,7 +283,7 @@ planets_data = [
           },
           {
             description: 'What type of galaxy has a spiral shape with curved arms and contains a large amount of gas and dust?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Spiral galaxy', correct: true },
               { description: 'Elliptical galaxy', correct: false },
@@ -298,7 +298,7 @@ planets_data = [
         questions: [
           {
             description: 'What is the name of the NASA rover that landed on Mars in 2012?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Opportunity', correct: false },
               { description: 'Spirit', correct: false },
@@ -308,7 +308,7 @@ planets_data = [
           },
           {
             description: 'What is the name of the supermassive black hole at the center of our galaxy?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Andromeda', correct: false },
               { description: 'Sagittarius A*', correct: true },
@@ -353,7 +353,7 @@ planets_data = [
         questions: [
           {
             description: 'What was the name of the first confirmed exoplanet orbiting a Sun-like star?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Kepler-186f', correct: false },
               { description: 'Proxima Centauri b', correct: false },
@@ -363,7 +363,7 @@ planets_data = [
           },
           {
             description: 'What type of star is the Sun?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'White dwarf', correct: false },
               { description: 'Red giant', correct: false },
@@ -378,7 +378,7 @@ planets_data = [
         questions: [
           {
             description: 'What is the coldest planet in the solar system?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Saturn', correct: false },
               { description: 'Uranus', correct: true },
@@ -388,7 +388,7 @@ planets_data = [
           },
           {
             description: 'What are the Van Allen belts?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Zones of high radiation around Jupiter', correct: false },
               { description: 'Asteroid belts around the Sun', correct: false },
@@ -433,7 +433,7 @@ planets_data = [
         questions: [
           {
             description: 'What was the name of the first telescope that detected cosmic microwave background radiation, helping to confirm the Big Bang theory?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Hubble', correct: false },
               { description: 'Chandra', correct: false },
@@ -443,7 +443,7 @@ planets_data = [
           },
           {
             description: 'What is a stellar black hole?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'A supermassive black hole at the center of a galaxy', correct: false },
               { description: 'A black hole formed by the explosion of a supernova', correct: true },
@@ -458,7 +458,7 @@ planets_data = [
         questions: [
           {
             description: 'Which planet has the most known moons?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Mars', correct: false },
               { description: 'Jupiter', correct: false },
@@ -468,7 +468,7 @@ planets_data = [
           },
           {
             description: 'What is a nova?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'The explosion of a massive star', correct: false },
               { description: 'The merger of two stars', correct: false },
@@ -513,7 +513,7 @@ planets_data = [
         questions: [
           {
             description: 'What is the main composition of interstellar molecular clouds?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Hydrogen and helium', correct: true },
               { description: 'Oxygen and carbon', correct: false },
@@ -523,7 +523,7 @@ planets_data = [
           },
           {
             description: 'What is a nebula?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'A forming black hole', correct: false },
               { description: 'A cluster of young stars', correct: false },
@@ -538,7 +538,7 @@ planets_data = [
         questions: [
           {
             description: 'What is the smallest planet in the solar system?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Mercury', correct: true },
               { description: 'Mars', correct: false },
@@ -548,7 +548,7 @@ planets_data = [
           },
           {
             description: 'Which planet has the most extreme axial tilt, rotating almost on its side?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Mars', correct: false },
               { description: 'Neptune', correct: false },
@@ -593,7 +593,7 @@ planets_data = [
         questions: [
           {
             description: 'What is the name of the phenomenon in which a celestial body completely blocks sunlight to Earth?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Solar eclipse', correct: true },
               { description: 'Lunar eclipse', correct: false },
@@ -603,7 +603,7 @@ planets_data = [
           },
           {
             description: 'What is the name of the process by which a massive star ends its life in a cataclysmic explosion?',
-            scoreQuestion: 10,
+            scoreQuestion: 15,
             answers: [
               { description: 'Supernova', correct: true },
               { description: 'Nova', correct: false },
@@ -618,7 +618,7 @@ planets_data = [
         questions: [
           {
             description: 'What is the name of the process by which stars produce energy?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Nuclear fusion', correct: true },
               { description: 'Nuclear fission', correct: false },
@@ -628,7 +628,7 @@ planets_data = [
           },
           {
             description: 'What is the name of the point in space where gravity is so strong that not even light can escape?',
-            scoreQuestion: 10,
+            scoreQuestion: 20,
             answers: [
               { description: 'Black hole', correct: true },
               { description: 'Pulsar', correct: false },
