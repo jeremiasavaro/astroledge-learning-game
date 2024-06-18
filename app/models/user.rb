@@ -16,11 +16,11 @@ class User < ActiveRecord::Base
   end
 
   def have_username?
-    :username != null
+    self.username.present?
   end
 
   def have_password?
-    :password != null
+    self.password.present?
   end
 
 end

@@ -9,6 +9,7 @@ RSpec.describe User do
     user = User.new(see_correct: true)
     expect(user).to see_the_correct?
   end
+
   it 'should not see the correct answer' do
     user = User.new(see_correct: false)
     expect(user).to not (see_the_correct?)

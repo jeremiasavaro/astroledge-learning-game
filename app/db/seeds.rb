@@ -642,18 +642,21 @@ planets_data = [
   }
 ]
 
-# Create planets, levels, questions, and answers in the database
 planets_data.each do |planet_data|
-  planet = Planet.create(name: planet_data[:name])
+  # Busca o crea el planeta por nombre
+  planet = Planet.find_or_create_by(name: planet_data[:name])
 
   planet_data[:levels].each do |level_data|
-    level = Level.create(number: level_data[:number], planet: planet)
+    # Busca o crea el nivel por número y planeta
+    level = Level.find_or_create_by(number: level_data[:number], planet: planet)
 
     level_data[:questions].each do |question_data|
-      question = Question.create(description: question_data[:description], scoreQuestion: question_data[:scoreQuestion], level: level)
+      # Busca o crea la pregunta por descripción y nivel
+      question = Question.find_or_create_by(description: question_data[:description], scoreQuestion: question_data[:scoreQuestion], level: level)
 
       question_data[:answers].each do |answer_data|
-        Answer.create(description: answer_data[:description], correct: answer_data[:correct], question: question)
+        # Busca o crea la respuesta por descripción y pregunta
+        Answer.find_or_create_by(description: answer_data[:description], correct: answer_data[:correct], question: question)
       end
     end
   end
