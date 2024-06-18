@@ -12,7 +12,6 @@ require './models/question'
 require './models/answer'
 require './models/questionUser'
 
-
 set :database_file, './config/database.yml'
 set :public_folder, 'assets'
 

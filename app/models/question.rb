@@ -1,3 +1,6 @@
+require 'sinatra'
+require 'sinatra/activerecord'
+
 class Question < ActiveRecord::Base
   belongs_to :level
   has_many :answers

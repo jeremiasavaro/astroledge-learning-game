@@ -1,3 +1,6 @@
+require 'sinatra'
+require 'sinatra/activerecord'
+
 class Planet < ActiveRecord::Base
   has_many :levels, dependent: :destroy
   validates :name, presence: true

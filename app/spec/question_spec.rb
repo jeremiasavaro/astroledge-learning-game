@@ -1,3 +1,11 @@
+ENV['APP_ENV'] = 'test'
+
+require_relative '../models/question.rb'
+require_relative '../models/answer.rb'
+require 'rspec'
+require 'rack/test'
+require 'spec_helper'
+
 RSpec.describe Question do
   it 'should have 4 answers' do
     answers = [
@@ -12,6 +20,6 @@ RSpec.describe Question do
 
   it 'should not have 4 answers' do
     question = Question.new(answers: [])
-    expect(question).to not (have_4_options)
+    expect(question).not_to have_4_options
   end
 end

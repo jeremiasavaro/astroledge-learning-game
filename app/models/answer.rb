@@ -1,3 +1,6 @@
+require 'sinatra'
+require 'sinatra/activerecord'
+
 class Answer < ActiveRecord::Base
   belongs_to :question
   validates :description, presence: true
@@ -9,4 +12,6 @@ class Answer < ActiveRecord::Base
       errors.add(:correct, "There can only be one correct answer per question.")
     end
   end
+
+
 end

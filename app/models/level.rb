@@ -1,3 +1,6 @@
+require 'sinatra'
+require 'sinatra/activerecord'
+
 class Level < ActiveRecord::Base
   belongs_to :planet
   has_many :questions, dependent: :destroy

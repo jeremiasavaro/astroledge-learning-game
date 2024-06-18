@@ -1,18 +1,24 @@
-RSpec.describe User do
-  it "is valid with a username, password and score" do
+ENV['APP_ENV'] = 'test'
+
+require_relative '../models/user.rb'
+require 'rspec'
+require 'rack/test'
+require 'spec_helper'
+
+RSpec.describe User, type: :model do
+  it "is valid with a username and password" do
     user = User.new(username: "user", password: "pass")
-    expect(user).to have_username?
-    expect(user).to have_password?
+    expect(user.username).to eq("user")
+    expect(user.password).to eq("pass")
   end
 
-  it 'should see the correct answer' do
+  it 'should see the correct answer if see_correct is true' do
     user = User.new(see_correct: true)
-    expect(user).to see_the_correct?
+    expect(user.see_correct).to be true
   end
 
-  it 'should not see the correct answer' do
+  it 'should not see the correct answer if see_correct is false' do
     user = User.new(see_correct: false)
-    expect(user).to not (see_the_correct?)
+    expect(user.see_correct).to be false
   end
-
 end
