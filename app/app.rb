@@ -108,7 +108,8 @@ class App < Sinatra::Application
     if params[:back]
       redirect '/mainMenu'
     end
-    planet = params[:planet]
+    session[:planet] = params[:planet]
+    planet = session[:planet]
     PLANET_ID = Planet.find_by(name: planet).id
     redirect '/planetLevels'
   end
@@ -122,6 +123,7 @@ class App < Sinatra::Application
   end
 
   get '/planetLevels' do
+    @planet = session[:planet]
     erb :planetLevels
   end
 

@@ -7,9 +7,10 @@
     <title>Select Level</title>
 </head>
 <body>
+    <h1><%= @planet %></h1>
     <audio id="background-audio" autoplay loop>
-    <source src="/tension.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
+        <source src="/tension.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
     </audio>
     <div class="container">
         <h2>Choose your level</h2>
@@ -43,21 +44,21 @@
     </form>
     
     <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-      const audio = document.getElementById('background-audio');
-      audio.volume = 0.1;
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const audio = document.getElementById('background-audio');
+            audio.volume = 0.1;
 
-      // Retrieve the playback time from localStorage
-      const savedTime = localStorage.getItem('audioTime');
-      if (savedTime) {
-        audio.currentTime = savedTime;
-      }
+            // Retrieve the playback time from localStorage
+            const savedTime = localStorage.getItem('audioTime');
+            if (savedTime) {
+                audio.currentTime = savedTime;
+            }
 
-      // Save the playback time periodically
-      setInterval(() => {
-        localStorage.setItem('audioTime', audio.currentTime);
-      }, 1000);
-    });
+            // Save the playback time periodically
+            setInterval(() => {
+                localStorage.setItem('audioTime', audio.currentTime);
+            }, 1000);
+        });
     </script>
 </body>
 </html>
