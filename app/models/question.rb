@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
     answers.find_by(correct: true)
   end
 
-  def have_4_options
+  def has_4_options?
     answers.size == 4
   end
 end

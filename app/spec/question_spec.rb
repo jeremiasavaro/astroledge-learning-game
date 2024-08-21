@@ -6,7 +6,7 @@ require 'rspec'
 require 'rack/test'
 require 'spec_helper'
 
-RSpec.describe Question do
+RSpec.describe Question, type: :model do
   it 'should have 4 answers' do
     answers = [
       { description: 'a1', correct: false },
