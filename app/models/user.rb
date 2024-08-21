@@ -18,11 +18,11 @@ class User < ActiveRecord::Base
     self.see_correct
   end
 
-  def have_username?
+  def has_username?
     self.username.present?
   end
 
-  def have_password?
+  def has_password?
     self.password.present?
   end
 

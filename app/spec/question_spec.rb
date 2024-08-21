@@ -8,18 +8,20 @@ require 'spec_helper'
 
 RSpec.describe Question, type: :model do
   it 'should have 4 answers' do
+    question = Question.create(description: 'Example question', level_id: 1)
     answers = [
-      { description: 'a1', correct: false },
-      { description: 'a2', correct: false },
-      { description: 'a3', correct: true },
-      { description: 'a4', correct: false }
+      { description: 'a1', correct: false, question: question },
+      { description: 'a2', correct: false, question: question },
+      { description: 'a3', correct: true, question: question },
+      { description: 'a4', correct: false, question: question }
     ]
-    question = Question.new(answers: answers.map { |attrs| Answer.new(attrs) })
-    expect(question).to have_4_options
+    Answer.create(answers)
+    expect(question.reload).to have_4_options
+    expect(question.correct_answer.description).to eq('a3')
   end
 
-  it 'should not have 4 answers' do
-    question = Question.new(answers: [])
-    expect(question).not_to have_4_options
+  it 'is invalid without a description' do
+    question = Question.new(description: nil)
+    expect(question).not_to be_valid
   end
 end
