@@ -26,6 +26,10 @@
           <button type="submit" class="button"><i class="fas fa-globe"></i> <span>Solar System</span></button>
         </form>
         <form method="post">
+          <input type="hidden" name="timeTrial">
+          <button type="submit" class="button"><i class="fas fa-clock"></i> <span>Time trial</span></button>
+        </form>
+        <form method="post">
           <input type="hidden" name="ranking">
           <button type="submit" class="button"><i class="fas fa-trophy"></i> <span>Ranking</span></button>
         </form>
@@ -71,7 +75,7 @@
         localStorage.setItem('audioTime', audio.currentTime);
       }, 1000);
     });
-    
+
   </script>
 </body>
 </html>
