@@ -74,7 +74,7 @@ class App < Sinatra::Application
     new_username = params[:username]
     new_password = params[:password]
     new_password_repeat = params[:password_rep]
- 
+
     if new_password != new_password_repeat
       # passwords don't match
       @error = "Passwords don't match."
@@ -222,6 +222,10 @@ class App < Sinatra::Application
     if params[:learn]
       redirect '/learn'
     end
+
+    if params[:timeTrial]
+      redirect '/timeTrial'
+    end
   end
 
   get '/ranking' do
@@ -230,6 +234,16 @@ class App < Sinatra::Application
   end
 
   post '/ranking' do
+    if params[:back]
+      redirect '/mainMenu'
+    end
+  end
+
+  get '/timeTrial' do
+    erb :timeTrial
+  end
+
+  post '/timeTrial' do
     if params[:back]
       redirect '/mainMenu'
     end
