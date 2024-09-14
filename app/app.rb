@@ -219,6 +219,10 @@ class App < Sinatra::Application
       redirect '/ranking'
     end
 
+    if params[:timeTrialRanking]
+      redirect '/timeTrialRanking'
+    end
+
     if params[:learn]
       redirect '/learn'
     end
@@ -234,6 +238,17 @@ class App < Sinatra::Application
   end
 
   post '/ranking' do
+    if params[:back]
+      redirect '/mainMenu'
+    end
+  end
+
+  get '/timeTrialRanking' do
+    @users = User.order(score_time_trial: :desc).limit(10)
+    erb :timeTrialRanking
+  end
+
+  post '/timeTrialRanking' do
     if params[:back]
       redirect '/mainMenu'
     end

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/ranking.css">
-    <title>Ranking</title>
+    <title>Time-Trial Ranking</title>
 </head>
 <body>
 <audio id="background-audio" autoplay loop>
@@ -17,7 +17,7 @@
         <tr>
     <th>Rank</th>
     <th>Username</th>
-    <th>Score</th>
+    <th>Best Time</th>
 </tr>
 <% @users.each_with_index do |user, index| %>
     <tr <% if user.id == session[:user_id] %>class="currentUser"<% end %>>

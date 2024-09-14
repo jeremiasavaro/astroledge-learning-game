@@ -6,6 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    
+    .button.dropdown::after {
+      content: '\25BC'; 
+      margin-left: 10px;
+      font-size: 10px;
+    }
+
+    
+    #ranking-options {
+      margin-left: 28px; 
+    }
+
+    #ranking-options .button {
+      font-size: 0.7em; 
+      padding: 8px;     
+    }
+  </style>
 </head>
 <body>
   <audio id="background-audio" autoplay loop>
@@ -31,8 +49,18 @@
         </form>
         <form method="post">
           <input type="hidden" name="ranking">
-          <button type="submit" class="button"><i class="fas fa-trophy"></i> <span>Ranking</span></button>
+          <button type="button" class="button dropdown" onclick="showRankingOptions()"><i class="fas fa-trophy"></i> <span>Ranking</span></button>
         </form>
+        <div id="ranking-options" style="display:none;">
+          <form method="post">
+            <input type="hidden" name="ranking">
+            <button type="submit" class="button"><i class="fas fa-award"></i></i> <span>Regular Ranking</span></button>
+          </form>
+          <form method="post">
+            <input type="hidden" name="timeTrialRanking">
+            <button type="submit" class="button"><i class="fas fa-medal"></i></i> <span>TimeTrial Ranking</span></button>
+          </form>
+        </div>
         <form method="post">
           <% user = User.find_by(id: session[:user_id])%>
           <% if user.see_correct %>
@@ -60,6 +88,11 @@
       sidebar.classList.toggle('expanded');
     }
 
+    function showRankingOptions() {
+      const rankingOptions = document.getElementById('ranking-options');
+      rankingOptions.style.display = rankingOptions.style.display === 'none' ? 'block' : 'none';
+    }
+
     window.addEventListener('DOMContentLoaded', (event) => {
       const audio = document.getElementById('background-audio');
       audio.volume = 0.1;
@@ -75,7 +108,6 @@
         localStorage.setItem('audioTime', audio.currentTime);
       }, 1000);
     });
-
   </script>
 </body>
 </html>
