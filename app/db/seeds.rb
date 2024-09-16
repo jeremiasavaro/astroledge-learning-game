@@ -78,6 +78,27 @@ planets_data = [
           }
         ]
       }
+    ],
+    levelYear: [
+      {
+        number: 1,
+        questionsYear: [
+          {
+            description: 'In which year was the Hubble Space Telescope launched?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1990', correct: true },
+            ]
+          },
+          {
+            description: 'In which year was the planet Pluto discovered?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1930', correct: true },
+            ]
+          },
+        ]
+      }
     ]
   },
   {
@@ -156,6 +177,27 @@ planets_data = [
               { description: 'Saturn', correct: false }
             ]
           }
+        ]
+      }
+    ],
+    levelYear: [
+      {
+        number: 1,
+        questionsYear: [
+          {
+            description: 'In what year was the first manned lunar landing on the surface of the moon?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1969', correct: true },
+            ]
+          },
+          {
+            description: 'In which year was the planet Neptune discovered?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1846', correct: true },
+            ]
+          },
         ]
       }
     ]
@@ -238,6 +280,27 @@ planets_data = [
           }
         ]
       }
+    ],
+    levelYear: [
+      {
+        number: 1,
+        questionsYear: [
+          {
+            description: 'In which year was the first space probe, Sputnik 1, launched?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1957', correct: true },
+            ]
+          },
+          {
+            description: 'In which year was the asteroid belt between Mars and Jupiter discovered?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1801', correct: true },
+            ]
+          },
+        ]
+      }
     ]
   },
   {
@@ -316,6 +379,27 @@ planets_data = [
               { description: 'Cygnus X-1', correct: false }
             ]
           }
+        ]
+      }
+    ],
+    levelYear: [
+      {
+        number: 1,
+        questionsYear: [
+          {
+            description: 'In which year was the first exoplanet orbiting a Sun-like star discovered?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1995', correct: true },
+            ]
+          },
+          {
+            description: 'In which year was Supernova 1987A first observed in the Large Magellanic Cloud?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1987', correct: true },
+            ]
+          },
         ]
       }
     ]
@@ -398,6 +482,27 @@ planets_data = [
           }
         ]
       }
+    ],
+    levelYear: [
+      {
+        number: 1,
+        questionsYear: [
+          {
+            description: 'In what year was NASA established?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1965', correct: true },
+            ]
+          },
+          {
+            description: 'In what year was the first flight of the Vostok 1 rocket, the first manned space flight, with Yuri Gagarin?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1961', correct: true },
+            ]
+          },
+        ]
+      }
     ]
   },
   {
@@ -476,6 +581,27 @@ planets_data = [
               { description: 'A star that becomes a black hole', correct: false }
             ]
           }
+        ]
+      }
+    ],
+    levelYear: [
+      {
+        number: 1,
+        questionsYear: [
+          {
+            description: 'In which year was the pulsar discovered in the first observation of a neutron star?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1967', correct: true },
+            ]
+          },
+          {
+            description: 'In which year was the first landing of a probe on the surface of Mars?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1976', correct: true },
+            ]
+          },
         ]
       }
     ]
@@ -558,6 +684,27 @@ planets_data = [
           }
         ]
       }
+    ],
+    levelYear: [
+      {
+        number: 1,
+        questionsYear: [
+          {
+            description: 'In what year was Apollo 11, the first mission to land humans on the moon, launched?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1969', correct: true },
+            ]
+          },
+          {
+            description: 'In which year was the microwave background radiation, evidence of the Big Bang, first detected?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1965', correct: true },
+            ]
+          },
+        ]
+      }
     ]
   },
   {
@@ -638,6 +785,27 @@ planets_data = [
           }
         ]
       }
+    ],
+    levelYear: [
+      {
+        number: 1,
+        questionsYear: [
+          {
+            description: 'In what year was the first manned lunar landing on the surface of the moon?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1969', correct: true },
+            ]
+          },
+          {
+            description: 'In which year was the planet Neptune discovered?',
+            scoreQuestion: 50,
+            answerYear: [
+              { description: '1846', correct: true },
+            ]
+          },
+        ]
+      }
     ]
   }
 ]
@@ -660,4 +828,20 @@ planets_data.each do |planet_data|
       end
     end
   end
+
+  planet_data[:levelYear].each do |levelYear_data|
+    # Busca o crea el nivel por número y planeta
+    levelYear = LevelYear.find_or_create_by(number: levelYear_data[:number], planet: planet)
+
+    levelYear_data[:questionsYear].each do |questionYear_data|
+      # Busca o crea la pregunta por descripción y nivel
+      questionYear = QuestionYear.find_or_create_by(description: questionYear_data[:description], scoreQuestion: questionYear_data[:scoreQuestion], levelYear: levelYear)
+
+      questionYear_data[:answerYear].each do |answerYear_data|
+        # Busca o crea la respuesta por descripción y pregunta
+        AnswerYear.find_or_create_by(description: answerYear_data[:description], correct: answerYear_data[:correct], questionYear: questionYear)
+      end
+    end
+  end
+
 end

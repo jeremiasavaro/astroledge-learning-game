@@ -4,6 +4,7 @@ class CreateUsersTable < ActiveRecord::Migration[7.1]
       t.string :username
       t.string :password
       t.integer :score
+      t.integer :score_time_trial
       t.boolean :see_correct
 
       t.datetime :created_at
