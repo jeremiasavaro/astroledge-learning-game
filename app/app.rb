@@ -93,6 +93,7 @@ class App < Sinatra::Application
         user.username = new_username
         user.password = new_password
         user.score = 0
+        user.score_time_trial = 0
         user.see_correct = false
         user.save
         redirect '/login'

@@ -6,6 +6,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time Trial</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script>
+    const INITIAL_TIME = 30;
+    let countdown; // variable para almacenar el tiempo
+
+    // metodo para empezar la cuenta atras
+    function startTimer() {
+      // obtengo el tiempo del HTML
+      const timerElement = document.getElementById('timer');
+      let timeLeft = parseInt(timerElement.textContent);
+
+      // chequeo que el tiempo sea 30 antes de comenzar
+      if (timeLeft !== 30) {
+        alert("El contador debe estar en 30 para iniciar.");
+        return;
+      }
+
+      // obtengo el boton del HTML
+      const startButton = document.getElementById('start-button');
+      // desactivo el boton para que una vez comenzado el timer no se pueda volver a clickear
+      startButton.disabled = true;
+
+      // metodo que va disminuyendo en 1 el contador
+      countdown = setInterval(() => {
+        timeLeft--;
+        timerElement.textContent = timeLeft;
+
+        // una vez terminado el tiempo
+        if (timeLeft <= 0) {
+          // reinicio el contador
+          clearInterval(countdown);
+          timerElement.textContent = "¡Tiempo terminado!";
+          // activo nuevamente el boton para que se pueda clickear de vuelta
+          startButton.disabled = false;
+        }
+      }, 1000); 
+    }
+
+    window.onload = () => {
+      document.getElementById('start-button').addEventListener('click', startTimer);
+    };
+  </script>
 </head>
 <body>
   <div class="time-trial-container">
