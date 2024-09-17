@@ -1159,6 +1159,7 @@ time_trial_data = [
 
 time_trial_data.each do |time_trial_item|
 #AÑADIR OREGUNTAS A LA BASE DE DATOS
+end
 
   planets_data.each do |planet_data|
     # Busca o crea el planeta por nombre
