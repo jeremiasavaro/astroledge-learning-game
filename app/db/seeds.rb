@@ -810,6 +810,354 @@ planets_data = [
   }
 ]
 
+time_trial_data = [
+  {
+    questions: [
+      {
+        description: 'What is the name of the process by which stars produce energy?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Nuclear fusion', correct: true },
+          { description: 'Nuclear fission', correct: false },
+          { description: 'Stellar combustion', correct: false },
+          { description: 'Radioactive decay', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet in our solar system is known for its prominent ring system?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Saturn', correct: true },
+          { description: 'Jupiter', correct: false },
+          { description: 'Uranus', correct: false },
+          { description: 'Neptune', correct: false }
+        ]
+      },
+      {
+        description: 'What is the largest planet in our solar system?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Jupiter', correct: true },
+          { description: 'Saturn', correct: false },
+          { description: 'Neptune', correct: false },
+          { description: 'Earth', correct: false }
+        ]
+      },
+      {
+        description: 'What type of galaxy is the Milky Way?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Spiral', correct: true },
+          { description: 'Elliptical', correct: false },
+          { description: 'Irregular', correct: false },
+          { description: 'Lenticular', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet is closest to the Sun?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Mercury', correct: true },
+          { description: 'Venus', correct: false },
+          { description: 'Earth', correct: false },
+          { description: 'Mars', correct: false }
+        ]
+      },
+      {
+        description: 'What is the most common type of star in the universe?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Red dwarf', correct: true },
+          { description: 'Yellow dwarf', correct: false },
+          { description: 'Blue giant', correct: false },
+          { description: 'White dwarf', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet is known as the "Red Planet"?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Mars', correct: true },
+          { description: 'Venus', correct: false },
+          { description: 'Jupiter', correct: false },
+          { description: 'Saturn', correct: false }
+        ]
+      },
+      {
+        description: 'What is the name of the first artificial satellite sent into space?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Sputnik 1', correct: true },
+          { description: 'Explorer 1', correct: false },
+          { description: 'Apollo 11', correct: false },
+          { description: 'Voyager 1', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet has the most moons?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Jupiter', correct: true },
+          { description: 'Saturn', correct: false },
+          { description: 'Uranus', correct: false },
+          { description: 'Neptune', correct: false }
+        ]
+      },
+      {
+        description: 'What is the name of the closest star to Earth, after the Sun?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Proxima Centauri', correct: true },
+          { description: 'Alpha Centauri', correct: false },
+          { description: 'Sirius', correct: false },
+          { description: 'Betelgeuse', correct: false }
+        ]
+      },
+      {
+        description: 'What is the term for a star that suddenly increases greatly in brightness because of a catastrophic explosion?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Supernova', correct: true },
+          { description: 'Nova', correct: false },
+          { description: 'Pulsar', correct: false },
+          { description: 'Quasar', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet has a day that is longer than its year?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Venus', correct: true },
+          { description: 'Mercury', correct: false },
+          { description: 'Mars', correct: false },
+          { description: 'Jupiter', correct: false }
+        ]
+      },
+      {
+        description: 'What is the most abundant element in the universe?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Hydrogen', correct: true },
+          { description: 'Helium', correct: false },
+          { description: 'Oxygen', correct: false },
+          { description: 'Carbon', correct: false }
+        ]
+      },
+      {
+        description: 'What do we call the boundary around a black hole beyond which no light or other radiation can escape?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Event horizon', correct: true },
+          { description: 'Singularity', correct: false },
+          { description: 'Accretion disk', correct: false },
+          { description: 'Schwarzschild radius', correct: false }
+        ]
+      },
+      {
+        description: 'What is the brightest star in the night sky?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Sirius', correct: true },
+          { description: 'Betelgeuse', correct: false },
+          { description: 'Rigel', correct: false },
+          { description: 'Polaris', correct: false }
+        ]
+      },
+      {
+        description: 'What is the name of the galaxy that is on a collision course with the Milky Way?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Andromeda', correct: true },
+          { description: 'Triangulum', correct: false },
+          { description: 'Magellanic Clouds', correct: false },
+          { description: 'Whirlpool', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet has the highest mountain in the solar system?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Mars', correct: true },
+          { description: 'Earth', correct: false },
+          { description: 'Venus', correct: false },
+          { description: 'Mercury', correct: false }
+        ]
+      },
+      {
+        description: 'What is the term for the apparent shift in position of an object due to the change in the observer\'s point of view?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Parallax', correct: true },
+          { description: 'Redshift', correct: false },
+          { description: 'Doppler effect', correct: false },
+          { description: 'Aberration', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet has the Great Red Spot, a giant storm?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Jupiter', correct: true },
+          { description: 'Saturn', correct: false },
+          { description: 'Neptune', correct: false },
+          { description: 'Uranus', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet has a tilt of about 98 degrees, causing it to rotate on its side?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Uranus', correct: true },
+          { description: 'Neptune', correct: false },
+          { description: 'Saturn', correct: false },
+          { description: 'Mars', correct: false }
+        ]
+      },
+      {
+        description: 'What is the phenomenon called when one celestial body passes in front of another, blocking its light?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Eclipse', correct: true },
+          { description: 'Occultation', correct: false },
+          { description: 'Transit', correct: false },
+          { description: 'Conjunction', correct: false }
+        ]
+      },
+      {
+        description: 'What do astronomers call the remnant of a star that has collapsed under its own gravity to the point where its escape velocity exceeds the speed of light?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Black hole', correct: true },
+          { description: 'Neutron star', correct: false },
+          { description: 'White dwarf', correct: false },
+          { description: 'Quasar', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet has the most extreme temperature variations between day and night?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Mercury', correct: true },
+          { description: 'Venus', correct: false },
+          { description: 'Mars', correct: false },
+          { description: 'Earth', correct: false }
+        ]
+      },
+      {
+        description: 'What is the name of the dwarf planet located in the asteroid belt between Mars and Jupiter?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Ceres', correct: true },
+          { description: 'Pluto', correct: false },
+          { description: 'Eris', correct: false },
+          { description: 'Haumea', correct: false }
+        ]
+      },
+      {
+        description: 'Which constellation is home to the stars Castor and Pollux?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Gemini', correct: true },
+          { description: 'Orion', correct: false },
+          { description: 'Taurus', correct: false },
+          { description: 'Leo', correct: false }
+        ]
+      },
+      {
+        description: 'What is the approximate age of the universe according to the Big Bang theory?',
+        scoreQuestion: 15,
+        answers: [
+          { description: '13.8 billion years', correct: true },
+          { description: '4.6 billion years', correct: false },
+          { description: '100 million years', correct: false },
+          { description: '10 billion years', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet is often referred to as Earth\'s "sister planet" due to its similar size and mass?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Venus', correct: true },
+          { description: 'Mars', correct: false },
+          { description: 'Mercury', correct: false },
+          { description: 'Neptune', correct: false }
+        ]
+      },
+      {
+        description: 'Which object is responsible for the tides on Earth?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'The Moon', correct: true },
+          { description: 'The Sun', correct: false },
+          { description: 'Jupiter', correct: false },
+          { description: 'Saturn', correct: false }
+        ]
+      },
+      {
+        description: 'Which planet is the hottest in our solar system due to its thick atmosphere of carbon dioxide?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Venus', correct: true },
+          { description: 'Mercury', correct: false },
+          { description: 'Earth', correct: false },
+          { description: 'Mars', correct: false }
+        ]
+      },
+      {
+        description: 'What is the term for a small body of rock or metal that enters Earth\'s atmosphere and burns up, creating a streak of light?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Meteor', correct: true },
+          { description: 'Asteroid', correct: false },
+          { description: 'Comet', correct: false },
+          { description: 'Meteorite', correct: false }
+        ]
+      },
+      {
+        description: 'What is the name of the space telescope launched in 1990 that has provided some of the most detailed images of the universe?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Hubble Space Telescope', correct: true },
+          { description: 'James Webb Space Telescope', correct: false },
+          { description: 'Kepler Space Telescope', correct: false },
+          { description: 'Chandra X-ray Observatory', correct: false }
+        ]
+      },
+      {
+        description: 'What is the most distant man-made object from Earth?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Voyager 1', correct: true },
+          { description: 'Voyager 2', correct: false },
+          { description: 'Pioneer 10', correct: false },
+          { description: 'New Horizons', correct: false }
+        ]
+      },
+      {
+        description: 'What is the closest galaxy to the Milky Way?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Andromeda', correct: true },
+          { description: 'Triangulum', correct: false },
+          { description: 'Large Magellanic Cloud', correct: false },
+          { description: 'Small Magellanic Cloud', correct: false }
+        ]
+      },
+      {
+        description: 'What do we call the outermost layer of the Sun\'s atmosphere, visible during a total solar eclipse?',
+        scoreQuestion: 15,
+        answers: [
+          { description: 'Corona', correct: true },
+          { description: 'Chromosphere', correct: false },
+          { description: 'Photosphere', correct: false },
+          { description: 'Convective zone', correct: false }
+        ]
+      }
+    ]
+  }
+];
+
+
 planets_data.each do |planet_data|
   # Busca o crea el planeta por nombre
   planet = Planet.find_or_create_by(name: planet_data[:name])
