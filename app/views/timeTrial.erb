@@ -5,47 +5,59 @@
   <link rel="stylesheet" type="text/css" href="styles/timeTrial.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time Trial</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script>
     const INITIAL_TIME = 30;
     let countdown; // variable para almacenar el tiempo
 
-    // metodo para empezar la cuenta atras
+    // Método para empezar la cuenta atrás
     function startTimer() {
-      // obtengo el tiempo del HTML
+      // Obtengo el tiempo del HTML
       const timerElement = document.getElementById('timer');
       let timeLeft = parseInt(timerElement.textContent);
 
-      // chequeo que el tiempo sea 30 antes de comenzar
-      if (timeLeft !== 30) {
+      // Chequeo que el tiempo sea 30 antes de comenzar
+      if (timeLeft !== INITIAL_TIME) {
         alert("El contador debe estar en 30 para iniciar.");
         return;
       }
 
-      // obtengo el boton del HTML
+      // Obtengo el botón del HTML
       const startButton = document.getElementById('start-button');
-      // desactivo el boton para que una vez comenzado el timer no se pueda volver a clickear
+      // Desactivo el botón para que no se pueda volver a clicar
       startButton.disabled = true;
 
-      // metodo que va disminuyendo en 1 el contador
+      // Método que va disminuyendo en 1 el contador
       countdown = setInterval(() => {
         timeLeft--;
         timerElement.textContent = timeLeft;
 
-        // una vez terminado el tiempo
+        // Cuando el tiempo se termina
         if (timeLeft <= 0) {
-          // reinicio el contador
+          // Reinicio el contador
           clearInterval(countdown);
           timerElement.textContent = "¡Tiempo terminado!";
-          // activo nuevamente el boton para que se pueda clickear de vuelta
+          // Activo nuevamente el botón para poder reiniciar
           startButton.disabled = false;
         }
       }, 1000); 
     }
 
+    // Cuando la ventana carga
     window.onload = () => {
       document.getElementById('start-button').addEventListener('click', startTimer);
+      document.getElementById('reset-button').addEventListener('click', resetGame);
     };
+
+    // Método para reiniciar el juego
+    function resetGame() {
+      clearInterval(countdown); // Detengo el intervalo actual
+      const timerElement = document.getElementById('timer');
+      timerElement.textContent = INITIAL_TIME; // Reseteo el contador a 30
+      document.getElementById('start-button').disabled = false; // Habilito el botón de nuevo
+      document.getElementById('reset-button').disabled = true;
+      document.getElementById('reset-button').disabled = false;
+    }
   </script>
 </head>
 <body>
@@ -56,9 +68,9 @@
         <i class="fas fa-stopwatch"></i>
         <span id="timer">30</span>
       </div>
-      <div class="trial-info">
-      </div>
-      <button id="start-button">Iniciar</button>
+      <div class="trial-info"></div>
+      <button id="start-button" class="button">Iniciar</button>
+      <button id="reset-button" class="button">Jugar de nuevo</button>
     </div>
   </div>
 </body>
