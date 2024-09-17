@@ -1,5 +1,3 @@
-# server.rb
-
 require 'sinatra'
 require 'sinatra/activerecord'
 
@@ -11,6 +9,13 @@ require './models/level'
 require './models/question'
 require './models/answer'
 require './models/questionUser'
+require './models/questionYear'
+require './models/answerYear'
+require './models/levelYear'
+require './models/timeTrial'
+require './models/questionTimeTrial'
+require './models/answerTimeTrial'
+
 
 set :database_file, './config/database.yml'
 set :public_folder, 'assets'
@@ -135,7 +140,40 @@ class App < Sinatra::Application
     your_level = params[:level].to_i
     session[:first_level] = true # first time playing
     session[:level_selected] = your_level # selected level
-    redirect '/planetLevelQuiz'
+    if your_level == 4
+      redirect '/planetLevelYear'
+    else  
+      redirect '/planetLevelQuiz'
+    end
+  end
+
+  get '/planetLevelYear' do
+    if session[:first_level] == true # if the user it's playing the first level
+      level_selected = session[:level_selected]
+      planet_id = session[:planet_id]  # Usa la ID del planeta almacenada en la sesións
+      levelYear_n = LevelYear.find_by(planet_id: PLANET_ID, number: 1)
+
+      if levelYear_n.nil?
+        halt 404, "Level not found."
+      end
+
+      @questionsYear = levelYear_n.questionsYear.pluck(:id)
+
+      if @questionsYear.empty?
+        halt 404, "No questions found for this level."
+      end
+
+      @current_question = @questionsYear.shift # takes the first question of level 1
+      session[:questions] = @questionsYear # save all questions in the session
+      session[:current_question] = @current_question  # save the current question in the session
+      session[:first_level] = false
+    else # already have all the questions saved, just take the next one
+      @questionsYear = session[:questions]
+      @current_question = @questionsYear.shift
+      session[:questions] = @questionsYear
+      session[:current_question] = @current_question
+    end
+    erb :planetLevelYear
   end
 
   get '/planetLevelQuiz' do
