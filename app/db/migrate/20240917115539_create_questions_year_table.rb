@@ -1,6 +1,6 @@
 class CreateQuestionsYearTable < ActiveRecord::Migration[7.1]
   def change
-    create_table :questionsYear do |t|
+    create_table :question_years do |t|
       t.references :levelYear, null: false, foreign_key: true
       t.string :description, null: false
       t.integer :scoreQuestion, default: 0
