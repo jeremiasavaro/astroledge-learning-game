@@ -1157,38 +1157,40 @@ time_trial_data = [
   }
 ];
 
+time_trial_data.each do |time_trial_item|
+#AÑADIR OREGUNTAS A LA BASE DE DATOS
 
-planets_data.each do |planet_data|
-  # Busca o crea el planeta por nombre
-  planet = Planet.find_or_create_by(name: planet_data[:name])
+  planets_data.each do |planet_data|
+    # Busca o crea el planeta por nombre
+    planet = Planet.find_or_create_by(name: planet_data[:name])
 
-  planet_data[:levels].each do |level_data|
-    # Busca o crea el nivel por número y planeta
-    level = Level.find_or_create_by(number: level_data[:number], planet: planet)
+    planet_data[:levels].each do |level_data|
+      # Busca o crea el nivel por número y planeta
+      level = Level.find_or_create_by(number: level_data[:number], planet: planet)
 
-    level_data[:questions].each do |question_data|
-      # Busca o crea la pregunta por descripción y nivel
-      question = Question.find_or_create_by(description: question_data[:description], scoreQuestion: question_data[:scoreQuestion], level: level)
+      level_data[:questions].each do |question_data|
+        # Busca o crea la pregunta por descripción y nivel
+        question = Question.find_or_create_by(description: question_data[:description], scoreQuestion: question_data[:scoreQuestion], level: level)
 
-      question_data[:answers].each do |answer_data|
-        # Busca o crea la respuesta por descripción y pregunta
-        Answer.find_or_create_by(description: answer_data[:description], correct: answer_data[:correct], question: question)
+        question_data[:answers].each do |answer_data|
+          # Busca o crea la respuesta por descripción y pregunta
+          Answer.find_or_create_by(description: answer_data[:description], correct: answer_data[:correct], question: question)
+        end
+      end
+    end
+
+    planet_data[:levelYear] do |levelYear_data|
+      # Busca o crea el nivel por número y planeta
+      levelYear = LevelYear.find_or_create_by(number: levelYear_data[:number], planet: planet)
+
+      levelYear_data[:questionsYear].each do |questionYear_data|
+        # Busca o crea la pregunta por descripción y nivel
+        questionYear = QuestionYear.find_or_create_by(description: questionYear_data[:description], scoreQuestion: questionYear_data[:scoreQuestion], levelYear: levelYear)
+
+        questionYear_data[:answersYear].each do |answerYear_data|
+          # Busca o crea la respuesta por descripción y pregunta
+          AnswerYear.find_or_create_by(description: answerYear_data[:description], correct: answerYear_data[:correct], questionYear: questionYear)
+        end
       end
     end
   end
-
-  planet_data[:levelYear] do |levelYear_data|
-    # Busca o crea el nivel por número y planeta
-    levelYear = LevelYear.find_or_create_by(number: levelYear_data[:number], planet: planet)
-
-    levelYear_data[:questionsYear].each do |questionYear_data|
-      # Busca o crea la pregunta por descripción y nivel
-      questionYear = QuestionYear.find_or_create_by(description: questionYear_data[:description], scoreQuestion: questionYear_data[:scoreQuestion], levelYear: levelYear)
-
-      questionYear_data[:answersYear].each do |answerYear_data|
-        # Busca o crea la respuesta por descripción y pregunta
-        AnswerYear.find_or_create_by(description: answerYear_data[:description], correct: answerYear_data[:correct], questionYear: questionYear)
-      end
-    end
-  end
-end
