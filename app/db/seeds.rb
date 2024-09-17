@@ -1180,28 +1180,25 @@ end
       end
     end
 
-    planet_data[:level_years]&.each do |levelYear_data|
-      level_years = LevelYear.find_or_create_by(number: levelYear_data[:number], planet: planet)
-    
-      if levelYear_data[:question_years].present?
-        levelYear_data[:question_years].each do |questionYear_data|
-          questionYear = QuestionYear.find_or_create_by(
-            description: questionYear_data[:description],
-            scoreQuestion: questionYear_data[:scoreQuestion],
-            level_year: level_years
-          )
-    
-          puts "Created/Found QuestionYear: #{questionYear.inspect}"  # Debugging line
-    
-          if questionYear_data[:answer_year].present?
-            # Asegúrate de que solo haya un AnswerYear para cada QuestionYear
+    planet_data[:level_years]&.each do |level_year_data|
+      level_year = LevelYear.find_or_create_by(number: level_year_data[:number], planet: planet)
+      
+      level_year_data[:question_years]&.each do |question_year_data|
+        question_year = QuestionYear.find_or_create_by(
+          description: question_year_data[:description],
+          scoreQuestion: question_year_data[:scoreQuestion],
+          level_year: level_year
+        )
+        
+        if question_year_data[:answer_years].is_a?(Array)
+          question_year_data[:answer_years].each do |answer_year_data|
             AnswerYear.find_or_create_by(
-              description: questionYear_data[:answer_year][:description],
-              correct: questionYear_data[:answer_year][:correct],
-              question_year: questionYear
+              description: answer_year_data[:description],
+              correct: answer_year_data[:correct],
+              question_year: question_year
             )
           end
-        end    
+        end
       end
     end    
   end
