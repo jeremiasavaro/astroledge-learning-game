@@ -157,23 +157,44 @@ class App < Sinatra::Application
         halt 404, "Level not found."
       end
 
-      @questionsYear = levelYear_n.questionsYear.pluck(:id)
+      @question_years = levelYear_n.question_years.pluck(:id)
 
-      if @questionsYear.empty?
+      if @question_years.nil? || @question_years.empty?
         halt 404, "No questions found for this level."
+      else
+        @current_questionYear = @question_years.shift # takes the first question of level 1
+        session[:questionsYear] = @question_years # save all questions in the session
+        session[:current_questionYear] = @current_questionYear  # save the current question in the session
+        session[:first_level] = false
       end
-
-      @current_question = @questionsYear.shift # takes the first question of level 1
-      session[:questions] = @questionsYear # save all questions in the session
-      session[:current_question] = @current_question  # save the current question in the session
-      session[:first_level] = false
     else # already have all the questions saved, just take the next one
-      @questionsYear = session[:questions]
-      @current_question = @questionsYear.shift
-      session[:questions] = @questionsYear
-      session[:current_question] = @current_question
+      @question_years = session[:questionsYear]
+      @current_questionYear = @question_years.shift
+      session[:questionsYear] = @question_years
+      session[:current_questionYear] = @current_questionYear
     end
     erb :planetLevelYear
+  end
+
+  post '/planetLevelYear' do
+    if params[:back]
+      redirect '/planetLevels'
+    end
+    session[:your_answer] = params[:button].to_i
+    u = session[:current_question]
+
+    @quest = Question.find_by(id: u)
+    @selected_answer = Answer.find_by(id: session[:your_answer])
+
+    redirect '/responseQuiz'
+  end
+
+  get '/responseYear' do
+    erb :responseYear
+  end
+
+  post '/responseYear' do
+    redirect '/planetLevelYear'
   end
 
   get '/planetLevelQuiz' do
