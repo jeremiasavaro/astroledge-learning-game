@@ -79,7 +79,7 @@ planets_data = [
         ]
       }
     ],
-    levelYear: [
+    levelsYear: [
       {
         number: 1,
         questionsYear: [
@@ -180,7 +180,7 @@ planets_data = [
         ]
       }
     ],
-    levelYear: [
+    levelsYear: [
       {
         number: 1,
         questionsYear: [
@@ -281,7 +281,7 @@ planets_data = [
         ]
       }
     ],
-    levelYear: [
+    levelsYear: [
       {
         number: 1,
         questionsYear: [
@@ -382,7 +382,7 @@ planets_data = [
         ]
       }
     ],
-    levelYear: [
+    levelsYear: [
       {
         number: 1,
         questionsYear: [
@@ -483,7 +483,7 @@ planets_data = [
         ]
       }
     ],
-    levelYear: [
+    levelsYear: [
       {
         number: 1,
         questionsYear: [
@@ -829,7 +829,7 @@ planets_data.each do |planet_data|
     end
   end
 
-  planet_data[:levelYear].each do |levelYear_data|
+  planet_data[:levelYear] do |levelYear_data|
     # Busca o crea el nivel por número y planeta
     levelYear = LevelYear.find_or_create_by(number: levelYear_data[:number], planet: planet)
 
@@ -837,11 +837,10 @@ planets_data.each do |planet_data|
       # Busca o crea la pregunta por descripción y nivel
       questionYear = QuestionYear.find_or_create_by(description: questionYear_data[:description], scoreQuestion: questionYear_data[:scoreQuestion], levelYear: levelYear)
 
-      questionYear_data[:answerYear].each do |answerYear_data|
+      questionYear_data[:answersYear].each do |answerYear_data|
         # Busca o crea la respuesta por descripción y pregunta
         AnswerYear.find_or_create_by(description: answerYear_data[:description], correct: answerYear_data[:correct], questionYear: questionYear)
       end
     end
   end
-
 end
