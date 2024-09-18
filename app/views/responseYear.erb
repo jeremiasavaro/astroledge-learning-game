@@ -11,10 +11,10 @@
 <div class="container">
   <% iu = session[:current_questionYear] %>
   <% your_answer = session[:your_answer] %>
-  <% quest = Question.find_by(id: iu) %>
+  <% quest = QuestionYear.find_by(id: iu) %>
   <% user = User.find(session[:user_id]) %>
   <% config = user.see_correct %>
-  <% selected_answer = Answer.find_by(id: your_answer) %>
+  <% selected_answer = AnswerYear.find_by(id: your_answer) %>
   <% if QuestionUser.exists?(user: user, question: quest) %>
     <% question_user = QuestionUser.find_by(user: user, question: quest) %>
     <% if quest && selected_answer.correct %>

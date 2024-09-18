@@ -180,21 +180,22 @@ class App < Sinatra::Application
     if params[:back]
       redirect '/planetLevels'
     end
-    session[:your_answer] = params[:button].to_i
-    u = session[:current_question]
-
-    @quest = Question.find_by(id: u)
-    @selected_answer = Answer.find_by(id: session[:your_answer])
-
-    redirect '/responseQuiz'
-  end
-
-  get '/responseYear' do
-    erb :responseYear
-  end
-
-  post '/responseYear' do
-    redirect '/planetLevelYear'
+    if params[:year].nil? || params[:year].strip.empty?
+      redirect '/planetLevelYear?error=empty'
+    else
+      session[:your_answer] = params[:year].to_i
+      u = session[:current_questionYear]
+  
+      @questYear = QuestionYear.find_by(id: u)
+      @selected_answerYear = AnswerYear.find_by(id: session[:your_answer])
+  
+      # Verificación de si @questYear y @selected_answerYear existen
+      if @questYear.nil? || @selected_answerYear.nil?
+        redirect '/planetLevelYear?error=invalid'
+      else
+        redirect '/responseYear'
+      end
+    end
   end
 
   get '/planetLevelQuiz' do
