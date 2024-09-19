@@ -7,4 +7,9 @@ class QuestionYear < ActiveRecord::Base
   validates :description, presence: true
   has_many :question_users
   has_many :users, through: :question_users
+
+  def correct_answerYear
+    answer_year if answer_year.correct
+  end
+
 end
