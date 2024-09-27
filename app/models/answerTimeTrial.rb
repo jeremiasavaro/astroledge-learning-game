@@ -1,9 +1,9 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
-class AnswerYear < ActiveRecord::Base
-  belongs_to :question_year
+class Answer < ActiveRecord::Base
+  belongs_to :questionTimeTrial
   validates :description, presence: true
   validates :correct, inclusion: { in: [true, false] }
-
+  validate :has_only_one_answer?, if: :correct
 end

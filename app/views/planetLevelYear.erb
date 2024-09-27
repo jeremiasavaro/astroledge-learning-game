@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles/planetLevelYear.css">
+  <title></title>
+</head>
+<body>
+    <audio id="background-audio" autoplay loop>
+      <source src="/tension.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+<div class="container">
+  <% if session[:current_questionYear]%>
+    <% question_id = session[:current_questionYear] %>
+    <% questionYear = QuestionYear.find_by(id: question_id) %>
+    <% if questionYear %>
+      <div class="question-box">
+        <h2><%= questionYear.description %></h2>
+      </div>
+      <div>
+        <form method="post">
+          <input type="text" name="year" placeholder="Your answer" value = >
+          <br>
+          <button type="submit" class="button">Send</button>
+        </form>
+      </div>
+    <% else %>
+      <p>Pregunta no encontrada</p>
+    <% end %>
+  <% else %>
+   <% redirect '/planetLevels' %>
+  <% end %>
+</div>
+    <form method="post">
+      <input type="hidden" name="back">
+      <button type="submit" class="buttonBack">Back</button>
+    </form>
+    <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const audio = document.getElementById('background-audio');
+      audio.volume = 0.1;
+
+      // Retrieve the playback time from localStorage
+      const savedTime = localStorage.getItem('audioTime');
+      if (savedTime) {
+        audio.currentTime = savedTime;
+      }
+
+      // Save the playback time periodically
+      setInterval(() => {
+        localStorage.setItem('audioTime', audio.currentTime);
+      }, 1000);
+    });
+    </script>
+</body>
+</html>

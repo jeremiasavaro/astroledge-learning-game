@@ -1,5 +1,3 @@
-# server.rb
-
 require 'sinatra'
 require 'sinatra/activerecord'
 
@@ -11,6 +9,14 @@ require './models/level'
 require './models/question'
 require './models/answer'
 require './models/questionUser'
+require './models/questionYearUser'
+require './models/questionYear'
+require './models/answerYear'
+require './models/levelYear'
+require './models/timeTrial'
+require './models/questionTimeTrial'
+require './models/answerTimeTrial'
+
 
 set :database_file, './config/database.yml'
 set :public_folder, 'assets'
@@ -135,7 +141,60 @@ class App < Sinatra::Application
     your_level = params[:level].to_i
     session[:first_level] = true # first time playing
     session[:level_selected] = your_level # selected level
-    redirect '/planetLevelQuiz'
+    if your_level == 4
+      redirect '/planetLevelYear'
+    else  
+      redirect '/planetLevelQuiz'
+    end
+  end
+
+  get '/planetLevelYear' do
+    if session[:first_level] == true # if the user it's playing the first level
+      level_selected = session[:level_selected]
+      planet_id = session[:planet_id]  # Usa la ID del planeta almacenada en la sesións
+      levelYear_n = LevelYear.find_by(planet_id: PLANET_ID, number: 1)
+
+      if levelYear_n.nil?
+        halt 404, "Level not found."
+      end
+
+      @question_years = levelYear_n.question_years.pluck(:id)
+
+      if @question_years.nil? || @question_years.empty?
+        halt 404, "No questions found for this level."
+      else
+        @current_questionYear = @question_years.shift # takes the first question of level 1
+        session[:questionsYear] = @question_years # save all questions in the session
+        session[:current_questionYear] = @current_questionYear  # save the current question in the session
+        session[:first_level] = false
+      end
+    else # already have all the questions saved, just take the next one
+      @question_years = session[:questionsYear]
+      @current_questionYear = @question_years.shift
+      session[:questionsYear] = @question_years
+      session[:current_questionYear] = @current_questionYear
+    end
+    erb :planetLevelYear
+  end
+
+  post '/planetLevelYear' do
+    if params[:back]
+      redirect '/planetLevels'
+    end
+    session[:your_answer] = params[:year].to_i
+    u = session[:current_questionYear]
+
+    @questYear = QuestionYear.find_by(id: u)
+    @selected_answerYear = AnswerYear.find_by(id: session[:your_answer])
+    redirect '/responseYear'
+  end
+
+  get '/responseYear' do
+    erb :responseYear
+  end
+
+  post '/responseYear' do
+    redirect '/planetLevelYear'
   end
 
   get '/planetLevelQuiz' do

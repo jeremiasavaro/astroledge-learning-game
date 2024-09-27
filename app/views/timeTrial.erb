@@ -5,7 +5,60 @@
   <link rel="stylesheet" type="text/css" href="styles/timeTrial.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time Trial</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script>
+    const INITIAL_TIME = 30;
+    let countdown; // variable para almacenar el tiempo
+
+    // Método para empezar la cuenta atrás
+    function startTimer() {
+      // Obtengo el tiempo del HTML
+      const timerElement = document.getElementById('timer');
+      let timeLeft = parseInt(timerElement.textContent);
+
+      // Chequeo que el tiempo sea 30 antes de comenzar
+      if (timeLeft !== INITIAL_TIME) {
+        alert("El contador debe estar en 30 para iniciar.");
+        return;
+      }
+
+      // Obtengo el botón del HTML
+      const startButton = document.getElementById('start-button');
+      // Desactivo el botón para que no se pueda volver a clicar
+      startButton.disabled = true;
+
+      // Método que va disminuyendo en 1 el contador
+      countdown = setInterval(() => {
+        timeLeft--;
+        timerElement.textContent = timeLeft;
+
+        // Cuando el tiempo se termina
+        if (timeLeft <= 0) {
+          // Reinicio el contador
+          clearInterval(countdown);
+          timerElement.textContent = "¡Tiempo terminado!";
+          // Activo nuevamente el botón para poder reiniciar
+          startButton.disabled = false;
+        }
+      }, 1000); 
+    }
+
+    // Cuando la ventana carga
+    window.onload = () => {
+      document.getElementById('start-button').addEventListener('click', startTimer);
+      document.getElementById('reset-button').addEventListener('click', resetGame);
+    };
+
+    // Método para reiniciar el juego
+    function resetGame() {
+      clearInterval(countdown); // Detengo el intervalo actual
+      const timerElement = document.getElementById('timer');
+      timerElement.textContent = INITIAL_TIME; // Reseteo el contador a 30
+      document.getElementById('start-button').disabled = false; // Habilito el botón de nuevo
+      document.getElementById('reset-button').disabled = true;
+      document.getElementById('reset-button').disabled = false;
+    }
+  </script>
 </head>
 <body>
   <div class="time-trial-container">
@@ -15,9 +68,9 @@
         <i class="fas fa-stopwatch"></i>
         <span id="timer">30</span>
       </div>
-      <div class="trial-info">
-      </div>
-      <button id="start-button">Iniciar</button>
+      <div class="trial-info"></div>
+      <button id="start-button" class="button">Iniciar</button>
+      <button id="reset-button" class="button">Jugar de nuevo</button>
     </div>
   </div>
 </body>
