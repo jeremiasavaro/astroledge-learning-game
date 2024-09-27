@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates :score_time_trial, numericality: { only_integer: true, greater_than_or_equal_to: 0 }  #for time trial gamemode. In seconds?
   validates :see_correct, inclusion: { in: [true, false] }
   has_many :question_users
+  has_many :question_year_users
+  has_many :question_years, through: :question_year_users
   has_many :questions, through: :question_users
 
   # authenticates user
