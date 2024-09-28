@@ -13,7 +13,6 @@ require './models/questionYearUser'
 require './models/questionYear'
 require './models/answerYear'
 require './models/levelYear'
-require './models/timeTrial'
 require './models/questionTimeTrial'
 require './models/answerTimeTrial'
 
@@ -143,7 +142,7 @@ class App < Sinatra::Application
     session[:level_selected] = your_level # selected level
     if your_level == 4
       redirect '/planetLevelYear'
-    else  
+    else
       redirect '/planetLevelQuiz'
     end
   end
