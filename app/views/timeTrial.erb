@@ -7,57 +7,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time Trial</title>
   <script>
-    const INITIAL_TIME = 30;
-    let countdown; // variable para almacenar el tiempo
+    let countdown;
+    let timeLeft = <%= session[:time_left] %>;
+    let gameStarted = <%= session[:game_started] %>;
 
-    // Método para empezar la cuenta atrás
     function startTimer() {
-      // Obtengo el tiempo del HTML
       const timerElement = document.getElementById('timer');
-      let timeLeft = parseInt(timerElement.textContent);
-
-      // Chequeo que el tiempo sea 30 antes de comenzar
-      if (timeLeft !== INITIAL_TIME) {
-        alert("El contador debe estar en 30 para iniciar.");
-        return;
-      }
-
-      // Obtengo el botón del HTML
       const startButton = document.getElementById('start-button');
-      // Desactivo el botón para que no se pueda volver a clicar
-      startButton.disabled = true;
-
-      // Método que va disminuyendo en 1 el contador
+      const questionContainer = document.getElementById('question-container');
+      const actionsContainer = document.getElementById('actions-container');
+      
+      startButton.style.display = 'none'; //ocultar el botón de inicio cuando lo apriete
+      questionContainer.style.display = 'block'; //mostrar las preguntas
+      actionsContainer.style.display = 'block';
+      sessionStorage.setItem('gameStarted', true); //marcamos el juego como empezado
+      
       countdown = setInterval(() => {
         timeLeft--;
         timerElement.textContent = timeLeft;
 
-        // Cuando el tiempo se termina
         if (timeLeft <= 0) {
-          // Reinicio el contador
           clearInterval(countdown);
           timerElement.textContent = "¡Tiempo terminado!";
-          // Activo nuevamente el botón para poder reiniciar
-          startButton.disabled = false;
+          document.getElementById('time-trial-form').submit();
         }
-      }, 1000); 
+      }, 1000);
     }
 
-    // Cuando la ventana carga
     window.onload = () => {
-      document.getElementById('start-button').addEventListener('click', startTimer);
-      document.getElementById('reset-button').addEventListener('click', resetGame);
-    };
-
-    // Método para reiniciar el juego
-    function resetGame() {
-      clearInterval(countdown); // Detengo el intervalo actual
       const timerElement = document.getElementById('timer');
-      timerElement.textContent = INITIAL_TIME; // Reseteo el contador a 30
-      document.getElementById('start-button').disabled = false; // Habilito el botón de nuevo
-      document.getElementById('reset-button').disabled = true;
-      document.getElementById('reset-button').disabled = false;
-    }
+      if (gameStarted) {
+        startTimer(); //si el juego ya está empezado, reiniciar el temporizador al cargar la página
+      }
+      
+      document.getElementById('start-button').addEventListener('click', startTimer);
+    };
   </script>
 </head>
 <body>
@@ -66,12 +50,24 @@
     <div class="time-trial-content">
       <div class="timer">
         <i class="fas fa-stopwatch"></i>
-        <span id="timer">30</span>
+        <span id="timer"><%= session[:time_left] %></span>
       </div>
-      <div class="actions-container">
-        <button id="start-button" class="button">Iniciar</button>
-        <button id="reset-button" class="button">Jugar de nuevo</button>
+      <div id="question-container" style="display:<%= session[:game_started] ? 'block' : 'none' %>;">
+        <form id="time-trial-form" method="POST" action="/timeTrial">
+          <div class="question">
+            <p><%= @current_question.description %></p>
+          </div>
+          <div class="answers">
+            <% @current_question.answers_time_trial.each do |answer| %>
+              <input type="radio" name="answer" value="<%= answer.id %>"> <%= answer.description %><br>
+            <% end %>
+          </div>
+          <div id="actions-container" style="display:block;">
+            <button type="submit" class="button">Responder</button>
+          </div>
+        </form>
       </div>
+      <button id="start-button" class="button" style="display:<%= session[:game_started] ? 'none' : 'block' %>;">Iniciar</button>
     </div>
   </div>
 </body>
