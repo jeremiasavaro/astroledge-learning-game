@@ -59,9 +59,11 @@
           </div>
           <div class="answers">
             <% @current_question.answers_time_trial.each do |answer| %>
+              <br>
               <input type="radio" name="answer" value="<%= answer.id %>"> <%= answer.description %><br>
             <% end %>
           </div>
+          <br>
           <div id="actions-container" style="display:block;">
             <button type="submit" class="button">Responder</button>
           </div>

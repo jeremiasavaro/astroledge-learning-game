@@ -8,9 +8,11 @@
 <body>
   <div class="time-trial-container">
     <h1>¡Juego terminado!</h1>
+    <br>
     <p>Tu tiempo total fue: <%= @total_time %> segundos.</p>
-    <form action="/mainMenu" method="POST">
-      <button type="submit" class="button">Volver al Menú Principal</button>
+    <br>
+    <form method="POST">
+      <button name="backToMenu" type="submit" class="button">Volver al Menú Principal</button>
     </form>
   </div>
 </body>

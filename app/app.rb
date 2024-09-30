@@ -336,7 +336,10 @@ class App < Sinatra::Application
     #obtener la pregunta actual
     current_question = QuestionsTimeTrial.find(session[:current_question])
     selected_answer = params[:answer] #recibis el ID de la respuesta
-
+    if session[:time_left] <= 0 || selected_answer.nil?
+      $total_time = 30 - session[:time_left] #guardas el timepo total
+      redirect '/endTimeTrial'
+    end
     #evaluas si la respuesta es correcta o incorrecta
     if current_question.answers_time_trial.find_by(id: selected_answer).correct
       session[:time_left] += 10 #aumentas 10 segundos si es correcta
@@ -344,15 +347,10 @@ class App < Sinatra::Application
       session[:time_left] -= 5 #decrementas 5 segundos si es incorrecta
     end
 
-    if session[:time_left] <= 0
-      $total_time = 30 - session[:time_left] #guardas el timepo total
-      redirect '/endTimeTrial'
-    end
-
     # Obtener la siguiente pregunta
     remaining_questions = session[:questions].reject { |id| id == current_question.id }
     if remaining_questions.empty?
-      $total_time = 30 - session[:time_left] #guardas el tiempo total
+      $total_time = 30 + session[:time_left] #guardas el tiempo total
       redirect '/endTimeTrial' #si no hay mas preguntas termina el juego
     else
       session[:questions] = remaining_questions
@@ -365,4 +363,11 @@ class App < Sinatra::Application
     @total_time = $total_time
     erb :endTimeTrial
   end
+
+  post '/endTimeTrial' do
+    if params[:backToMenu]
+      redirect '/mainMenu'
+    end
+  end
+
 end
