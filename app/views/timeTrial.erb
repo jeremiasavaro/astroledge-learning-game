@@ -60,7 +60,9 @@
           <div class="answers">
             <% @current_question.answers_time_trial.each do |answer| %>
               <br>
-              <input type="radio" name="answer" value="<%= answer.id %>"> <%= answer.description %><br>
+              <label>
+                <input type="radio" name="answer" value="<%= answer.id %>">
+              </label> <%= answer.description %><br>
             <% end %>
           </div>
           <br>

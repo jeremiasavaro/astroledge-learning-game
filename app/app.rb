@@ -337,7 +337,7 @@ class App < Sinatra::Application
     current_question = QuestionsTimeTrial.find(session[:current_question])
     selected_answer = params[:answer] #recibis el ID de la respuesta
     if session[:time_left] <= 0 || selected_answer.nil?
-      $total_time = 30 - session[:time_left] #guardas el timepo total
+      $total_time = 30 + session[:time_left] #guardas el timepo total
       redirect '/endTimeTrial'
     end
     #evaluas si la respuesta es correcta o incorrecta
