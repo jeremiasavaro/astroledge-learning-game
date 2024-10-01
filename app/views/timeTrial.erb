@@ -7,41 +7,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time Trial</title>
   <script>
-    let countdown;
-    let timeLeft = <%= session[:time_left] %>;
-    let gameStarted = <%= session[:game_started] %>;
+  function startTimer() {
+    const timerElement = document.getElementById('timer');
+    const startButton = document.getElementById('start-button');
+    const questionContainer = document.getElementById('question-container');
+    const actionsContainer = document.getElementById('actions-container');
+    
+    startButton.style.display = 'none';
+    questionContainer.style.display = 'block';
+    actionsContainer.style.display = 'block';
+    sessionStorage.setItem('gameStarted', true);
 
-    function startTimer() {
-      const timerElement = document.getElementById('timer');
-      const startButton = document.getElementById('start-button');
-      const questionContainer = document.getElementById('question-container');
-      const actionsContainer = document.getElementById('actions-container');
-      
-      startButton.style.display = 'none'; //ocultar el botón de inicio cuando lo apriete
-      questionContainer.style.display = 'block'; //mostrar las preguntas
-      actionsContainer.style.display = 'block';
-      sessionStorage.setItem('gameStarted', true); //marcamos el juego como empezado
-      
-      countdown = setInterval(() => {
-        timeLeft--;
-        timerElement.textContent = timeLeft;
+    countdown = setInterval(() => {
+      fetch('/time_left')
+        .then(response => response.json())
+        .then(data => {
+          timeLeft = data.time_left;
+          timerElement.textContent = timeLeft;
 
-        if (timeLeft <= 0) {
-          clearInterval(countdown);
-          timerElement.textContent = "¡Tiempo terminado!";
-          document.getElementById('time-trial-form').submit();
-        }
-      }, 1000);
+          if (timeLeft <= 0) {
+            clearInterval(countdown);
+            timerElement.textContent = "¡Tiempo terminado!";
+            document.getElementById('time-trial-form').submit();
+          }
+        })
+        .catch(error => console.error('Error fetching time:', error));
+    }, 1000);
+  }
+
+  window.onload = () => {
+    const gameStarted = sessionStorage.getItem('gameStarted');
+    if (gameStarted) {
+      startTimer();
     }
-
-    window.onload = () => {
-      const timerElement = document.getElementById('timer');
-      if (gameStarted) {
-        startTimer(); //si el juego ya está empezado, reiniciar el temporizador al cargar la página
-      }
-      
-      document.getElementById('start-button').addEventListener('click', startTimer);
-    };
+    
+    document.getElementById('start-button').addEventListener('click', startTimer);
+  };
   </script>
 </head>
 <body>

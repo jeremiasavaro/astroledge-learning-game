@@ -313,6 +313,9 @@ class App < Sinatra::Application
     end
   end
 
+  #inicializamos $total_time si no existe
+  $total_time ||= 0
+
   get '/timeTrial' do
     #si el juego todavia no empezó asignas las preguntas
     unless session[:game_started]
@@ -329,6 +332,15 @@ class App < Sinatra::Application
     erb :timeTrial
   end
 
+  #endpoint para enviar tiempo restante a frontend
+  get '/time_left' do
+    content_type :json
+    session[:time_left] = session[:time_left] - 1
+    $total_time = $total_time + 1
+    puts session[:time_left]
+    { time_left: session[:time_left] }.to_json
+  end
+
   post '/timeTrial' do
     #el juego empezo
     session[:game_started] = true
@@ -337,7 +349,6 @@ class App < Sinatra::Application
     current_question = QuestionsTimeTrial.find(session[:current_question])
     selected_answer = params[:answer] #recibis el ID de la respuesta
     if session[:time_left] <= 0 || selected_answer.nil?
-      $total_time = 30 + session[:time_left] #guardas el timepo total
       redirect '/endTimeTrial'
     end
     #evaluas si la respuesta es correcta o incorrecta
@@ -350,7 +361,6 @@ class App < Sinatra::Application
     # Obtener la siguiente pregunta
     remaining_questions = session[:questions].reject { |id| id == current_question.id }
     if remaining_questions.empty?
-      $total_time = 30 + session[:time_left] #guardas el tiempo total
       redirect '/endTimeTrial' #si no hay mas preguntas termina el juego
     else
       session[:questions] = remaining_questions
@@ -361,10 +371,19 @@ class App < Sinatra::Application
 
   get '/endTimeTrial' do
     @total_time = $total_time
+    user = User.find_by(id: session[:user_id])
+    if $total_time > user.score_time_trial
+      user.score_time_trial = $total_time
+      user.save
+    end
     erb :endTimeTrial
   end
 
   post '/endTimeTrial' do
+    session[:game_started] = false
+    session[:time_left] = 30
+    #reiniciamos total time
+    $total_time = 0
     if params[:backToMenu]
       redirect '/mainMenu'
     end
