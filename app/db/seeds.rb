@@ -810,13 +810,12 @@ planets_data = [
   }
 ]
 
-time_trial_data = [
-  {
-    questions: [
+
+    questions_time_trial = [
       {
         description: 'What is the name of the process by which stars produce energy?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Nuclear fusion', correct: true },
           { description: 'Nuclear fission', correct: false },
           { description: 'Stellar combustion', correct: false },
@@ -826,7 +825,7 @@ time_trial_data = [
       {
         description: 'Which planet in our solar system is known for its prominent ring system?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Saturn', correct: true },
           { description: 'Jupiter', correct: false },
           { description: 'Uranus', correct: false },
@@ -836,7 +835,7 @@ time_trial_data = [
       {
         description: 'What is the largest planet in our solar system?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Jupiter', correct: true },
           { description: 'Saturn', correct: false },
           { description: 'Neptune', correct: false },
@@ -846,7 +845,7 @@ time_trial_data = [
       {
         description: 'What type of galaxy is the Milky Way?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Spiral', correct: true },
           { description: 'Elliptical', correct: false },
           { description: 'Irregular', correct: false },
@@ -856,7 +855,7 @@ time_trial_data = [
       {
         description: 'Which planet is closest to the Sun?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Mercury', correct: true },
           { description: 'Venus', correct: false },
           { description: 'Earth', correct: false },
@@ -866,7 +865,7 @@ time_trial_data = [
       {
         description: 'What is the most common type of star in the universe?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Red dwarf', correct: true },
           { description: 'Yellow dwarf', correct: false },
           { description: 'Blue giant', correct: false },
@@ -876,7 +875,7 @@ time_trial_data = [
       {
         description: 'Which planet is known as the "Red Planet"?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Mars', correct: true },
           { description: 'Venus', correct: false },
           { description: 'Jupiter', correct: false },
@@ -886,7 +885,7 @@ time_trial_data = [
       {
         description: 'What is the name of the first artificial satellite sent into space?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Sputnik 1', correct: true },
           { description: 'Explorer 1', correct: false },
           { description: 'Apollo 11', correct: false },
@@ -896,7 +895,7 @@ time_trial_data = [
       {
         description: 'Which planet has the most moons?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Jupiter', correct: true },
           { description: 'Saturn', correct: false },
           { description: 'Uranus', correct: false },
@@ -906,7 +905,7 @@ time_trial_data = [
       {
         description: 'What is the name of the closest star to Earth, after the Sun?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Proxima Centauri', correct: true },
           { description: 'Alpha Centauri', correct: false },
           { description: 'Sirius', correct: false },
@@ -916,7 +915,7 @@ time_trial_data = [
       {
         description: 'What is the term for a star that suddenly increases greatly in brightness because of a catastrophic explosion?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Supernova', correct: true },
           { description: 'Nova', correct: false },
           { description: 'Pulsar', correct: false },
@@ -926,7 +925,7 @@ time_trial_data = [
       {
         description: 'Which planet has a day that is longer than its year?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Venus', correct: true },
           { description: 'Mercury', correct: false },
           { description: 'Mars', correct: false },
@@ -936,7 +935,7 @@ time_trial_data = [
       {
         description: 'What is the most abundant element in the universe?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Hydrogen', correct: true },
           { description: 'Helium', correct: false },
           { description: 'Oxygen', correct: false },
@@ -946,7 +945,7 @@ time_trial_data = [
       {
         description: 'What do we call the boundary around a black hole beyond which no light or other radiation can escape?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Event horizon', correct: true },
           { description: 'Singularity', correct: false },
           { description: 'Accretion disk', correct: false },
@@ -956,7 +955,7 @@ time_trial_data = [
       {
         description: 'What is the brightest star in the night sky?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Sirius', correct: true },
           { description: 'Betelgeuse', correct: false },
           { description: 'Rigel', correct: false },
@@ -966,7 +965,7 @@ time_trial_data = [
       {
         description: 'What is the name of the galaxy that is on a collision course with the Milky Way?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Andromeda', correct: true },
           { description: 'Triangulum', correct: false },
           { description: 'Magellanic Clouds', correct: false },
@@ -976,7 +975,7 @@ time_trial_data = [
       {
         description: 'Which planet has the highest mountain in the solar system?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Mars', correct: true },
           { description: 'Earth', correct: false },
           { description: 'Venus', correct: false },
@@ -986,7 +985,7 @@ time_trial_data = [
       {
         description: 'What is the term for the apparent shift in position of an object due to the change in the observer\'s point of view?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Parallax', correct: true },
           { description: 'Redshift', correct: false },
           { description: 'Doppler effect', correct: false },
@@ -996,7 +995,7 @@ time_trial_data = [
       {
         description: 'Which planet has the Great Red Spot, a giant storm?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Jupiter', correct: true },
           { description: 'Saturn', correct: false },
           { description: 'Neptune', correct: false },
@@ -1006,7 +1005,7 @@ time_trial_data = [
       {
         description: 'Which planet has a tilt of about 98 degrees, causing it to rotate on its side?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Uranus', correct: true },
           { description: 'Neptune', correct: false },
           { description: 'Saturn', correct: false },
@@ -1016,7 +1015,7 @@ time_trial_data = [
       {
         description: 'What is the phenomenon called when one celestial body passes in front of another, blocking its light?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Eclipse', correct: true },
           { description: 'Occultation', correct: false },
           { description: 'Transit', correct: false },
@@ -1026,7 +1025,7 @@ time_trial_data = [
       {
         description: 'What do astronomers call the remnant of a star that has collapsed under its own gravity to the point where its escape velocity exceeds the speed of light?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Black hole', correct: true },
           { description: 'Neutron star', correct: false },
           { description: 'White dwarf', correct: false },
@@ -1036,7 +1035,7 @@ time_trial_data = [
       {
         description: 'Which planet has the most extreme temperature variations between day and night?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Mercury', correct: true },
           { description: 'Venus', correct: false },
           { description: 'Mars', correct: false },
@@ -1046,7 +1045,7 @@ time_trial_data = [
       {
         description: 'What is the name of the dwarf planet located in the asteroid belt between Mars and Jupiter?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Ceres', correct: true },
           { description: 'Pluto', correct: false },
           { description: 'Eris', correct: false },
@@ -1056,7 +1055,7 @@ time_trial_data = [
       {
         description: 'Which constellation is home to the stars Castor and Pollux?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Gemini', correct: true },
           { description: 'Orion', correct: false },
           { description: 'Taurus', correct: false },
@@ -1066,7 +1065,7 @@ time_trial_data = [
       {
         description: 'What is the approximate age of the universe according to the Big Bang theory?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: '13.8 billion years', correct: true },
           { description: '4.6 billion years', correct: false },
           { description: '100 million years', correct: false },
@@ -1076,7 +1075,7 @@ time_trial_data = [
       {
         description: 'Which planet is often referred to as Earth\'s "sister planet" due to its similar size and mass?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Venus', correct: true },
           { description: 'Mars', correct: false },
           { description: 'Mercury', correct: false },
@@ -1086,7 +1085,7 @@ time_trial_data = [
       {
         description: 'Which object is responsible for the tides on Earth?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'The Moon', correct: true },
           { description: 'The Sun', correct: false },
           { description: 'Jupiter', correct: false },
@@ -1096,7 +1095,7 @@ time_trial_data = [
       {
         description: 'Which planet is the hottest in our solar system due to its thick atmosphere of carbon dioxide?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Venus', correct: true },
           { description: 'Mercury', correct: false },
           { description: 'Earth', correct: false },
@@ -1106,7 +1105,7 @@ time_trial_data = [
       {
         description: 'What is the term for a small body of rock or metal that enters Earth\'s atmosphere and burns up, creating a streak of light?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Meteor', correct: true },
           { description: 'Asteroid', correct: false },
           { description: 'Comet', correct: false },
@@ -1116,7 +1115,7 @@ time_trial_data = [
       {
         description: 'What is the name of the space telescope launched in 1990 that has provided some of the most detailed images of the universe?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Hubble Space Telescope', correct: true },
           { description: 'James Webb Space Telescope', correct: false },
           { description: 'Kepler Space Telescope', correct: false },
@@ -1126,7 +1125,7 @@ time_trial_data = [
       {
         description: 'What is the most distant man-made object from Earth?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Voyager 1', correct: true },
           { description: 'Voyager 2', correct: false },
           { description: 'Pioneer 10', correct: false },
@@ -1136,7 +1135,7 @@ time_trial_data = [
       {
         description: 'What is the closest galaxy to the Milky Way?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Andromeda', correct: true },
           { description: 'Triangulum', correct: false },
           { description: 'Large Magellanic Cloud', correct: false },
@@ -1146,7 +1145,7 @@ time_trial_data = [
       {
         description: 'What do we call the outermost layer of the Sun\'s atmosphere, visible during a total solar eclipse?',
         scoreQuestion: 15,
-        answers: [
+        answers_time_trial: [
           { description: 'Corona', correct: true },
           { description: 'Chromosphere', correct: false },
           { description: 'Photosphere', correct: false },
@@ -1154,51 +1153,59 @@ time_trial_data = [
         ]
       }
     ]
-  }
-];
 
-time_trial_data.each do |time_trial_item|
-#AÑADIR OREGUNTAS A LA BASE DE DATOS
-end
+    questions_time_trial.each do |question_time_trial|
+      question = QuestionsTimeTrial.create(
+        description: question_time_trial[:description],
+        scoreQuestion: question_time_trial[:scoreQuestion]
+      )
 
-  planets_data.each do |planet_data|
-    # Busca o crea el planeta por nombre
-    planet = Planet.find_or_create_by(name: planet_data[:name])
-
-    planet_data[:levels].each do |level_data|
-      # Busca o crea el nivel por número y planeta
-      level = Level.find_or_create_by(number: level_data[:number], planet: planet)
-
-      level_data[:questions].each do |question_data|
-        # Busca o crea la pregunta por descripción y nivel
-        question = Question.find_or_create_by(description: question_data[:description], scoreQuestion: question_data[:scoreQuestion], level: level)
-
-        question_data[:answers].each do |answer_data|
-          # Busca o crea la respuesta por descripción y pregunta
-          Answer.find_or_create_by(description: answer_data[:description], correct: answer_data[:correct], question: question)
-        end
+      question_time_trial[:answers_time_trial].each do |answer_time_trial|
+        question.answers_time_trial.create(
+          description: answer_time_trial[:description],
+          correct: answer_time_trial[:correct]
+        )
       end
     end
 
-    planet_data[:level_years]&.each do |level_year_data|
-      level_year = LevelYear.find_or_create_by(number: level_year_data[:number], planet: planet)
-      
-      level_year_data[:question_years]&.each do |question_year_data|
-        question_year = QuestionYear.find_or_create_by(
-          description: question_year_data[:description],
-          scoreQuestion: question_year_data[:scoreQuestion],
-          level_year: level_year
-        )
-        
-        if question_year_data[:answer_years].is_a?(Array)
-          question_year_data[:answer_years].each do |answer_year_data|
-            AnswerYear.find_or_create_by(
-              description: answer_year_data[:description],
-              correct: answer_year_data[:correct],
-              question_year: question_year
-            )
-          end
+planets_data.each do |planet_data|
+  # Busca o crea el planeta por nombre
+  planet = Planet.find_or_create_by(name: planet_data[:name])
+
+  planet_data[:levels].each do |level_data|
+    # Busca o crea el nivel por número y planeta
+    level = Level.find_or_create_by(number: level_data[:number], planet: planet)
+
+    level_data[:questions].each do |question_data|
+      # Busca o crea la pregunta por descripción y nivel
+      question = Question.find_or_create_by(description: question_data[:description], scoreQuestion: question_data[:scoreQuestion], level: level)
+
+      question_data[:answers].each do |answer_data|
+        # Busca o crea la respuesta por descripción y pregunta
+        Answer.find_or_create_by(description: answer_data[:description], correct: answer_data[:correct], question: question)
+      end
+    end
+  end
+
+  planet_data[:level_years]&.each do |level_year_data|
+    level_year = LevelYear.find_or_create_by(number: level_year_data[:number], planet: planet)
+
+    level_year_data[:question_years]&.each do |question_year_data|
+      question_year = QuestionYear.find_or_create_by(
+        description: question_year_data[:description],
+        scoreQuestion: question_year_data[:scoreQuestion],
+        level_year: level_year
+      )
+
+      if question_year_data[:answer_years].is_a?(Array)
+        question_year_data[:answer_years].each do |answer_year_data|
+          AnswerYear.find_or_create_by(
+            description: answer_year_data[:description],
+            correct: answer_year_data[:correct],
+            question_year: question_year
+          )
         end
       end
-    end    
+    end
   end
+end

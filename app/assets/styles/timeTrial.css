@@ -1,73 +1,111 @@
-  .body {
-    overflow: hidden;
-  }
+/* Estilos generales */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  .time-trial-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    height: 100vh;
-    background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    position: relative;
-  }
-  
-  .time-trial-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 0;
-  }
-  
-  .time-trial-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    border-radius: 10px;
-    position: relative;
-    background-color: rgba(255, 255, 255, 0);
-    z-index: 1;
-  }
-  
-  .timer {
-    font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-  
-  .trial-info {
-    margin-bottom: 20px;
-  }
-  
-  .trial-info p {
-    margin-bottom: 10px;
-    color: #fff;
-  }
-  
-  #start-button {
-    padding: 15px;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
-    border-radius: 30px;
-    background-color: transparent;
-    color: white;
-    transition: background-color 0.3s ease-in-out;
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
-  
-  #start-button:hover {
-    background-color: #3B4F54;
-  }
+body {
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal */
+.time-trial-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  height: 100% ;
+  background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  position: fixed;
+}
+
+.time-trial-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+/* Contenido principal */
+.time-trial-content {
+  text-align: center;
+  padding: 40px;
+  border-radius: 10px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Contenedor de acciones */
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Timer */
+.timer {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.timer i {
+  margin-right: 10px;
+}
+
+/* Botones */
+.button {
+  padding: 15px 30px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+  background-color: #3B4F54;
+  color: white;
+  transition: background-color 0.3s ease-in-out;
+  margin-bottom: 10px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.button:hover {
+  background-color: #455A64;
+}
+
+.button:active {
+  transform: scale(0.9);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+#start-button {
+  background-color: #4CAF50;
+}
+
+#start-button:hover {
+  background-color: #3e8e41;
+}
+
+#reset-button {
+  background-color: #E74C3C;
+}
+
+#reset-button:hover {
+  background-color: #c0392b;
+}
