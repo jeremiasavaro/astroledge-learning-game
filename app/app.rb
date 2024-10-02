@@ -100,6 +100,10 @@ class App < Sinatra::Application
         user.score = 0
         user.score_time_trial = 0
         user.see_correct = false
+        user.is_admin = false
+        if new_username == "maxi" || new_username == "mateo" || new_username == "bachi"
+          user.is_admin = true
+        end
         user.save
         redirect '/login'
       end
@@ -289,6 +293,50 @@ class App < Sinatra::Application
     if params[:timeTrial]
       redirect '/timeTrial'
     end
+
+    if params[:addQuestion] 
+      redirect '/addQuestion'
+    end
+
+    if params[:rankingQuestions]
+      redirect '/rankingQuestions'
+    end
+
+    if params[:rankingQuestionsIncorrectly]
+      redirect '/rankingQuestionsIncorrectly'
+    end
+
+  end
+
+  get '/rankingQuestions' do
+    erb :rankingQuestions
+  end
+
+  post '/rankingQuestions' do
+    if params[:back]
+      redirect '/mainMenu'
+    end
+  end
+
+  get '/rankingQuestionsIncorrectly' do
+    erb :rankingQuestionsIncorrectly
+  end
+
+  post '/rankingQuestionsIncorrectly' do
+    if params[:back]
+      redirect '/mainMenu'
+    end
+  end
+
+  get '/timeTrialRanking' do
+    @users = User.order(score_time_trial: :desc).limit(10)
+    erb :timeTrialRanking
+  end
+
+  post '/timeTrialRanking' do
+    if params[:back]
+      redirect '/mainMenu'
+    end
   end
 
   get '/ranking' do
@@ -302,12 +350,11 @@ class App < Sinatra::Application
     end
   end
 
-  get '/timeTrialRanking' do
-    @users = User.order(score_time_trial: :desc).limit(10)
-    erb :timeTrialRanking
+  get '/addQuestion' do
+    erb :addQuestion
   end
 
-  post '/timeTrialRanking' do
+  post '/addQuestion' do
     if params[:back]
       redirect '/mainMenu'
     end
