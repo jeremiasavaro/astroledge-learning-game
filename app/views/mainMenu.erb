@@ -23,6 +23,16 @@
       font-size: 0.7em; 
       padding: 8px;     
     }
+
+    #rankingQuestions-options {
+      margin-left: 28px; 
+    }
+
+    #rankingQuestions-options .button {
+      font-size: 0.7em; 
+      padding: 8px;     
+    }
+
   </style>
 </head>
 <body>
@@ -75,6 +85,26 @@
           <input type="hidden" name="learn">
           <button type="submit" class="button"><i class="fas fa-book"></i> <span>Learn</span></button>
         </form>
+        <%if user.is_admin%>
+          <form method="post">
+            <input type="hidden" name="addQuestion">
+            <button type="submit" class="button"><i class="fas fa-pen"></i><span>Add question</span></button>
+          </form>
+          <form method="post">
+            <input type="hidden" name="rankingQuestions">
+            <button type="button" class="button dropdown" onclick="showRankingQuestionsOptions()"><i class="far fa-star"></i><span>Ranking of questions</span></button>
+          </form>
+          <div id="rankingQuestions-options" style="display:none;">
+            <form method="post">
+              <input type="hidden" name="rankingQuestions">
+              <button type="submit" class="button"><i class="fas fa-award"></i></i><span>Correctly answered</span></button>
+            </form>
+            <form method="post">
+              <input type="hidden" name="rankingQuestionsIncorrectly">
+              <button type="submit" class="button"><i class="fas fa-medal"></i></i><span>Answered incorrectly</span></button>
+            </form>
+          </div>
+        <%end%>
       </div>
     </div>
     <form method="post">
@@ -91,6 +121,11 @@
     function showRankingOptions() {
       const rankingOptions = document.getElementById('ranking-options');
       rankingOptions.style.display = rankingOptions.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function showRankingQuestionsOptions() {
+      const rankingQuestionsOptions = document.getElementById('rankingQuestions-options');
+      rankingQuestionsOptions.style.display = rankingQuestionsOptions.style.display === 'none' ? 'block' : 'none';
     }
 
     window.addEventListener('DOMContentLoaded', (event) => {
