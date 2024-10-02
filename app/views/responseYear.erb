@@ -9,40 +9,57 @@
 <body>
 
 <div class="container">
-  <% iu = session[:current_questionYear] %>
-  <% your_answer = session[:your_answer] %>
-  <% quest = QuestionYear.find_by(id: iu) %>
-  <% user = User.find(session[:user_id]) %>
-  <% config = user.see_correct %>
-  <%if QuestionYearUser.exists?(user: user, question_year:quest) %>
-    <%questionYear_user = QuestionYearUser.find_by(user: user, question_year: quest) %>
+  <%
+    # Se obtienen los datos de la pregunta y el usuario actual
+    iu = session[:current_questionYear]
+    your_answer = session[:your_answer]
+    quest = QuestionYear.find_by(id: iu)
+    user = User.find(session[:user_id])
+    config = user.see_correct
+  %>
+
+  <% if QuestionYearUser.exists?(user: user, question_year: quest) %>
+    <%
+      # Si el usuario ya ha respondido esta pregunta antes, busca su registro
+      questionYear_user = QuestionYearUser.find_by(user: user, question_year: quest)
+    %>
+
     <% if quest && your_answer == quest.correct_answerYear.description %>
-      <%if questionYear_user[:correct]%>
+      <%
+        # Si la respuesta es correcta, incrementa el contador de respuestas correctas
+        quest.increment_correct_count
+      %>
+
+      <% if questionYear_user[:correct] %>
+        <!-- Mensaje si ya había respondido correctamente antes -->
         <div class="container">
-          <p> Correct answer, but you have already answered correctly before.</p>
+          <p>Correct answer, but you have already answered correctly before.</p>
           <img class="happy" src="https://images.vexels.com/media/users/3/160984/isolated/preview/131b54bb87efa05876ad7ae969806757-planeta-tierra-felicidad-reir-sonrisa-plana.png" alt="Happy Image">
           <audio class="correctSound" autoplay>
             <source src="/correctAnswer.mp3" type="audio/mp3">
             Your browser does not support the audio element.
           </audio>
-        </div>     
-      <%else%>
-        <% actual_score = session[:score_user] %>
-        <% session[:score_user] = actual_score + (quest.scoreQuestion/2) %>
+        </div>
+      <% else %>
+        <!-- Mensaje y actualización de puntos si no había respondido correctamente antes -->
+        <% session[:score_user] += (quest.scoreQuestion / 2) %>
         <% user.update(score: session[:score_user]) %>
-        <% user.save %>
-          <div class="container">
-            <p>Correct answer, and it's not your first attempt, +<%= quest.scoreQuestion / 2 %> points, total points: <%= session[:score_user] %></p>
-            <img class="happy" src="https://images.vexels.com/media/users/3/160984/isolated/preview/131b54bb87efa05876ad7ae969806757-planeta-tierra-felicidad-reir-sonrisa-plana.png" alt="Happy Image">
-            <audio class="correctSound" autoplay>
-              <source src="/correctAnswer.mp3" type="audio/mp3">
-              Your browser does not support the audio element.
-            </audio>
-          </div>     
-          <%questionYear_user.update(correct: true)%>
-        <%end%>
+        <div class="container">
+          <p>Correct answer, +<%= quest.scoreQuestion / 2 %> points, total points: <%= session[:score_user] %></p>
+          <img class="happy" src="https://images.vexels.com/media/users/3/160984/isolated/preview/131b54bb87efa05876ad7ae969806757-planeta-tierra-felicidad-reir-sonrisa-plana.png" alt="Happy Image">
+          <audio class="correctSound" autoplay>
+            <source src="/correctAnswer.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <% questionYear_user.update(correct: true) %>
+      <% end %>
     <% else %>
+      <!-- Si la respuesta es incorrecta, incrementa el contador de incorrectas -->
+      <% quest.increment_incorrect_count %>
+
       <% if config %>
+        <!-- Mensaje con la respuesta correcta -->
         <div class="container">
           <p>Your answer is wrong, the correct answer is: <%= quest.correct_answerYear.description %></p>
           <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
@@ -52,6 +69,7 @@
           </audio>
         </div>
       <% else %>
+        <!-- Mensaje sin mostrar la respuesta correcta -->
         <div class="container">
           <p>Your answer is wrong.</p>
           <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
@@ -62,12 +80,12 @@
         </div>
       <% end %>
     <% end %>
-  <%else%>
-   <% if quest && your_answer == quest.correct_answerYear.description %>
-      <% actual_score = session[:score_user] %>
-      <% session[:score_user] = actual_score + quest.scoreQuestion %>
+  <% else %>
+    <% if quest && your_answer == quest.correct_answerYear.description %>
+      <!-- Si el usuario responde correctamente por primera vez, actualiza la puntuación -->
+      <% quest.increment_correct_count %>
+      <% session[:score_user] += quest.scoreQuestion %>
       <% user.update(score: session[:score_user]) %>
-      <% user.save %>
       <div class="container">
         <p>Correct answer, +<%= quest.scoreQuestion %> points, total points: <%= session[:score_user] %></p>
         <img class="happy" src="https://images.vexels.com/media/users/3/160984/isolated/preview/131b54bb87efa05876ad7ae969806757-planeta-tierra-felicidad-reir-sonrisa-plana.png" alt="Happy Image">
@@ -75,10 +93,14 @@
           <source src="/correctAnswer.mp3" type="audio/mp3">
           Your browser does not support the audio element.
         </audio>
-      </div>     
-      <%QuestionYearUser.create(user: user, question_year: quest, correct:true)%>     
+      </div>
+      <% QuestionYearUser.create(user: user, question_year: quest, correct: true) %>
     <% else %>
+      <!-- Si la respuesta es incorrecta por primera vez -->
+      <% quest.increment_incorrect_count %>
+
       <% if config %>
+        <!-- Muestra la respuesta correcta -->
         <div class="container">
           <p>Your answer is wrong, the correct answer is: <%= quest.correct_answerYear.description %></p>
           <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
@@ -88,6 +110,7 @@
           </audio>
         </div>
       <% else %>
+        <!-- No muestra la respuesta correcta -->
         <div class="container">
           <p>Your answer is wrong.</p>
           <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
@@ -99,7 +122,8 @@
       <% end %>
       <% QuestionYearUser.create(user: user, question_year: quest, correct: false) %>
     <% end %>
-  <%end%>
+  <% end %>
+
   <form method="post">
     <input type="hidden" name="nextQuestion">
     <button type="submit" class="button">Next question</button>

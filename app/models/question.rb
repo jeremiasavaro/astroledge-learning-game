@@ -8,6 +8,20 @@ class Question < ActiveRecord::Base
   has_many :question_users
   has_many :users, through: :question_users
 
+  # Incrementa el contador de respuestas correctas
+  def increment_correct_count
+    self.correct_count ||= 0
+    self.correct_count += 1
+    save
+  end
+
+  # Incrementa el contador de respuestas incorrectas
+  def increment_incorrect_count
+    self.incorrect_count ||= 0
+    self.incorrect_count += 1
+    save
+  end
+
   def correct_answer
     answers.find_by(correct: true)
   end
