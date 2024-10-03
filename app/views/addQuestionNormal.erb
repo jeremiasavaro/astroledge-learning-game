@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/ranking.css">
+    <title>Add question in normal mode</title>
+</head>
+<body>
+<div class="container">
+    <form action="/addQuestion" method="POST">
+      <label for="question">Pregunta:</label>
+      <input type="text" name="question" required><br>
+
+      <label for="planet">Planeta:</label>
+      <select name="planet" required>
+        <option value="Mercury">Mercury</option>
+        <option value="Venus">Venus</option>
+        <option value="Earth">Earth</option>
+        <option value="Mars">Mars</option>
+        <option value="Jupiter">Jupiter</option>
+        <option value="Saturn">Saturn</option>
+        <option value="Uranus">Uranus</option>
+        <option value="Neptune">Neptune</option>
+      </select><br>
+
+      <label for="level">Nivel:</label>
+      <select name="level" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select><br>
+
+      <label for="scoreQuestion">Puntuación de la pregunta:</label>
+      <input type="number" name="scoreQuestion" required><br>
+
+      <label for="answers">Respuestas:</label><br>
+      <input type="text" name="answers[][description]" placeholder="Respuesta 1" required>
+      <input type="radio" name="answers[][correct]" value="true"> Correcta
+      <input type="radio" name="answers[][correct]" value="false" checked> Incorrecta<br>
+
+      <input type="text" name="answers[][description]" placeholder="Respuesta 2" required>
+      <input type="radio" name="answers[][correct]" value="true"> Correcta
+      <input type="radio" name="answers[][correct]" value="false" checked> Incorrecta<br>
+
+      <input type="text" name="answers[][description]" placeholder="Respuesta 3" required>
+      <input type="radio" name="answers[][correct]" value="true"> Correcta
+      <input type="radio" name="answers[][correct]" value="false" checked> Incorrecta<br>
+
+      <input type="text" name="answers[][description]" placeholder="Respuesta 4" required>
+      <input type="radio" name="answers[][correct]" value="true"> Correcta
+      <input type="radio" name="answers[][correct]" value="false" checked> Incorrecta<br>
+
+      <button type="submit">Añadir Pregunta</button>
+      <button type="submit" name="back">Volver</button>
+  </form>
+
+
+</div>
+<form method="post">
+    <input type="hidden" name="back">
+    <button type="submit" class="buttonBack"><i class="fas fa-arrow-left"></i> Back</button>
+</form>
+</body>
+</html>

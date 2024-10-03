@@ -294,8 +294,8 @@ class App < Sinatra::Application
       redirect '/timeTrial'
     end
 
-    if params[:addQuestion] 
-      redirect '/addQuestion'
+    if params[:whereAddQuestion]
+      redirect '/whereAddQuestion'
     end
 
     if params[:rankingQuestions]
@@ -350,15 +350,45 @@ class App < Sinatra::Application
     end
   end
 
-  get '/addQuestion' do
-    erb :addQuestion
+  get '/addQuestionNormal' do
+    erb :addQuestionNormal
   end
 
-  post '/addQuestion' do
+  post '/addQuestionNormal' do
     if params[:back]
       redirect '/mainMenu'
+    else
+      #obtengo los datos del formulario
+      question_description = params[:question]
+      planet_name = params[:planet]
+      level_number = params[:level]
+      score_question = params[:scoreQuestion]
+      answers = params[:answers]  #recibo hashes con { description: "text", correct: true/false }
+
+      #busco o creo el planeta
+      planet = Planet.find_or_create_by(name: planet_name)
+
+      #busco o creo el nivel correspondiente
+      level = Level.find_or_create_by(planet: planet, number: level_number)
+
+      #busco o creo la nueva pregunta
+      question = Question.find_or_create_by(description: question_description, level: level, scoreQuestion: score_question)
+
+      #busco o creo las respuestas
+      answers.each do |answer_data|
+        Answer.find_or_create_by(description: answer_data[:description], correct: answer_data[:correct], question: question)
+      end
+
+      redirect '/mainMenu'
+
     end
   end
+
+
+  get 'addQuestionTimeTrial' do
+    erb :addQuestionTimeTrial
+  end
+
 
   #inicializamos $total_time si no existe
   $total_time ||= 0

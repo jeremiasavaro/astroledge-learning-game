@@ -7,32 +7,53 @@
   <title>Menu</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
+    /* Estilo del modal */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.4); /* Fondo semitransparente */
+      padding-top: 60px;
+    }
     
-    .button.dropdown::after {
-      content: '\25BC'; 
-      margin-left: 10px;
-      font-size: 10px;
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto; 
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px; /* Ancho fijo del modal */
+      position: relative; /* Para poder posicionar la 'X' correctamente */
+      top: 50%; /* Centrar verticalmente */
+      transform: translateY(-50%); /* Ajustar posición vertical */
     }
 
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* El resto de tu CSS... */
     
-    #ranking-options {
-      margin-left: 28px; 
+    .button {
+      margin-top: 10px; /* Añadir un poco de espacio entre los botones */
+      padding: 10px; /* Ajustar padding para los botones */
+      width: 100%; /* Hacer que los botones ocupen todo el ancho del modal */
+      font-size: 1em; /* Aumentar el tamaño de fuente de los botones */
     }
-
-    #ranking-options .button {
-      font-size: 0.7em; 
-      padding: 8px;     
-    }
-
-    #rankingQuestions-options {
-      margin-left: 28px; 
-    }
-
-    #rankingQuestions-options .button {
-      font-size: 0.7em; 
-      padding: 8px;     
-    }
-
   </style>
 </head>
 <body>
@@ -85,10 +106,10 @@
           <input type="hidden" name="learn">
           <button type="submit" class="button"><i class="fas fa-book"></i> <span>Learn</span></button>
         </form>
-        <%if user.is_admin%>
+        <% if user.is_admin %>
           <form method="post">
-            <input type="hidden" name="addQuestion">
-            <button type="submit" class="button"><i class="fas fa-pen"></i><span>Add question</span></button>
+            <input type="hidden" name="whereAddQuestion">
+            <button type="button" class="button" onclick="openModal()"><i class="fas fa-pen"></i><span>Add new question</span></button>
           </form>
           <form method="post">
             <input type="hidden" name="rankingQuestions">
@@ -104,7 +125,15 @@
               <button type="submit" class="button"><i class="fas fa-medal"></i></i><span>Answered incorrectly</span></button>
             </form>
           </div>
-        <%end%>
+        <% end %>
+      </div>
+    </div>
+    <div id="addQuestionModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div>Select Mode</div>
+        <button onclick="window.location.href='/addQuestionTimeTrial'">Time trial</button>
+        <button onclick="window.location.href='/addQuestionNormal'">Normal mode</button>
       </div>
     </div>
     <form method="post">
@@ -113,6 +142,22 @@
     </form>
   </div>
   <script>
+    function openModal() {
+      document.getElementById('addQuestionModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('addQuestionModal').style.display = 'none';
+    }
+
+    // Cuando el usuario haga clic en cualquier lugar fuera del modal, lo cierra
+    window.onclick = function(event) {
+      const modal = document.getElementById('addQuestionModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+
     function toggleSidebar() {
       const sidebar = document.querySelector('.sidebar');
       sidebar.classList.toggle('expanded');
