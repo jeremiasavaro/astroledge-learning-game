@@ -385,10 +385,26 @@ class App < Sinatra::Application
   end
 
 
-  get 'addQuestionTimeTrial' do
+  get '/addQuestionTimeTrial' do
     erb :addQuestionTimeTrial
   end
 
+  post '/addQuestionTimeTrial' do
+    if params[:back]
+      redirect '/mainMenu'
+    else
+      question_description = params[:question]
+      answers = params[:answers]
+
+      question = QuestionsTimeTrial.create( description: question_description, scoreQuestion: 15)
+
+      answers.each do |answer_data|
+        question.answers_time_trial.create(description: answer_data[:description], correct: answer_data[:correct])
+      end
+
+      redirect '/mainMenu'
+    end
+  end
 
   #inicializamos $total_time si no existe
   $total_time ||= 0

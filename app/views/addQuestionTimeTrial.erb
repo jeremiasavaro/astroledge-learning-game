@@ -8,9 +8,30 @@
     </head>
     <body>
         <div class="container">
-            
-        </div>
+            <form action ="/addQuestionTimeTrial" method="POST">
+                <label for="question">Pregunta:</label>
+                <input type="text" name="question" required><br>
+                <label for="answers">Respuestas:</label><br>
+                <input type="text" name="answers[][description]" placeholder="Respuesta 1" required>
+                <input type="radio" name="answers[][correct]" value="true"> Correcta
+                <input type="radio" name="answers[][correct]" value="false" checked> Incorrecta<br>
 
+                <input type="text" name="answers[][description]" placeholder="Respuesta 2" required>
+                <input type="radio" name="answers[][correct]" value="true"> Correcta
+                <input type="radio" name="answers[][correct]" value="false" checked> Incorrecta<br>
+
+                <input type="text" name="answers[][description]" placeholder="Respuesta 3" required>
+                <input type="radio" name="answers[][correct]" value="true"> Correcta
+                <input type="radio" name="answers[][correct]" value="false" checked> Incorrecta<br>
+
+                <input type="text" name="answers[][description]" placeholder="Respuesta 4" required>
+                <input type="radio" name="answers[][correct]" value="true"> Correcta
+                <input type="radio" name="answers[][correct]" value="false" checked> Incorrecta<br>
+
+                <button type="submit">Añadir Pregunta</button>
+                <button type="submit" name="back">Volver</button>
+            </form>
+        </div>
         <form method="post">
             <input type="hidden" name="back">
             <button type="submit" class="buttonBack"><i class="fas fa-arrow-left"></i> Back</button>
