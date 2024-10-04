@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles/ranking.css">
-    <title>Ranking question incorrectly</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles/ranking.css">
+  <title>Ranking question correctly</title>
 </head>
 <body>
 <audio id="background-audio" autoplay loop>
@@ -12,36 +12,52 @@
   Your browser does not support the audio element.
 </audio>
 <div class="container">
-    <h1>Ranking question correctly</h1>
-    <table border="1">
-        <tr>
-    <th>Rank</th>
-    <th>Username</th>
-    <th>Score</th>
-</tr>
-</table>
+  <h1>Ranking correctly answered questions</h1>
+  <table border="1">
+    <tr>
+      <th>Rank</th>
+      <th>Username</th>
+      <th>Score</th>
+    </tr>
+    <% @questions.each_with_index do |question, index| %>
+      <tr>
+        <td>
+          <% if index == 0 %>
+            <span class="gold">🥇</span>
+          <% elsif index == 1 %>
+            <span class="silver">🥈</span>
+          <% elsif index == 2 %>
+            <span class="bronze">🥉</span>
+          <% else %>
+            <%= index + 1 %>
+          <% end %>
+        </td>
+        <td><%= question.description %></td>
+        <td><%= question.correct_count %></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
 <form method="post">
-    <input type="hidden" name="back">
-    <button type="submit" class="buttonBack"><i class="fas fa-arrow-left"></i> Back</button>
+  <input type="hidden" name="back">
+  <button type="submit" class="buttonBack"><i class="fas fa-arrow-left"></i> Back</button>
 </form>
 <script>
-  window.addEventListener('DOMContentLoaded', (event) => {
-      const audio = document.getElementById('background-audio');
-      audio.volume = 0.1;
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const audio = document.getElementById('background-audio');
+        audio.volume = 0.1;
 
-      // Retrieve the playback time from localStorage
-      const savedTime = localStorage.getItem('audioTime');
-      if (savedTime) {
-        audio.currentTime = savedTime;
-      }
+        // Retrieve the playback time from localStorage
+        const savedTime = localStorage.getItem('audioTime');
+        if (savedTime) {
+            audio.currentTime = savedTime;
+        }
 
-      // Save the playback time periodically
-      setInterval(() => {
-        localStorage.setItem('audioTime', audio.currentTime);
-      }, 1000);
+        // Save the playback time periodically
+        setInterval(() => {
+            localStorage.setItem('audioTime', audio.currentTime);
+        }, 1000);
     });
-
 </script>
 </body>
 </html>

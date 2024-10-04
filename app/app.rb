@@ -309,6 +309,7 @@ class App < Sinatra::Application
   end
 
   get '/rankingQuestions' do
+    @questions = Question.order(correct_count: :desc).limit(5)
     erb :rankingQuestions
   end
 
@@ -319,6 +320,7 @@ class App < Sinatra::Application
   end
 
   get '/rankingQuestionsIncorrectly' do
+    @questions = Question.order(incorrect_count: :desc).limit(5)
     erb :rankingQuestionsIncorrectly
   end
 
