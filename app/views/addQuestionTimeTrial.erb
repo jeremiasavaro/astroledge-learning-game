@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/addQuestion.css">
+    <title>Add Question (Time Trial Mode)</title>
+</head>
+<body>
+<div class="container">
+    <form action="/addQuestionTimeTrial" method="POST">
+        <label for="question">Pregunta:</label>
+        <input type="text" name="question" required><br>
+
+        <label for="answers">Respuestas:</label><br>
+
+        <!-- Respuesta 1 -->
+        <div class="answer-group">
+            <input type="text" name="answers[0][description]" placeholder="Respuesta 1" required>
+            <label>
+                <input type="radio" name="correct_answer" value="0"> Correcta
+            </label>
+        </div>
+
+        <!-- Respuesta 2 -->
+        <div class="answer-group">
+            <input type="text" name="answers[1][description]" placeholder="Respuesta 2" required>
+            <label>
+                <input type="radio" name="correct_answer" value="1"> Correcta
+            </label>
+        </div>
+
+        <!-- Respuesta 3 -->
+        <div class="answer-group">
+            <input type="text" name="answers[2][description]" placeholder="Respuesta 3" required>
+            <label>
+                <input type="radio" name="correct_answer" value="2"> Correcta
+            </label>
+        </div>
+
+        <!-- Respuesta 4 -->
+        <div class="answer-group">
+            <input type="text" name="answers[3][description]" placeholder="Respuesta 4" required>
+            <label>
+                <input type="radio" name="correct_answer" value="3"> Correcta
+            </label>
+        </div>
+
+        <button type="submit">Añadir Pregunta</button>
+    </form>
+</div>
+
+<form method="post">
+    <input type="hidden" name="back">
+    <button type="submit" class="buttonBack"><i class="fas fa-arrow-left"></i> Back</button>
+</form>
+</body>
+</html>

@@ -100,6 +100,10 @@ class App < Sinatra::Application
         user.score = 0
         user.score_time_trial = 0
         user.see_correct = false
+        user.is_admin = false
+        if new_username == "maxi" || new_username == "mateo" || new_username == "bachi"
+          user.is_admin = true
+        end
         user.save
         redirect '/login'
       end
@@ -289,6 +293,50 @@ class App < Sinatra::Application
     if params[:timeTrial]
       redirect '/timeTrial'
     end
+
+    if params[:whereAddQuestion]
+      redirect '/whereAddQuestion'
+    end
+
+    if params[:rankingQuestions]
+      redirect '/rankingQuestions'
+    end
+
+    if params[:rankingQuestionsIncorrectly]
+      redirect '/rankingQuestionsIncorrectly'
+    end
+
+  end
+
+  get '/rankingQuestions' do
+    erb :rankingQuestions
+  end
+
+  post '/rankingQuestions' do
+    if params[:back]
+      redirect '/mainMenu'
+    end
+  end
+
+  get '/rankingQuestionsIncorrectly' do
+    erb :rankingQuestionsIncorrectly
+  end
+
+  post '/rankingQuestionsIncorrectly' do
+    if params[:back]
+      redirect '/mainMenu'
+    end
+  end
+
+  get '/timeTrialRanking' do
+    @users = User.order(score_time_trial: :desc).limit(10)
+    erb :timeTrialRanking
+  end
+
+  post '/timeTrialRanking' do
+    if params[:back]
+      redirect '/mainMenu'
+    end
   end
 
   get '/ranking' do
@@ -302,13 +350,61 @@ class App < Sinatra::Application
     end
   end
 
-  get '/timeTrialRanking' do
-    @users = User.order(score_time_trial: :desc).limit(10)
-    erb :timeTrialRanking
+  get '/addQuestionNormal' do
+    erb :addQuestionNormal
   end
 
-  post '/timeTrialRanking' do
+  post '/addQuestionNormal' do
     if params[:back]
+      redirect '/mainMenu'
+    else
+      question_description = params[:question]
+      planet_name = params[:planet]
+      level_number = params[:level]
+      score_question = params[:scoreQuestion]
+      correct_answer_index = params[:correct_answer].to_i
+      answers = params[:answers]
+
+      #encuentro o creo el planeta
+      planet = Planet.find_or_create_by(name: planet_name)
+
+      #encuentro o creo el nivel
+      level = Level.find_or_create_by(planet: planet, number: level_number)
+
+      #encuentro o creo la pregunta
+      question = Question.find_or_create_by(description: question_description, level: level, scoreQuestion: score_question)
+
+      #guardo las respuestas, marcando la correcta según el índice enviado en correct_answer
+      answers.each_with_index do |(index, answer_data), idx|
+        correct = (idx == correct_answer_index)  #marc la respuesta correcta
+        Answer.find_or_create_by(description: answer_data[:description], correct: correct, question: question)
+      end
+
+      redirect '/mainMenu'
+    end
+  end
+
+
+  get '/addQuestionTimeTrial' do
+    erb :addQuestionTimeTrial
+  end
+
+  post '/addQuestionTimeTrial' do
+    if params[:back]
+      redirect '/mainMenu'
+    else
+      question_description = params[:question]
+      answers = params[:answers]
+      correct_answer_index = params[:correct_answer].to_i
+
+      question = QuestionsTimeTrial.create(description: question_description, scoreQuestion: 15)
+
+      #guardo las respuestas, marcando la correcta según el índice enviado en correct_answer
+      answers.each_with_index do |(index, answer_data), idx|
+        correct = (idx == correct_answer_index)  #marc la respuesta correcta
+        question.answers_time_trial.create(description: answer_data[:description], correct: correct)
+      end
+
       redirect '/mainMenu'
     end
   end
