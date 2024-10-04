@@ -358,29 +358,29 @@ class App < Sinatra::Application
     if params[:back]
       redirect '/mainMenu'
     else
-      #obtengo los datos del formulario
       question_description = params[:question]
       planet_name = params[:planet]
       level_number = params[:level]
       score_question = params[:scoreQuestion]
-      answers = params[:answers]  #recibo hashes con { description: "text", correct: true/false }
+      correct_answer_index = params[:correct_answer].to_i
+      answers = params[:answers]
 
-      #busco o creo el planeta
+      #encuentro o creo el planeta
       planet = Planet.find_or_create_by(name: planet_name)
 
-      #busco o creo el nivel correspondiente
+      #encuentro o creo el nivel
       level = Level.find_or_create_by(planet: planet, number: level_number)
 
-      #busco o creo la nueva pregunta
+      #encuentro o creo la pregunta
       question = Question.find_or_create_by(description: question_description, level: level, scoreQuestion: score_question)
 
-      #busco o creo las respuestas
-      answers.each do |answer_data|
-        Answer.find_or_create_by(description: answer_data[:description], correct: answer_data[:correct], question: question)
+      #guardo las respuestas, marcando la correcta según el índice enviado en correct_answer
+      answers.each_with_index do |(index, answer_data), idx|
+        correct = (idx == correct_answer_index)  #marc la respuesta correcta
+        Answer.find_or_create_by(description: answer_data[:description], correct: correct, question: question)
       end
 
       redirect '/mainMenu'
-
     end
   end
 
@@ -395,11 +395,14 @@ class App < Sinatra::Application
     else
       question_description = params[:question]
       answers = params[:answers]
+      correct_answer_index = params[:correct_answer].to_i
 
-      question = QuestionsTimeTrial.create( description: question_description, scoreQuestion: 15)
+      question = QuestionsTimeTrial.create(description: question_description, scoreQuestion: 15)
 
-      answers.each do |answer_data|
-        question.answers_time_trial.create(description: answer_data[:description], correct: answer_data[:correct])
+      #guardo las respuestas, marcando la correcta según el índice enviado en correct_answer
+      answers.each_with_index do |(index, answer_data), idx|
+        correct = (idx == correct_answer_index)  #marc la respuesta correcta
+        question.answers_time_trial.create(description: answer_data[:description], correct: correct)
       end
 
       redirect '/mainMenu'
