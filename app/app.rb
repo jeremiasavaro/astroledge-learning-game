@@ -309,6 +309,12 @@ class App < Sinatra::Application
   end
 
   get '/rankingQuestions' do
+    questions = []
+    questions.concat(Question.order(correct_count: :desc).limit(5))
+    questions.concat(QuestionYear.order(correct_count: :desc).limit(5))
+    questions.concat(QuestionsTimeTrial.order(correct_count: :desc).limit(5))
+    questions.sort_by!(&:correct_count).reverse!
+    @questions = questions.take(5)
     erb :rankingQuestions
   end
 
@@ -319,6 +325,12 @@ class App < Sinatra::Application
   end
 
   get '/rankingQuestionsIncorrectly' do
+    questions = []
+    questions.concat(Question.order(incorrect_count: :desc).limit(5))
+    questions.concat(QuestionYear.order(incorrect_count: :desc).limit(5))
+    questions.concat(QuestionsTimeTrial.order(incorrect_count: :desc).limit(5))
+    questions.sort_by!(&:incorrect_count).reverse!
+    @questions = questions.take(5)
     erb :rankingQuestionsIncorrectly
   end
 
@@ -433,7 +445,6 @@ class App < Sinatra::Application
     content_type :json
     session[:time_left] = session[:time_left] - 1
     $total_time = $total_time + 1
-    puts session[:time_left]
     { time_left: session[:time_left] }.to_json
   end
 
@@ -449,8 +460,10 @@ class App < Sinatra::Application
     end
     #evaluas si la respuesta es correcta o incorrecta
     if current_question.answers_time_trial.find_by(id: selected_answer).correct
+      current_question.increment_correct_count
       session[:time_left] += 10 #aumentas 10 segundos si es correcta
     else
+      current_question.increment_incorrect_count
       session[:time_left] -= 5 #decrementas 5 segundos si es incorrecta
     end
 

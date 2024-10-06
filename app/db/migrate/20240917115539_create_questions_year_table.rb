@@ -4,6 +4,8 @@ class CreateQuestionsYearTable < ActiveRecord::Migration[7.1]
       t.references :level_year, null: false, foreign_key: true
       t.string :description, null: false
       t.integer :scoreQuestion, default: 0
+      t.integer :correct_count, default: 0
+      t.integer :incorrect_count, default: 0
       t.timestamps
     end
   end
