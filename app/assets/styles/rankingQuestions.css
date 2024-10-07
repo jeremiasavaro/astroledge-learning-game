@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Montserrat, sans-serif;
+    overflow: auto;
+    color: #fff;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    padding: 40px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    z-index: 1;
+}
+
+h1 {
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+p {
+    font-size: 24px;
+    color: #fff;
+}
+
+table {
+    width: 60%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    background-color: white;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: center;
+    color: black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #3B4F54;
+    color: white;
+}
+
+td {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.buttonBack {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: rgba(69, 90, 100, 0.9);
+    color: white;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.buttonBack:hover {
+    background-color: #3B4F54;
+}
+
+.gold {
+    color: gold;
+    font-weight: bold;
+}
+
+.silver {
+    color: silver;
+    font-weight: bold;
+}
+
+.bronze {
+    color: #cd7f32; /* bronze color */
+    font-weight: bold;
+}
+
+.currentUser {
+    background-color: rgba(0, 0, 0, 0.2); /* darker background */
+}
+
+audio {
+    display: none;
+}

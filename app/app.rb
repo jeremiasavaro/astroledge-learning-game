@@ -310,11 +310,11 @@ class App < Sinatra::Application
 
   get '/rankingQuestions' do
     questions = []
-    questions.concat(Question.order(correct_count: :desc).limit(5))
-    questions.concat(QuestionYear.order(correct_count: :desc).limit(5))
-    questions.concat(QuestionsTimeTrial.order(correct_count: :desc).limit(5))
+    questions.concat(Question.order(correct_count: :desc).limit(10))
+    questions.concat(QuestionYear.order(correct_count: :desc).limit(10))
+    questions.concat(QuestionsTimeTrial.order(correct_count: :desc).limit(10))
     questions.sort_by!(&:correct_count).reverse!
-    @questions = questions.take(5)
+    @questions = questions.take(10)
     erb :rankingQuestions
   end
 
@@ -326,11 +326,11 @@ class App < Sinatra::Application
 
   get '/rankingQuestionsIncorrectly' do
     questions = []
-    questions.concat(Question.order(incorrect_count: :desc).limit(5))
-    questions.concat(QuestionYear.order(incorrect_count: :desc).limit(5))
-    questions.concat(QuestionsTimeTrial.order(incorrect_count: :desc).limit(5))
+    questions.concat(Question.order(incorrect_count: :desc).limit(10))
+    questions.concat(QuestionYear.order(incorrect_count: :desc).limit(10))
+    questions.concat(QuestionsTimeTrial.order(incorrect_count: :desc).limit(10))
     questions.sort_by!(&:incorrect_count).reverse!
-    @questions = questions.take(5)
+    @questions = questions.take(10)
     erb :rankingQuestionsIncorrectly
   end
 
