@@ -51,6 +51,10 @@ input[type="text"], select {
     margin-bottom: 10px;
 }
 
+option{
+    background-color: black;
+}
+
 /* Para que las opciones estén una al lado de la otra */
 .radio-group {
     display: flex;
