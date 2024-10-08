@@ -13,12 +13,24 @@
 </audio>
 <div class="container">
   <h1>Ranking incorrectly answered questions</h1>
-  <table border="1">
+  <div class="label-container">
+    <label for="question-count">Select number of questions to display:</label>
+    <select id="question-count">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
+  </div>
+
+  <table border="1" id="question-table">
+    <thead>
     <tr>
       <th>Rank</th>
       <th>Description</th>
       <th>Score</th>
     </tr>
+    </thead>
+    <tbody>
     <% @questions.each_with_index do |question, index| %>
       <tr>
         <td>
@@ -36,27 +48,46 @@
         <td><%= question.incorrect_count %></td>
       </tr>
     <% end %>
+    </tbody>
   </table>
 </div>
+
 <form method="post">
   <input type="hidden" name="back">
   <button type="submit" class="buttonBack"><i class="fas fa-arrow-left"></i> Back</button>
 </form>
+
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
         const audio = document.getElementById('background-audio');
         audio.volume = 0.1;
 
-        // Retrieve the playback time from localStorage
         const savedTime = localStorage.getItem('audioTime');
         if (savedTime) {
             audio.currentTime = savedTime;
         }
 
-        // Save the playback time periodically
         setInterval(() => {
             localStorage.setItem('audioTime', audio.currentTime);
         }, 1000);
+
+        const questionCountSelect = document.getElementById('question-count');
+        const questionTableBody = document.querySelector('#question-table tbody');
+        const allQuestions = Array.from(questionTableBody.querySelectorAll('tr'));
+
+        const updateQuestionTable = (count) => {
+            questionTableBody.innerHTML = '';
+            allQuestions.slice(0, count).forEach((questionRow) => {
+                questionTableBody.appendChild(questionRow);
+            });
+        };
+
+        questionCountSelect.addEventListener('change', (event) => {
+            const selectedCount = parseInt(event.target.value, 10);
+            updateQuestionTable(selectedCount);
+        });
+
+        updateQuestionTable(5);
     });
 </script>
 </body>
