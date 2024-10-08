@@ -39,7 +39,8 @@
       }
 
       h1 {
-          font-size: 40px;
+          font-size: 30px;
+          text-align: center;
           margin-top: 0;
           margin-bottom: 20px;
           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
