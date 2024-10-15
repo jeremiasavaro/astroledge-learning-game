@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 ENV['APP_ENV'] = 'test'
 
-require_relative '../models/question.rb'
-require_relative '../models/answer.rb'
+require_relative '../models/question'
+require_relative '../models/answer'
 require 'rspec'
 require 'rack/test'
 require 'spec_helper'
