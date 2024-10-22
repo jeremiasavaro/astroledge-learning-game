@@ -11,6 +11,7 @@ gem 'rake'
 gem 'rackup'
 gem 'bcrypt', '~> 3.1.7'
 gem 'simplecov'
+gem 'rubocop'
 
 group :test, :development do
   gem 'rspec'
