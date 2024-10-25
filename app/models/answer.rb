@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/activerecord'
 
@@ -8,9 +10,8 @@ class Answer < ActiveRecord::Base
   validate :has_only_one_answer?, if: :correct
 
   def has_only_one_answer?
-    if question.answers.where(correct: true).where.not(id: id).exists?
-      errors.add(:correct, "There can only be one correct answer per question.")
-    end
-  end
+    return false unless question.answers.where(correct: true).where.not(id: id).exists?
 
+    errors.add(:correct, 'There can only be one correct answer per question.')
+  end
 end

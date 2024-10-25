@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/activerecord'
 
@@ -25,5 +27,4 @@ class QuestionYear < ActiveRecord::Base
   def correct_answerYear
     answer_year if answer_year.correct
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/activerecord'
 
@@ -13,5 +15,5 @@ class QuestionUser < ActiveRecord::Base
   validates :user_id, presence: true
 
   # Ensures the uniqueness of the combination of question_id and user_id
-  validates :question_id, uniqueness: { scope: :user_id, message: "has already been answered by this user" }
+  validates :question_id, uniqueness: { scope: :user_id, message: 'has already been answered by this user' }
 end
