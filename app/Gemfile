@@ -1,21 +1,19 @@
-# frozen_string_literal: true
-
 # Gemfile
 ruby '3.0.2'
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'activerecord'
-gem 'bcrypt', '~> 3.1.7'
-gem 'rackup'
-gem 'rake'
-gem 'rubocop'
-gem 'simplecov'
 gem 'sinatra'
+gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'sqlite3', '~> 1.4'
+gem 'rake'
+gem 'rackup'
+gem 'bcrypt', '~> 3.1.7'
+gem 'simplecov'
+gem 'rubocop'
 
 group :test, :development do
-  gem 'rack-test'
   gem 'rspec'
+  gem 'rack-test'
 end

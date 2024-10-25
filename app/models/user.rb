@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'sinatra'
 require 'sinatra/activerecord'
 
@@ -7,7 +5,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true
   validates :score, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :score_time_trial, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :score_time_trial, numericality: { only_integer: true, greater_than_or_equal_to: 0 }  #for time trial gamemode. In seconds?
   validates :see_correct, inclusion: { in: [true, false] }
   validates :is_admin, inclusion: { in: [true, false] }
   has_many :question_users
@@ -21,14 +19,15 @@ class User < ActiveRecord::Base
   end
 
   def see_the_correct?
-    see_correct
+    self.see_correct
   end
 
   def has_username?
-    username.present?
+    self.username.present?
   end
 
   def has_password?
-    password.present?
+    self.password.present?
   end
+
 end

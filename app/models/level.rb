@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'sinatra'
 require 'sinatra/activerecord'
 
@@ -10,8 +8,8 @@ class Level < ActiveRecord::Base
   validate :has_at_most_three_questions?
 
   def has_at_most_three_questions?
-    return false unless questions.size > 3
-
-    errors.add(:questions, 'A level can have a maximum of 3 questions.')
+    if questions.size > 3
+      errors.add(:questions, "A level can have a maximum of 3 questions.")
+    end
   end
 end
