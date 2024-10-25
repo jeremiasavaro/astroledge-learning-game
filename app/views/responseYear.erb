@@ -11,7 +11,7 @@
 <div class="container">
   <%
     # Se obtienen los datos de la pregunta y el usuario actual
-    iu = session[:current_questionYear]
+    iu = session[:current_question_year]
     your_answer = session[:your_answer]
     quest = QuestionYear.find_by(id: iu)
     user = User.find(session[:user_id])
@@ -24,7 +24,7 @@
       questionYear_user = QuestionYearUser.find_by(user: user, question_year: quest)
     %>
 
-    <% if quest && your_answer == quest.correct_answerYear.description %>
+    <% if quest && your_answer == quest.correct_answer_year.description %>
       <%
         # Si la respuesta es correcta, incrementa el contador de respuestas correctas
         quest.increment_correct_count
@@ -61,7 +61,7 @@
       <% if config %>
         <!-- Mensaje con la respuesta correcta -->
         <div class="container">
-          <p>Your answer is wrong, the correct answer is: <%= quest.correct_answerYear.description %></p>
+          <p>Your answer is wrong, the correct answer is: <%= quest.correct_answer_year.description %></p>
           <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
           <audio class="wrongSound" autoplay>
             <source src="/wrongAnswer.mp3" type="audio/mp3">
@@ -81,7 +81,7 @@
       <% end %>
     <% end %>
   <% else %>
-    <% if quest && your_answer == quest.correct_answerYear.description %>
+    <% if quest && your_answer == quest.correct_answer_year.description %>
       <!-- Si el usuario responde correctamente por primera vez, actualiza la puntuación -->
       <% quest.increment_correct_count %>
       <% session[:score_user] += quest.scoreQuestion %>
@@ -102,7 +102,7 @@
       <% if config %>
         <!-- Muestra la respuesta correcta -->
         <div class="container">
-          <p>Your answer is wrong, the correct answer is: <%= quest.correct_answerYear.description %></p>
+          <p>Your answer is wrong, the correct answer is: <%= quest.correct_answer_year.description %></p>
           <img class="sad" src="https://images.vexels.com/media/users/3/160987/isolated/preview/c583efe4654749625deaa8104757418d-planeta-tierra-tristeza-melancolia-plana.png" alt="Sad Image">
           <audio class="wrongSound" autoplay>
             <source src="/wrongAnswer.mp3" type="audio/mp3">

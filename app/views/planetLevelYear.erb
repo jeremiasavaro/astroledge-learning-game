@@ -12,8 +12,8 @@
       Your browser does not support the audio element.
     </audio>
 <div class="container">
-  <% if session[:current_questionYear]%>
-    <% question_id = session[:current_questionYear] %>
+  <% if session[:current_question_year]%>
+    <% question_id = session[:current_question_year] %>
     <% questionYear = QuestionYear.find_by(id: question_id) %>
     <% if questionYear %>
       <div class="question-box">
