@@ -3,6 +3,9 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
+# The QuestionUser class represents the association between questions and users.
+# It includes validations to ensure the presence of question_id and user_id,
+# and that the combination of question_id and user_id is unique.
 class QuestionUser < ActiveRecord::Base
   belongs_to :question
   belongs_to :user

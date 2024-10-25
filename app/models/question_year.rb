@@ -3,6 +3,10 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
+# The QuestionYear class represents a question for a specific year in the application.
+# It includes validations to ensure that the description is present.
+# It also provides methods to increment correct and incorrect answer counts,
+# find the correct answer, and check if the question has 4 options.
 class QuestionYear < ActiveRecord::Base
   belongs_to :level_year
   has_one :answer_year
@@ -24,7 +28,7 @@ class QuestionYear < ActiveRecord::Base
     save
   end
 
-  def correct_answerYear
+  def correct_answer_year
     answer_year if answer_year.correct
   end
 end

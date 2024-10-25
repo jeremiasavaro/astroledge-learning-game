@@ -3,6 +3,10 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
+# The QuestionsTimeTrial class represents a time trial question in the application.
+# It includes validations to ensure that the description is present.
+# It also provides methods to increment correct and incorrect answer counts,
+# find the correct answer, and check if the question has 4 options.
 class QuestionsTimeTrial < ActiveRecord::Base
   has_many :answers_time_trial
   validates :description, presence: true
