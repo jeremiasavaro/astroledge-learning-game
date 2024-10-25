@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/activerecord'
 
@@ -9,7 +11,7 @@ class AnswersTimeTrial < ActiveRecord::Base
 end
 
 def has_only_one_answer?
-  if questions_time_trial.answers_time_trial.where(correct: true).count > 1
-    errors.add(:correct, "Solo puede haber una respuesta correcta por pregunta")
-  end
+  return false unless questions_time_trial.answers_time_trial.where(correct: true).count > 1
+
+  errors.add(:correct, 'Solo puede haber una respuesta correcta por pregunta')
 end
