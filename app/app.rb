@@ -8,13 +8,13 @@ require './models/planet'
 require './models/level'
 require './models/question'
 require './models/answer'
-require './models/questionUser'
-require './models/questionYearUser'
-require './models/questionYear'
-require './models/answerYear'
-require './models/levelYear'
-require './models/questionTimeTrial'
-require './models/answerTimeTrial'
+require './models/question_user'
+require './models/question_year_user'
+require './models/question_year'
+require './models/answer_year'
+require './models/level_year'
+require './models/question_time_trial'
+require './models/answer_time_trial'
 
 set :database_file, './config/database.yml'
 set :public_folder, 'assets'
@@ -156,16 +156,16 @@ class App < Sinatra::Application
       if @question_years.nil? || @question_years.empty?
         halt 404, 'No questions found for this level.'
       else
-        @current_questionYear = @question_years.shift # takes the first question of level 1
+        @current_question_year = @question_years.shift # takes the first question of level 1
         session[:questionsYear] = @question_years # save all questions in the session
-        session[:current_questionYear] = @current_questionYear # save the current question in the session
+        session[:current_question_year] = @current_question_year # save the current question in the session
         session[:first_level] = false
       end
     else # already have all the questions saved, just take the next one
       @question_years = session[:questionsYear]
-      @current_questionYear = @question_years.shift
+      @current_question_year = @question_years.shift
       session[:questionsYear] = @question_years
-      session[:current_questionYear] = @current_questionYear
+      session[:current_question_year] = @current_question_year
     end
     erb :planetLevelYear
   end
@@ -173,7 +173,7 @@ class App < Sinatra::Application
   post '/planetLevelYear' do
     redirect '/planetLevels' if params[:back]
     session[:your_answer] = params[:year].to_i
-    u = session[:current_questionYear]
+    u = session[:current_question_year]
 
     @questYear = QuestionYear.find_by(id: u)
     @selected_answerYear = AnswerYear.find_by(id: session[:your_answer])
