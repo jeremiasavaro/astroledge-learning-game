@@ -13,18 +13,18 @@ RSpec.describe User, type: :model do
   describe 'validations' do
     context 'when username and password are present' do
       it 'is valid with a username' do
-        expect(user.has_username?).to be(true)
+        expect(user.username?).to be(true)
       end
 
       it 'is valid with a password' do
-        expect(user.has_password?).to be(true)
+        expect(user.password?).to be(true)
       end
     end
 
     context 'when username is missing' do
       it 'returns false for has_username?' do
         user_without_username = described_class.new(password: 'pass', score: 0, see_correct: true)
-        expect(user_without_username.has_username?).to be false
+        expect(user_without_username.username?).to be false
       end
     end
   end

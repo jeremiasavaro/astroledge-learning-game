@@ -20,28 +20,18 @@ RSpec.describe App do
     App.new
   end
 
-  RSpec.describe 'POST /register' do
-    include Rack::Test::Methods
-
-    def app
-      App.new
-    end
-
+  describe 'POST /register' do
     context 'when passwords match' do
       it 'redirects to login' do
         post '/register', username: 'new_user', password: 'password123', password_rep: 'password123'
         expect(last_response).to be_redirect
-      end
-
-      it 'follows the redirect to login page' do
-        post '/register', username: 'new_user', password: 'password123', password_rep: 'password123'
         follow_redirect!
         expect(last_request.path).to eq('/login')
       end
     end
   end
 
-  RSpec.describe 'GET /login' do
+  describe 'GET /login' do
     include Rack::Test::Methods
 
     def app
@@ -59,30 +49,20 @@ RSpec.describe App do
     end
   end
 
-  RSpec.describe 'POST /login' do
-    include Rack::Test::Methods
-
-    def app
-      App.new
-    end
-
+  describe 'POST /login' do
     let(:user) { User.create(username: 'test_user', password: 'password123') }
 
     context 'with valid credentials' do
       it 'redirects to the main menu' do
         post '/login', username: user.username, password: user.password
         expect(last_response).to be_redirect
-      end
-
-      it 'follows the redirect to main menu' do
-        post '/login', username: user.username, password: user.password
         follow_redirect!
         expect(last_request.path).to eq('/mainMenu')
       end
     end
   end
 
-  RSpec.describe 'GET /solarSystem' do
+  describe 'GET /solarSystem' do
     include Rack::Test::Methods
 
     def app
@@ -100,7 +80,7 @@ RSpec.describe App do
     end
   end
 
-  RSpec.describe 'POST /planetLevels' do
+  describe 'POST /planetLevels' do
     include Rack::Test::Methods
 
     def app
@@ -133,7 +113,7 @@ RSpec.describe App do
     end
   end
 
-  RSpec.describe 'GET /ranking' do
+  describe 'GET /ranking' do
     include Rack::Test::Methods
 
     def app
