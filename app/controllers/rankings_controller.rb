@@ -12,11 +12,11 @@ class RankingsController < Sinatra::Base
 
   get '/rankingQuestions' do
     questions = []
-    questions.concat(Question.order(correct_count: :desc).limit(10))
-    questions.concat(QuestionYear.order(correct_count: :desc).limit(10))
-    questions.concat(QuestionsTimeTrial.order(correct_count: :desc).limit(10))
+    questions.concat(Question.order(correct_count: :desc).limit(15))
+    questions.concat(QuestionYear.order(correct_count: :desc).limit(15))
+    questions.concat(QuestionsTimeTrial.order(correct_count: :desc).limit(15))
     questions.sort_by!(&:correct_count).reverse!
-    @questions = questions.take(10)
+    @questions = questions.take(15)
     erb :rankingQuestions
   end
 
@@ -26,11 +26,11 @@ class RankingsController < Sinatra::Base
 
   get '/rankingQuestionsIncorrectly' do
     questions = []
-    questions.concat(Question.order(incorrect_count: :desc).limit(10))
-    questions.concat(QuestionYear.order(incorrect_count: :desc).limit(10))
-    questions.concat(QuestionsTimeTrial.order(incorrect_count: :desc).limit(10))
+    questions.concat(Question.order(incorrect_count: :desc).limit(15))
+    questions.concat(QuestionYear.order(incorrect_count: :desc).limit(15))
+    questions.concat(QuestionsTimeTrial.order(incorrect_count: :desc).limit(15))
     questions.sort_by!(&:incorrect_count).reverse!
-    @questions = questions.take(10)
+    @questions = questions.take(15)
     erb :rankingQuestionsIncorrectly
   end
 
