@@ -20,7 +20,6 @@ class UsersController < Sinatra::Base
 
     user = User.find_by(username: username)
     if user.nil?
-      # user not found
       @error = 'User not found.'
       @user_login_exist = false
       erb :login
@@ -31,7 +30,6 @@ class UsersController < Sinatra::Base
         session[:score_user] = user.score
         redirect '/mainMenu'
       else
-        # failed authentication
         @error = 'Incorrect password.'
         @pass_login_correct = false
         erb :login
@@ -53,7 +51,6 @@ class UsersController < Sinatra::Base
       aut = User.find_by(username: new_username)
       @password_dist = false
       if aut
-        puts 'Username already taken.'
         @user_oc = true
         erb :register
       else
