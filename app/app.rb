@@ -120,11 +120,7 @@ class App < Sinatra::Application
 
     if params[:see_correct]
       user = User.find_by(id: session[:user_id])
-      user.see_correct = if user.see_correct
-                           false
-                         else
-                           true
-                         end
+      user.see_correct = user.see_correct ? false : true
       user.save
       redirect '/mainMenu'
     end
