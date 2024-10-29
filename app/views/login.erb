@@ -21,13 +21,13 @@
         <input type="submit" value="Login">
       </form>
       <div class="notRegistered">
-        <% if @userLoginExist != true %>
+        <% if @user_login_exist != true %>
           <p>Username not exists, you should register</p>
         <% end %>
-        <% if @passLoginCorrect == false %>
-          <p>Incorrect password, try again</p>
-          <% @passLoginCorrect = true%>
-        <% end %>
+        <% unless @pass_login_correct %>
+        <p>Incorrect password, try again</p>
+        <%  @pass_login_correct = true %>
+        <%  end %>
         <p>First time here, <a href="/register">sign up</a></p>
       </div>
     </div>

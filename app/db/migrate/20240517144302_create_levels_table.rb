@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Migration to create the levels table with the necessary fields
 class CreateLevelsTable < ActiveRecord::Migration[7.1]
   def change
     create_table :levels do |t|

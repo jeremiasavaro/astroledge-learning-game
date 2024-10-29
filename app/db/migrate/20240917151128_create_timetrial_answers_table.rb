@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Migration to create the answers_time_trials table with the necessary fields
 class CreateTimetrialAnswersTable < ActiveRecord::Migration[7.1]
   def change
     create_table :answers_time_trials do |t|

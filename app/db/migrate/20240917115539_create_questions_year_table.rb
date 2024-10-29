@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Migration to create the question_years table with the necessary fields
 class CreateQuestionsYearTable < ActiveRecord::Migration[7.1]
   def change
     create_table :question_years do |t|
