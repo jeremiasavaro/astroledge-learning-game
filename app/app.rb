@@ -34,7 +34,7 @@ use TimeTrialController
 # Main application class for the Sinatra app
 class App < Sinatra::Application
   configure do
-    set :views, '/home/mateo/Universidad/Tercer año/astroledge-learning-game/app/views'
+    set :views, './views'
   end
 
   get '/' do

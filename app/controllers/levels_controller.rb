@@ -7,7 +7,7 @@ require './models/question'
 # controller class for levels
 class LevelsController < Sinatra::Base
   configure do
-    set :views, '/home/mateo/Universidad/Tercer año/astroledge-learning-game/app/views'
+    set :views, './views'
   end
 
   get '/planetLevelQuiz' do

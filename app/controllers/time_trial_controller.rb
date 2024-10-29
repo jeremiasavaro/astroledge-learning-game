@@ -3,7 +3,7 @@
 # controller class for mode timeTrial
 class TimeTrialController < Sinatra::Base
   configure do
-    set :views, '/home/mateo/Universidad/Tercer año/astroledge-learning-game/app/views'
+    set :views, './views'
   end
 
   # inicializamos $total_time si no existe

@@ -7,7 +7,7 @@ require './models/question'
 # controller class for ranking
 class RankingsController < Sinatra::Base
   configure do
-    set :views, '/home/mateo/Universidad/Tercer año/astroledge-learning-game/app/views'
+    set :views, './views'
   end
 
   get '/rankingQuestions' do

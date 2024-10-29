@@ -5,7 +5,7 @@ require './models/user'
 # controller class for users
 class UsersController < Sinatra::Base
   configure do
-    set :views, '/home/mateo/Universidad/Tercer año/astroledge-learning-game/app/views'
+    set :views, './views'
   end
 
   get '/login' do

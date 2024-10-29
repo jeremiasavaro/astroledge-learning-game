@@ -3,7 +3,7 @@
 # controller class for add questions
 class AddQuestionController < Sinatra::Base
   configure do
-    set :views, '/home/mateo/Universidad/Tercer año/astroledge-learning-game/app/views'
+    set :views, './views'
   end
 
   get '/addQuestionNormal' do
