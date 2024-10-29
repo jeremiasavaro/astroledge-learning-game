@@ -23,10 +23,10 @@
         <input type="submit" value="Register">
       </form>
       <div class = "registered" >
-        <% if @passwordDist == true %>
+        <% if @password_dist == true %>
           <p>Passwords are not the same, try again</p>
         <% end %>
-        <% if @userOc == true %>
+        <% if @user_oc == true %>
           <p>Username already registered, try another</p>
         <% end %>
         <p>Already registered?, <a href="/login">log in</a></p>
