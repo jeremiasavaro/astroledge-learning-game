@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Migration to create the level_years table with the necessary fields
 class CreateLevelsYearTable < ActiveRecord::Migration[7.1]
   def change
     create_table :level_years do |t|

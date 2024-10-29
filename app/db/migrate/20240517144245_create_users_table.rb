@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Migration to create the users table with the necessary fields
 class CreateUsersTable < ActiveRecord::Migration[7.1]
   def change
     create_table :users do |t|
