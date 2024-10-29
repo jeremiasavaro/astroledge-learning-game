@@ -2,10 +2,10 @@
 
 body {
     margin: 0;
-    height: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background: url('https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center fixed;
     background-size: cover;
@@ -17,7 +17,7 @@ body {
 
 body::before {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -27,21 +27,21 @@ body::before {
 }
 
 .container {
-    width: 80%;
+    width: 100%;
     max-width: 800px;
     padding: 40px;
     border-radius: 10px;
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0);
     z-index: 1;
+    flex-grow: 1;
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 30px;
     margin-top: 0;
+    text-align: center;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -52,7 +52,7 @@ p {
 }
 
 table {
-    width: 60%;
+    width: 80%;
     border-collapse: collapse;
     border: 1px solid #ccc;
     background-color: white;
@@ -79,7 +79,7 @@ td {
 }
 
 .buttonBack {
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     left: 10px;
     padding: 10px 20px;
@@ -119,4 +119,30 @@ td {
 
 audio {
     display: none;
+}
+
+.label-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.label-container label {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.label-container select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
