@@ -28,6 +28,7 @@ RSpec.describe App do
         follow_redirect!
         expect(last_request.path).to eq('/login')
       end
+      User.find_by(username: 'new_user').destroy
     end
   end
 
@@ -50,7 +51,7 @@ RSpec.describe App do
   end
 
   describe 'POST /login' do
-    let(:user) { User.create(username: 'test_user', password: 'password123') }
+    let(:user) { User.create(username: 'new_user', password: 'password123') }
 
     context 'with valid credentials' do
       it 'redirects to the main menu' do

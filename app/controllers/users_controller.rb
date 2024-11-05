@@ -22,7 +22,7 @@ class UsersController < Sinatra::Base
     if user.nil?
       @error = 'User not found.'
       @user_login_exist = false
-      erb :login
+      redirect '/login'
     else
       @user_login_exist = true
       if user.authenticates(password)
@@ -32,7 +32,7 @@ class UsersController < Sinatra::Base
       else
         @error = 'Incorrect password.'
         @pass_login_correct = false
-        erb :login
+        redirect '/login'
       end
     end
   end
@@ -47,6 +47,7 @@ class UsersController < Sinatra::Base
     new_username = params[:username]
     new_password = params[:password]
     new_password_repeat = params[:password_rep]
+
     if new_password == new_password_repeat
       aut = User.find_by(username: new_username)
       @password_dist = false
