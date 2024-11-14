@@ -53,17 +53,16 @@ class UsersController < Sinatra::Base
       @password_dist = false
       if aut
         @user_oc = true
-        erb :register
       else
         user = User.new
         create_user(user, new_username, new_password)
         user.save
-        redirect '/login'
       end
+      redirect '/login'
     else
       @error = "Passwords don't match."
       @password_dist = true
-      erb :register
+      redirect '/register'
     end
   end
 

@@ -25,10 +25,13 @@ RSpec.describe App do
       it 'redirects to login' do
         post '/register', username: 'new_user', password: 'password123', password_rep: 'password123'
         expect(last_response).to be_redirect
+      end
+
+      it 'follows the redirect to login' do
+        post '/register', username: 'new_user', password: 'password123', password_rep: 'password123'
         follow_redirect!
         expect(last_request.path).to eq('/login')
       end
-      User.find_by(username: 'new_user').destroy
     end
   end
 
@@ -57,6 +60,10 @@ RSpec.describe App do
       it 'redirects to the main menu' do
         post '/login', username: user.username, password: user.password
         expect(last_response).to be_redirect
+      end
+
+      it 'follows the redirect to the main menu' do
+        post '/login', username: user.username, password: user.password
         follow_redirect!
         expect(last_request.path).to eq('/mainMenu')
       end
